@@ -92,13 +92,16 @@
   .hero-statement{font-family:var(--fat);font-weight:400;font-size:clamp(2.8rem,5.6vw,6.4rem);line-height:.93;letter-spacing:-.025em;max-width:920px;margin:0 auto;color:var(--ink)}
   .hero-statement .neon-word{color:var(--accent);text-shadow:0 0 24px rgba(216,255,53,.55)}
   .hero-cred-strip{display:flex;justify-content:center;align-items:stretch;width:min(100%,1180px);margin:42px auto 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;font-family:var(--mono);text-transform:uppercase;color:var(--ink)}
-  .hero-cred{display:flex;align-items:center;justify-content:center;min-width:0;padding:0 clamp(14px,2vw,30px)}
-  .hero-cred-shopify{flex-direction:row;align-items:center;gap:12px;text-align:left}
+  .hero-cred{display:flex;align-items:center;justify-content:center;min-width:0;padding:0 clamp(14px,2vw,30px);transition:background .3s ease;border-radius:10px}
+  .hero-cred:hover{background:var(--accent)}
+  .hero-cred:hover *{color:#0A0A0A !important}
+  .hero-cred-shopify,.hero-cred-wordpress{flex-direction:row;align-items:center;gap:12px;text-align:left}
   .shopify-logo{width:38px;height:43px;flex:none;display:block}
+  .wordpress-logo{width:32px;height:32px;flex:none;display:block}
   .hero-cred-shopify-copy{display:flex;flex-direction:column;gap:2px}
 
-  .hero-cred-label{font-size:clamp(.64rem,.8vw,.78rem);letter-spacing:.18em;color:var(--muted)}
-  .hero-cred-shopify strong{font-size:clamp(.82rem,1.15vw,1.12rem);letter-spacing:.04em;color:var(--ink)}
+  .hero-cred-label{font-size:clamp(.64rem,.8vw,.78rem);letter-spacing:.18em;color:var(--ink)}
+  .hero-cred-shopify strong,.hero-cred-wordpress strong{font-size:clamp(.82rem,1.15vw,1.12rem);letter-spacing:.04em;color:var(--ink)}
   .hero-cred-platform strong{font-size:clamp(.82rem,1.2vw,1.12rem);letter-spacing:.14em}
   .hero-cred-divider{width:1px;background:var(--line);align-self:stretch;min-height:44px}
   .hero-cred-websites{gap:10px;white-space:nowrap}
@@ -635,7 +638,8 @@
     .keyword-grid{grid-template-columns:1fr}
 
     .shopify-logo{width:31px;height:35px}
-    .hero-cred-shopify{gap:9px}
+    .wordpress-logo{width:26px;height:26px}
+    .hero-cred-shopify,.hero-cred-wordpress{gap:9px}
   }
 
 
@@ -1300,15 +1304,21 @@
             </div>
           </div>
           <div class="hero-cred-divider" aria-hidden="true"></div>
-          <div class="hero-cred hero-cred-platform"><strong>WordPress</strong></div>
+          <div class="hero-cred hero-cred-wordpress">
+            <svg class="wordpress-logo" viewBox="0 0 24 24" aria-hidden="true" role="img">
+              <path fill="#21759B" d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/>
+            </svg>
+            <div class="hero-cred-shopify-copy">
+              <span class="hero-cred-label">Platform</span>
+              <strong>WordPress</strong>
+            </div>
+          </div>
           <div class="hero-cred-divider" aria-hidden="true"></div>
-          <div class="hero-cred hero-cred-platform"><strong>D2C</strong></div>
-          <div class="hero-cred-divider" aria-hidden="true"></div>
-          <div class="hero-cred hero-cred-platform"><strong>Digital</strong></div>
+          <div class="hero-cred hero-cred-platform"><strong>Ex-D2C Founder, 4 Yrs</strong></div>
           <div class="hero-cred-divider" aria-hidden="true"></div>
           <div class="hero-cred hero-cred-websites">
-            <strong>05</strong>
-            <span>Selected projects</span>
+            <strong>50+</strong>
+            <span>Websites developed</span>
           </div>
         </div>
 
