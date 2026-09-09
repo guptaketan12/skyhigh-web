@@ -1114,6 +1114,10 @@
   .founder-story-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:42px}
   .founder-story-actions .pill{min-height:58px;padding:0 25px}
   .founder-story-tags{margin-top:30px;font:500 .68rem var(--mono);letter-spacing:.12em;line-height:1.55;color:#686862;max-width:620px}
+  .founder-story-tags-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:30px;max-width:480px}
+  .founder-story-tags-grid .proof-card{min-height:auto;padding:18px 16px}
+  .founder-story-tags-grid .proof-card:nth-child(2n){border-right:0}
+  .founder-story-tags-grid .proof-card:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .founder-story-proof{display:flex;align-items:center;gap:13px;margin-top:38px;font-size:.95rem}
   .founder-story-proof .mono{font-size:.68rem;letter-spacing:.13em;color:#55554f}
   .founder-story-proof strong{font-family:var(--display-family);font-weight:650;margin-left:4px}
@@ -1350,11 +1354,14 @@
             <a class="pill fill" href="#contact"><span class="dot"></span> Start a project <span>→</span></a>
             <a class="pill" href="#work">View selected work <span>→</span></a>
           </div>
-          <div class="founder-story-tags">STORE BUILD&nbsp;&nbsp; · &nbsp;&nbsp;REDESIGN&nbsp;&nbsp; · &nbsp;&nbsp;THEME CUSTOMISATION&nbsp;&nbsp; · &nbsp;&nbsp;ONGOING SUPPORT</div>
-          <div class="founder-story-proof"><span class="lime-dot small"></span><span class="mono">FOUNDER-SIDE ADVANTAGE</span><strong>4 years inside D2C.</strong></div>
+          <div class="founder-story-tags-grid">
+            <div class="proof-card"><div class="desc">Store build</div></div>
+            <div class="proof-card"><div class="desc">Redesign</div></div>
+            <div class="proof-card"><div class="desc">Theme customisation</div></div>
+            <div class="proof-card"><div class="desc">Ongoing support</div></div>
+          </div>
         </div>
       </div>
-      <div class="founder-story-scroll mono">SCROLL <span></span></div>
     </div>
   </section>
 
@@ -1470,16 +1477,6 @@
       </div>
     </div>
   </section>
-
-  <!-- 03 STATEMENT — ivory (neon hover) -->
-  <section class="stmt sec s-white">
-    <div class="wrap">
-      <div class="grp rv"><div class="line">Design gets <span class="statement-neon">attention.</span></div></div>
-      <div class="grp rv"><div class="line">Experience earns <span class="statement-neon">trust.</span></div></div>
-      <div class="grp rv"><div class="line">Understanding drives the <span class="statement-neon">sale.</span></div></div>
-    </div>
-  </section>
-
 
   <!-- 04 WORK — white -->
   <section class="sec s-white" id="work">
