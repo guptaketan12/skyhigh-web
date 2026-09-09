@@ -292,6 +292,7 @@
   .proof-card:last-child{border-right:0}
   .proof-card:hover{background:var(--lime);transform:translateY(-4px)}
   .proof-card .num{font-family:var(--sans);font-size:clamp(3rem,6vw,6.5rem);font-weight:600;line-height:.8;letter-spacing:-.07em}
+  .proof-card .proof-names{font-family:var(--sans);font-size:clamp(1.3rem,2.2vw,1.9rem);font-weight:600;line-height:1.25;letter-spacing:-.02em}
   .proof-card .desc{font-family:var(--mono);font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
   .proof-card:hover .desc{color:var(--ink)}
 
@@ -393,6 +394,10 @@
   .maint-card .small{font:400 .6rem var(--mono);color:#8f8e89;letter-spacing:.1em;margin-top:8px}
   .maint-card:nth-child(2n){transform:rotate(1.5deg)}.maint-card:nth-child(3n){transform:rotate(-1.5deg)}
   @keyframes marquee{to{transform:translateX(-50%)}}
+  .maint .carelist{border-top:1px solid #3a3a37}
+  .maint .carelist li{border-bottom:1px solid #3a3a37;color:#f7f6f2}
+  .maint .carelist li i{color:#8f8e89}
+  .maint .carelist li:hover i{color:var(--lime)}
 
   /* fit section */
   .fit{padding:16vh 0;background:var(--ivory)}
@@ -1354,7 +1359,7 @@
   <!-- 02 DIFFERENCE — black -->
   <section class="diff sec s-black" id="difference">
     <div class="wrap">
-      <div class="mono lbl rv">01 / The difference</div>
+      <div class="mono lbl rv">The difference</div>
       <h2 class="head h-md rv d2" style="max-width:17ch">Most developers learn websites. I learned the business behind one.</h2>
       <span class="kw kw--sm rv d2"><span class="t">first.</span></span>
       <div class="body">
@@ -1370,16 +1375,29 @@
     </div>
   </section>
 
+  <!-- 02B WHY — black -->
+  <section class="why sec s-black" id="why">
+    <div class="wrap">
+      <div class="mono rv">Why me</div>
+      <h2 class="head h-md rv d2" style="margin-top:16px">A developer who thinks like an</h2>
+      <span class="kw rv d2"><span class="t">owner.</span></span>
+      <div class="list">
+        <div class="item rv"><div class="no">01</div><h3>Business first</h3><p>I don't open with code. I open with what the site has to achieve, and for whom.</p></div>
+        <div class="item rv"><div class="no">02</div><h3>Customer aware</h3><p>Four years selling D2C taught me design isn't decoration. Every screen changes what a customer notices, believes, and does next.</p></div>
+        <div class="item rv"><div class="no">03</div><h3>Design + development</h3><p>It has to look right and work right. One without the other doesn't sell.</p></div>
+        <div class="item rv"><div class="no">04</div><h3>Built to evolve</h3><p>Launch isn't the finish line. Collections change, offers change, businesses change. The site changes with them.</p></div>
+      </div>
+    </div>
+  </section>
 
-
-  <!-- 02B PROOF — white -->
+  <!-- 02C PROOF — white -->
   <section class="proof">
     <div class="wrap">
       <div class="mono rv">Proof, without the theatre</div>
       <div class="founder-quote rv">“Most customers will never meet your business. They will only ever meet your website — and they decide in seconds.”</div>
       <div class="proof-grid" style="margin-top:32px">
         <div class="proof-card rv"><div class="num">04</div><div class="desc">Years running a D2C business</div></div>
-        <div class="proof-card rv d2"><div class="num">05</div><div class="desc">Projects across brands &amp; business</div></div>
+        <div class="proof-card rv d2"><div class="proof-names">Vugy India<br>SNG Cosmetics<br>Ammax Decor</div><div class="desc">Recent work</div></div>
         <div class="proof-card rv d3"><div class="num">02</div><div class="desc">Core platforms: Shopify + WordPress</div></div>
         <div class="proof-card rv d4"><div class="num">∞</div><div class="desc">The website can keep evolving</div></div>
       </div>
@@ -1391,7 +1409,7 @@
   <section class="problem">
     <div class="wrap problem-grid">
       <div>
-        <div class="mono">02 / You don't need to know what to call it</div>
+        <div class="mono">Getting started</div>
         <h2 style="margin-top:22px">Bring me the problem. We'll figure out the <em>build.</em></h2>
       </div>
       <div>
@@ -1412,7 +1430,7 @@
   <section class="questions">
     <div class="wrap question-wrap">
       <div class="q-intro">
-        <div class="mono">02 / Before we build</div>
+        <div class="mono">How I think</div>
         <h2 style="margin-top:22px">I care about <em>this</em> before I care about code.</h2>
       </div>
       <div class="q-stack">
@@ -1463,7 +1481,7 @@
     <div class="wrap">
       <div class="work-head">
         <div>
-          <div class="mono rv">02 / Selected work</div>
+          <div class="mono rv">Selected work</div>
           <h2 class="head h-lg rv d2" style="margin-top:10px">Actual websites.<br><span class="ombre-heading">Built to work.</span></h2>
         </div>
         <div class="mono rv d3">Actual builds · no concept-only work</div>
@@ -1517,7 +1535,7 @@
     <div class="wrap">
       <div class="transform-head">
         <div>
-          <div class="mono rv">04 / Watch it become <span style="color:var(--accent);margin-left:10px">scroll / hover · neon = selected</span></div>
+          <div class="mono rv">Watch it become <span style="color:var(--accent);margin-left:10px">scroll / hover · neon = selected</span></div>
           <h2 class="rv d2" style="margin-top:18px">From a grey box to a <em class="ombre-heading">working storefront.</em></h2>
         </div>
         <p class="rv d3">You shouldn't have to trust someone because they say they can build a website. Scroll through the build. See how structure, design, content and interaction become the thing customers actually use.</p>
@@ -1548,7 +1566,7 @@
   <section class="build sec s-black" id="build" style="padding-bottom:0">
     <div class="wrap">
       <div class="head-wrap">
-        <div class="mono rv">03 / What I build <span style="color:var(--accent);margin-left:10px">scroll / hover to explore · neon = selected</span></div>
+        <div class="mono rv">What I build <span style="color:var(--accent);margin-left:10px">scroll / hover to explore · neon = selected</span></div>
         <h2 class="head h-md rv d2" style="margin-top:16px">Different businesses.<br>Different customer journeys.</h2>
         <span class="kw kw--sm rv d2"><span class="t">Same obsession.</span></span>
       </div>
@@ -1593,24 +1611,21 @@
     </div>
   </section>
 
-  <!-- 05 ONGOING SUPPORT — white -->
-  <section class="finish sec s-white" id="support">
-    <div class="wrap finish-grid">
-      <div>
-        <div class="mono rv">05 / After launch</div>
-        <h2 class="head h-lg rv d2" style="margin-top:14px">Launch isn't the</h2>
-        <span class="kw kw--sm rv d2"><span class="t">finish.</span></span>
-      </div>
-      <div class="finish-col rv d2">
-        <p class="fp">Your website changes because your business does — new collections, new products, new offers, new campaigns. I stay on hand to keep the storefront current. Need a collection uploaded, a banner changed or a festive offer live? That is exactly the kind of small job that shouldn't become a big problem.</p>
-        <ul class="carelist">
-          <li><span>New collections</span><i aria-hidden="true">&#8599;</i></li>
-          <li><span>Product updates</span><i aria-hidden="true">&#8599;</i></li>
-          <li><span>Discounts &amp; offers</span><i aria-hidden="true">&#8599;</i></li>
-          <li><span>Festive campaigns</span><i aria-hidden="true">&#8599;</i></li>
-          <li><span>Homepage / banner updates</span><i aria-hidden="true">&#8599;</i></li>
-          <li><span>Ongoing digital support</span><i aria-hidden="true">&#8599;</i></li>
-        </ul>
+  <!-- 05B PROCESS — neon -->
+  <section class="sec s-ivory" id="process">
+    <div class="wrap">
+      <div class="mono rv">Process</div>
+      <h2 class="head h-md rv d2" style="margin-top:16px">A good project should feel</h2>
+      <span class="kw rv d2"><span class="t">simple.</span></span>
+      <div class="steps">
+        <div class="step rv"><div class="no">01</div><div class="h">Discovery</div><p class="d">A complimentary call. We map the business, the audience, the scope.</p></div>
+        <div class="step rv"><div class="no">02</div><div class="h">Scope + quote</div><p class="d">Clear deliverables. A proposal you can actually read.</p></div>
+        <div class="step rv"><div class="no">03</div><div class="h">Timeline</div><p class="d">Responsibilities, milestones, dates — agreed up front.</p></div>
+        <div class="step rv pay"><div class="no">04</div><div class="h">25% advance</div><p class="d">Work begins once the 25% advance is in.</p></div>
+        <div class="step rv"><div class="no">05</div><div class="h">Concept</div><p class="d">We lock the visual direction before building on it.</p></div>
+        <div class="step rv"><div class="no">06</div><div class="h">Development</div><p class="d">The approved concept becomes a working website.</p></div>
+        <div class="step rv"><div class="no">07</div><div class="h">Two revisions</div><p class="d">Two structured revision rounds, included.</p></div>
+        <div class="step rv pay"><div class="no">08</div><div class="h">Handover</div><p class="d">Final checks, balance, and the keys are yours.</p></div>
       </div>
     </div>
   </section>
@@ -1620,7 +1635,7 @@
     <div class="wrap">
       <div class="shopify-lane-head">
         <div>
-          <div class="mono rv">06 / Shopify, properly</div>
+          <div class="mono rv">Shopify, properly</div>
           <h2 class="rv d2" style="margin-top:18px">The things a Shopify <em>brand</em> actually needs.</h2>
         </div>
         <p class="rv d3">Builds are only one part of the job. The rest is making the store easier to use, easier to update and easier for a customer to say yes to.</p>
@@ -1642,15 +1657,15 @@
     </div>
   </section>
 
-  <!-- 07B MAINTENANCE — black -->
-  <section class="maint">
+  <!-- 06 MAINTENANCE — black (merged with former Support section) -->
+  <section class="maint" id="support">
     <div class="wrap">
       <div class="maint-head">
         <div>
-          <div class="mono">06 / After launch</div>
-          <h2 style="margin-top:20px">Your business moves.<br>Your website should <em>move too.</em></h2>
+          <div class="mono">After launch</div>
+          <h2 style="margin-top:20px">Launch isn't the <em>finish.</em></h2>
         </div>
-        <p>New collections. New products. New offers. Festival campaigns. Your site shouldn't become a museum piece the day it launches. Ongoing digital support keeps it current.</p>
+        <p>Your business keeps moving — new collections, new offers, festive campaigns, new products. Your website should move with it. That's exactly the kind of small job that shouldn't become a big problem.</p>
       </div>
       <div class="maint-marquee" aria-label="Ongoing website support services">
         <div class="maint-card"><div class="big">NEW DROP</div><div class="small">COLLECTION UPDATE ↗</div></div>
@@ -1662,40 +1677,14 @@
         <div class="maint-card"><div class="big">NEW DROP</div><div class="small">COLLECTION UPDATE ↗</div></div>
         <div class="maint-card"><div class="big">SALE</div><div class="small">PROMOTION ↗</div></div>
       </div>
-    </div>
-  </section>
-
-  <!-- 08 WHY — black -->
-  <section class="why sec s-black" id="why">
-    <div class="wrap">
-      <div class="mono rv">06 / Why me</div>
-      <h2 class="head h-md rv d2" style="margin-top:16px">A developer who thinks like an</h2>
-      <span class="kw rv d2"><span class="t">owner.</span></span>
-      <div class="list">
-        <div class="item rv"><div class="no">01</div><h3>Business first</h3><p>I don't open with code. I open with what the site has to achieve, and for whom.</p></div>
-        <div class="item rv"><div class="no">02</div><h3>Customer aware</h3><p>Four years selling D2C taught me design isn't decoration. Every screen changes what a customer notices, believes, and does next.</p></div>
-        <div class="item rv"><div class="no">03</div><h3>Design + development</h3><p>It has to look right and work right. One without the other doesn't sell.</p></div>
-        <div class="item rv"><div class="no">04</div><h3>Built to evolve</h3><p>Launch isn't the finish line. Collections change, offers change, businesses change. The site changes with them.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 09 PROCESS — neon -->
-  <section class="sec s-ivory" id="process">
-    <div class="wrap">
-      <div class="mono rv">07 / Process</div>
-      <h2 class="head h-md rv d2" style="margin-top:16px">A good project should feel</h2>
-      <span class="kw rv d2"><span class="t">simple.</span></span>
-      <div class="steps">
-        <div class="step rv"><div class="no">01</div><div class="h">Discovery</div><p class="d">A complimentary call. We map the business, the audience, the scope.</p></div>
-        <div class="step rv"><div class="no">02</div><div class="h">Scope + quote</div><p class="d">Clear deliverables. A proposal you can actually read.</p></div>
-        <div class="step rv"><div class="no">03</div><div class="h">Timeline</div><p class="d">Responsibilities, milestones, dates — agreed up front.</p></div>
-        <div class="step rv pay"><div class="no">04</div><div class="h">25% advance</div><p class="d">Work begins once the 25% advance is in.</p></div>
-        <div class="step rv"><div class="no">05</div><div class="h">Concept</div><p class="d">We lock the visual direction before building on it.</p></div>
-        <div class="step rv"><div class="no">06</div><div class="h">Development</div><p class="d">The approved concept becomes a working website.</p></div>
-        <div class="step rv"><div class="no">07</div><div class="h">Two revisions</div><p class="d">Two structured revision rounds, included.</p></div>
-        <div class="step rv pay"><div class="no">08</div><div class="h">Handover</div><p class="d">Final checks, balance, and the keys are yours.</p></div>
-      </div>
+      <ul class="carelist" style="margin-top:56px">
+        <li><span>New collections</span><i aria-hidden="true">&#8599;</i></li>
+        <li><span>Product updates</span><i aria-hidden="true">&#8599;</i></li>
+        <li><span>Discounts &amp; offers</span><i aria-hidden="true">&#8599;</i></li>
+        <li><span>Festive campaigns</span><i aria-hidden="true">&#8599;</i></li>
+        <li><span>Homepage / banner updates</span><i aria-hidden="true">&#8599;</i></li>
+        <li><span>Ongoing digital support</span><i aria-hidden="true">&#8599;</i></li>
+      </ul>
     </div>
   </section>
 
@@ -1703,7 +1692,7 @@
   <section class="sec s-white" id="client">
     <div class="wrap cli">
       <div>
-        <div class="mono rv">08 / Working together</div>
+        <div class="mono rv">Working together</div>
         <h2 class="head h-md rv d2" style="margin-top:16px">Bring the brand. I'll build the</h2>
         <span class="kw kw--sm rv d2"><span class="t">experience.</span></span>
         <div class="body rv" style="margin-top:24px">
@@ -1725,7 +1714,7 @@
   <!-- 11 ENGAGE — black -->
   <section class="eng sec s-black">
     <div class="wrap">
-      <div class="mono rv">09 / Ways to work</div>
+      <div class="mono rv">Ways to work</div>
       <h2 class="head h-md rv d2" style="margin-top:16px">A project. A retainer.<br>Or someone on the inside.</h2>
       <span class="kw rv d2"><span class="t">longer.</span></span>
       <div class="cards">
@@ -1741,7 +1730,7 @@
   <section class="fit">
     <div class="wrap fit-grid">
       <div>
-        <div class="mono rv">10 / A good fit</div>
+        <div class="mono rv">A good fit</div>
         <h2 class="rv d2" style="margin-top:20px">We’ll probably get along if you care about <em>the details.</em></h2>
       </div>
       <div class="fit-col">
@@ -1757,7 +1746,7 @@
   <!-- 12 CTA — neon -->
   <section class="cta sec s-ivory" id="contact">
     <div class="wrap">
-      <div class="mono rv">10 / Start</div>
+      <div class="mono rv">Start</div>
       <h2 class="rv d2" style="margin-top:18px">Show me what<br>you’re <span class="kw"><span class="t">building.</span></span><br><span class="cta-subline">I'll bring the founder lens.</span></h2>
       <div class="row rv d3">
         <a class="pill fill" href="mailto:REPLACE@EMAIL.com"><span class="dot"></span> Start a project</a>
