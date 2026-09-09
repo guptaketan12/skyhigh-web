@@ -215,13 +215,13 @@
   .carelist li:hover i{transform:translate(4px,-4px);color:var(--strong)}
 
   /* WHY */
-  .why .list{margin-top:52px;border-top:1px solid var(--line)}
-  .why .item{display:grid;grid-template-columns:1fr;gap:8px;padding:clamp(24px,3.4vw,40px) 0;border-bottom:1px solid var(--line);transition:padding .35s}
-  @media(min-width:820px){.why .item{grid-template-columns:70px 300px 1fr;gap:34px;align-items:baseline}}
+  .why .list{margin-top:52px;border-top:1px solid #323230}
+  .why .item{position:relative;display:grid;grid-template-columns:55px 1fr;gap:20px;padding:34px 0;border-bottom:1px solid #323230;transition:padding .35s;cursor:default}
   .why .item:hover{padding-left:14px}
-  .why .item .no{font-family:var(--mono);font-size:.8rem;color:var(--accent)}
-  .why .item h3{font-family:var(--sans);font-weight:600;letter-spacing:-.04em;line-height:.92;font-size:clamp(1.5rem,3vw,2.6rem);color:var(--strong)}
-  .why .item p{margin:0;color:var(--muted);max-width:46ch;line-height:1.45}
+  .why .item .no{font-family:var(--mono);font-size:.7rem;color:#77756f;padding-top:10px}
+  .why .item h3{font-family:var(--sans);font-weight:500;letter-spacing:-.055em;line-height:.86;font-size:clamp(2rem,5.2vw,5.8rem);color:var(--strong);transition:transform .4s,color .4s}
+  .why .item:hover h3{transform:translateX(12px);color:var(--lime)}
+  .why .item p{margin:16px 0 0;color:#A8A7A1;max-width:52ch;line-height:1.45}
 
   /* PROCESS */
   .steps{margin-top:52px;border-top:1px solid var(--line)}
@@ -439,6 +439,7 @@
     .taste-options{grid-template-columns:1fr}
     .questions .q{grid-template-columns:34px 1fr}
     .q-text{font-size:2.35rem}
+    .why .item{grid-template-columns:34px 1fr}
     .build-stage{min-height:300px}
     .layer.wire{inset:18px;padding:18px}
     .layer.design{inset:35px 28px;padding:18px}
@@ -1382,10 +1383,10 @@
       <h2 class="head h-md rv d2" style="margin-top:16px">A developer who thinks like an</h2>
       <span class="kw rv d2"><span class="t">owner.</span></span>
       <div class="list">
-        <div class="item rv"><div class="no">01</div><h3>Business first</h3><p>I don't open with code. I open with what the site has to achieve, and for whom.</p></div>
-        <div class="item rv"><div class="no">02</div><h3>Customer aware</h3><p>Four years selling D2C taught me design isn't decoration. Every screen changes what a customer notices, believes, and does next.</p></div>
-        <div class="item rv"><div class="no">03</div><h3>Design + development</h3><p>It has to look right and work right. One without the other doesn't sell.</p></div>
-        <div class="item rv"><div class="no">04</div><h3>Built to evolve</h3><p>Launch isn't the finish line. Collections change, offers change, businesses change. The site changes with them.</p></div>
+        <div class="item rv"><div class="no">01</div><div><h3>Business first</h3><p>I don't open with code. I open with what the site has to achieve, and for whom.</p></div></div>
+        <div class="item rv"><div class="no">02</div><div><h3>Customer aware</h3><p>Four years selling D2C taught me design isn't decoration. Every screen changes what a customer notices, believes, and does next.</p></div></div>
+        <div class="item rv"><div class="no">03</div><div><h3>Design + development</h3><p>It has to look right and work right. One without the other doesn't sell.</p></div></div>
+        <div class="item rv"><div class="no">04</div><div><h3>Built to evolve</h3><p>Launch isn't the finish line. Collections change, offers change, businesses change. The site changes with them.</p></div></div>
       </div>
     </div>
   </section>
