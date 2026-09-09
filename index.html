@@ -91,24 +91,16 @@
   .hero-rule{width:76px;height:6px;background:var(--ink);margin:26px auto 42px}
   .hero-statement{font-family:var(--fat);font-weight:400;font-size:clamp(2.8rem,5.6vw,6.4rem);line-height:.93;letter-spacing:-.025em;max-width:920px;margin:0 auto;color:var(--ink)}
   .hero-statement .neon-word{color:var(--accent);text-shadow:0 0 24px rgba(216,255,53,.55)}
-  .hero-cred-strip{display:flex;justify-content:center;align-items:stretch;width:min(100%,1180px);margin:42px auto 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;font-family:var(--mono);text-transform:uppercase;color:var(--ink)}
-  .hero-cred{display:flex;align-items:center;justify-content:center;min-width:0;padding:0 clamp(14px,2vw,30px);transition:background .3s ease;border-radius:10px}
-  .hero-cred:hover{background:var(--accent)}
-  .hero-cred:hover *{color:#0A0A0A !important}
-  .hero-cred-shopify,.hero-cred-wordpress{flex-direction:column;align-items:flex-start;gap:8px;text-align:left}
-  .brand-lockup{display:flex;align-items:center;gap:10px}
-  .shopify-logo{width:34px;height:38px;flex:none;display:block}
-  .wordpress-logo{width:34px;height:34px;flex:none;display:block}
-  .brand-wordmark{font-family:var(--sans);font-size:clamp(1.15rem,1.9vw,1.7rem);color:var(--ink);white-space:nowrap}
+  .hero-proof-grid{width:min(100%,1180px);margin:42px auto 0}
+  .hero-proof-grid .proof-card{align-items:flex-start;text-align:left}
+  .proof-card:hover .num{color:var(--ink)}
+  .brand-lockup{display:flex;align-items:center;gap:12px}
+  .shopify-logo{width:46px;height:52px;flex:none;display:block}
+  .wordpress-logo{width:46px;height:46px;flex:none;display:block}
+  .brand-wordmark{font-family:var(--sans);font-size:clamp(1.35rem,2.3vw,2.1rem);color:var(--ink);white-space:nowrap}
   .shopify-wordmark{font-style:italic;font-weight:800;letter-spacing:-.02em;text-transform:lowercase}
   .wordpress-wordmark{font-family:var(--fat);font-weight:400;letter-spacing:-.005em;text-transform:uppercase}
-
-  .hero-cred-label{font-size:clamp(.64rem,.8vw,.78rem);letter-spacing:.18em;color:var(--ink)}
-  .hero-cred-platform strong{font-size:clamp(.82rem,1.2vw,1.12rem);letter-spacing:.14em}
-  .hero-cred-divider{width:1px;background:var(--line);align-self:stretch;min-height:44px}
-  .hero-cred-websites{gap:10px;white-space:nowrap}
-  .hero-cred-websites strong{font-family:var(--sans);font-size:clamp(2.4rem,3.8vw,4rem);line-height:.8;letter-spacing:-.06em;color:var(--accent)}
-  .hero-cred-websites span{font-size:clamp(.62rem,.75vw,.76rem);letter-spacing:.15em;color:var(--ink);font-weight:500}
+  .num.neon-num{color:var(--accent)}
   .hero-proof-row{display:grid;grid-template-columns:1fr 1px 1fr;align-items:center;max-width:800px;margin:48px auto 0;text-align:left}
   .hero-proof-item{display:flex;align-items:center;gap:18px;padding:0 26px}
   .hero-proof-item:first-child{justify-content:flex-end}
@@ -639,10 +631,10 @@
   .logo{font-size:.78rem;letter-spacing:-.055em}.logo .logo-web{font-size:.46em}.brand-tagline{font-size:.66rem;max-width:34ch}
     .keyword-grid{grid-template-columns:1fr}
 
-    .shopify-logo{width:27px;height:30px}
-    .wordpress-logo{width:27px;height:27px}
-    .brand-lockup{gap:7px}
-    .brand-wordmark{font-size:1.05rem}
+    .shopify-logo{width:34px;height:38px}
+    .wordpress-logo{width:34px;height:34px}
+    .brand-lockup{gap:9px}
+    .brand-wordmark{font-size:1.3rem}
   }
 
 
@@ -1294,8 +1286,8 @@
 
         <h1 class="hero-statement rv d2">Build websites that<br>take businesses <span class="neon-word">higher.</span></h1>
 
-        <div class="hero-cred-strip rv d3" aria-label="Platforms, credentials and experience">
-          <div class="hero-cred hero-cred-shopify">
+        <div class="proof-grid hero-proof-grid rv d3" aria-label="Platforms, credentials and experience">
+          <div class="proof-card">
             <div class="brand-lockup">
               <svg class="shopify-logo" viewBox="0 0 60 68" aria-hidden="true" role="img">
                 <path fill="#95BF47" d="M48.2 13.3c0-.3-.3-.5-.5-.5s-4-.3-4-.3-2.7-2.6-3-2.9c-.3-.3-.9-.2-1.1-.1 0 0-.6.2-1.5.5-.9-2.6-2.5-5-5.3-5h-.3C31.7.5 30.7 0 29.9 0c-6.1.1-9 7.7-9.9 11.5-2.4.7-4.1 1.3-4.3 1.3-1.3.4-1.4.5-1.6 1.7C14 15.5 10.6 42 10.6 42l26.8 5 14.5-3.1S48.2 13.6 48.2 13.3zM33.7 9.7l-2.4.7v-.5c0-1.6-.2-2.8-.6-3.8 1.5.2 2.5 1.9 3 3.6zm-4.7-3.2c.4 1 .7 2.4.7 4.3v.3l-4.9 1.5c.9-3.6 2.7-5.4 4.2-6.1zm-1.9-1.8c.3 0 .6.1.8.3-2 .9-4.1 3.3-5 8.1l-3.9 1.2c1.1-3.7 3.5-9.6 8.1-9.6z"/>
@@ -1304,23 +1296,24 @@
               </svg>
               <span class="brand-wordmark shopify-wordmark">shopify</span>
             </div>
-            <span class="hero-cred-label">Select Partner</span>
+            <div class="desc">Select Partner</div>
           </div>
-          <div class="hero-cred-divider" aria-hidden="true"></div>
-          <div class="hero-cred hero-cred-wordpress">
+          <div class="proof-card">
             <div class="brand-lockup">
               <svg class="wordpress-logo" viewBox="0 0 24 24" aria-hidden="true" role="img">
                 <path fill="#21759B" d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/>
               </svg>
               <span class="brand-wordmark wordpress-wordmark">WordPress</span>
             </div>
+            <div class="desc">Website Platform</div>
           </div>
-          <div class="hero-cred-divider" aria-hidden="true"></div>
-          <div class="hero-cred hero-cred-platform"><strong>Ex-D2C Founder, 4 Yrs</strong></div>
-          <div class="hero-cred-divider" aria-hidden="true"></div>
-          <div class="hero-cred hero-cred-websites">
-            <strong>50+</strong>
-            <span>Websites done</span>
+          <div class="proof-card">
+            <div class="num">4</div>
+            <div class="desc">Years as a D2C founder</div>
+          </div>
+          <div class="proof-card">
+            <div class="num neon-num">50+</div>
+            <div class="desc">Websites done</div>
           </div>
         </div>
 
