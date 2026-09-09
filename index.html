@@ -215,13 +215,15 @@
   .carelist li:hover i{transform:translate(4px,-4px);color:var(--strong)}
 
   /* WHY */
-  .why .list{margin-top:52px;border-top:1px solid #323230}
-  .why .item{position:relative;display:grid;grid-template-columns:55px 1fr;gap:20px;padding:34px 0;border-bottom:1px solid #323230;transition:padding .35s;cursor:default}
+  .why-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:7vw;align-items:start}
+  .why h2 em{font-family:var(--fat);font-style:italic;font-weight:500;letter-spacing:-.045em;color:var(--lime)}
+  .why .list{border-top:1px solid #3a3a37}
+  .why .item{position:relative;display:grid;grid-template-columns:38px 1fr;gap:15px;padding:20px 0;border-bottom:1px solid #3a3a37;transition:padding .35s;cursor:default}
   .why .item:hover{padding-left:14px}
-  .why .item .no{font-family:var(--mono);font-size:.7rem;color:#77756f;padding-top:10px}
-  .why .item h3{font-family:var(--sans);font-weight:500;letter-spacing:-.055em;line-height:.86;font-size:clamp(2rem,5.2vw,5.8rem);color:var(--strong);transition:transform .4s,color .4s}
-  .why .item:hover h3{transform:translateX(12px);color:var(--lime)}
-  .why .item p{margin:16px 0 0;color:#A8A7A1;max-width:52ch;line-height:1.45}
+  .why .item .no{font-family:var(--mono);font-size:.65rem;color:#7f7e78;padding-top:5px}
+  .why .item h3{font-family:var(--sans);font-weight:500;letter-spacing:-.04em;line-height:.95;font-size:clamp(1.3rem,2.6vw,2.4rem);color:var(--strong);transition:transform .35s,color .35s}
+  .why .item:hover h3{transform:translateX(5px);color:var(--lime)}
+  .why .item p{margin:10px 0 0;color:#aaa9a3;max-width:52ch;line-height:1.45}
 
   /* PROCESS */
   .steps{margin-top:52px;border-top:1px solid var(--line)}
@@ -628,7 +630,7 @@
   .tier-strip .status{font:400 .55rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 
   @media(max-width:900px){
-    .problem-grid,.shopify-lane-head{grid-template-columns:1fr;gap:34px}
+    .problem-grid,.shopify-lane-head,.why-grid{grid-template-columns:1fr;gap:34px}
     .keyword-grid{grid-template-columns:1fr 1fr}
     .partner-explainer{display:block}
     .partner-explainer .partner-note{text-align:left;margin-top:15px}
@@ -1378,15 +1380,16 @@
 
   <!-- 02B WHY — black -->
   <section class="why sec s-black" id="why">
-    <div class="wrap">
-      <div class="mono rv">Why me</div>
-      <h2 class="head h-md rv d2" style="margin-top:16px">A developer who thinks like an</h2>
-      <span class="kw rv d2"><span class="t">owner.</span></span>
-      <div class="list">
-        <div class="item rv"><div class="no">01</div><div><h3>Business first</h3><p>I don't open with code. I open with what the site has to achieve, and for whom.</p></div></div>
-        <div class="item rv"><div class="no">02</div><div><h3>Customer aware</h3><p>Four years selling D2C taught me design isn't decoration. Every screen changes what a customer notices, believes, and does next.</p></div></div>
-        <div class="item rv"><div class="no">03</div><div><h3>Design + development</h3><p>It has to look right and work right. One without the other doesn't sell.</p></div></div>
-        <div class="item rv"><div class="no">04</div><div><h3>Built to evolve</h3><p>Launch isn't the finish line. Collections change, offers change, businesses change. The site changes with them.</p></div></div>
+    <div class="wrap why-grid">
+      <div>
+        <div class="mono rv">Why me</div>
+        <h2 class="head h-md rv d2" style="margin-top:22px">A developer who thinks like an <em>owner.</em></h2>
+      </div>
+      <div class="list rv d2">
+        <div class="item"><div class="no">01</div><div><h3>Business first</h3><p>I don't open with code. I open with what the site has to achieve, and for whom.</p></div></div>
+        <div class="item"><div class="no">02</div><div><h3>Customer aware</h3><p>Four years selling D2C taught me design isn't decoration. Every screen changes what a customer notices, believes, and does next.</p></div></div>
+        <div class="item"><div class="no">03</div><div><h3>Design + development</h3><p>It has to look right and work right. One without the other doesn't sell.</p></div></div>
+        <div class="item"><div class="no">04</div><div><h3>Built to evolve</h3><p>Launch isn't the finish line. Collections change, offers change, businesses change. The site changes with them.</p></div></div>
       </div>
     </div>
   </section>
