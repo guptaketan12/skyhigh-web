@@ -92,11 +92,11 @@
   .index-client.active{color:var(--accent)}
   .index-client.active .dot{opacity:1;transform:scale(1)}
   .index-column{display:flex;flex-direction:column;gap:10svh;padding:6svh 0}
-  .index-card{position:relative;border:1px solid #232320;border-radius:14px;background:linear-gradient(160deg,#161614,#0d0d0c);overflow:hidden;box-shadow:0 40px 80px -50px rgba(0,0,0,.8);will-change:transform,opacity}
+  .index-card{position:relative;border:1px solid #3a3a36;border-radius:14px;background:linear-gradient(160deg,#161614,#0d0d0c);overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.03),0 40px 80px -50px rgba(0,0,0,.8);will-change:transform,opacity;max-height:64vh}
   .index-card-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid #232320;background:#131311}
   .index-card-bar i{width:8px;height:8px;border-radius:50%;background:#2c2c28;display:block}
   .index-card-bar span{margin-left:8px;font-family:var(--mono);font-size:11px;color:#726f66}
-  .index-card-img{aspect-ratio:16/10.5;position:relative;overflow:hidden;background:#111}
+  .index-card-img{height:min(56vh,58vw);position:relative;overflow:hidden;background:#111}
   .index-card-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
   .index-card:hover .index-card-img img{transform:scale(1.035)}
   .index-card-img--pending{display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#1a1a18,#0c0c0b)}
@@ -1943,16 +1943,26 @@
 
     if(window.gsap && window.ScrollTrigger && !reduceMotion){
       gsap.set(cards,{opacity:0,y:60,scale:.94});
-      cards.forEach(function(card,i){
+      cards.forEach(function(card){
         gsap.to(card,{
           opacity:1,y:0,scale:1,ease:'none',
           scrollTrigger:{trigger:card,start:'top 92%',end:'top 55%',scrub:.4}
         });
-        ScrollTrigger.create({
-          trigger:card,start:'top center',end:'bottom center',
-          onEnter:function(){setActive(i);},onEnterBack:function(){setActive(i);}
-        });
       });
+      /* Active card = whichever is actually closest to viewport center right now —
+         computed directly on every scroll tick, not inferred from enter/leave order
+         (which breaks on fast/instant scrolls). */
+      function updateActive(){
+        var mid=innerHeight/2, best=0, bestDist=Infinity;
+        cards.forEach(function(card,i){
+          var r=card.getBoundingClientRect();
+          var d=Math.abs((r.top+r.bottom)/2-mid);
+          if(d<bestDist){bestDist=d;best=i;}
+        });
+        setActive(best);
+      }
+      ScrollTrigger.create({trigger:'.index-hero',start:'top bottom',end:'bottom top',onUpdate:updateActive,onRefresh:updateActive});
+      updateActive();
     }else{
       var revealIO=new IntersectionObserver(function(es){
         es.forEach(function(e){if(e.isIntersecting) e.target.style.opacity=1;});
