@@ -56,8 +56,8 @@
 
   /* nav */
   header.nav{position:fixed;inset:0 0 auto 0;z-index:100;display:flex;align-items:center;justify-content:space-between;
-      padding:18px var(--pad);color:var(--ink);transition:padding .4s,background .4s}
-  header.nav.scrolled{padding:12px var(--pad);background:rgba(255,255,255,.9);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+      padding:18px var(--pad);color:#f2f2ee;transition:padding .4s,background .4s,color .4s}
+  header.nav.scrolled{padding:12px var(--pad);background:rgba(255,255,255,.9);backdrop-filter:blur(9px);border-bottom:1px solid var(--line);color:var(--ink)}
   .logo{font-family:'Sora',var(--sans);font-size:clamp(.86rem,1.15vw,1.02rem);font-weight:800;letter-spacing:-.055em;text-transform:uppercase;display:inline-flex;align-items:baseline;gap:.34em;white-space:nowrap}.logo .logo-web{font-size:.48em;font-weight:600;letter-spacing:.16em;opacity:.72;position:relative;top:-.08em}
   .brand-tagline{font-family:var(--mono);font-size:.72rem;line-height:1.35;letter-spacing:.02em;color:var(--muted);max-width:38ch}.navlinks{display:flex;align-items:center;gap:26px;font-size:.82rem}
   .navlinks a.n{color:inherit;position:relative}
@@ -81,6 +81,47 @@
   .rv{opacity:0;transform:translateY(30px);transition:opacity .85s ease,transform .85s cubic-bezier(.2,.65,.2,1)}
   .rv.in{opacity:1;transform:none}
   .rv.d2{transition-delay:.09s}.rv.d3{transition-delay:.18s}.rv.d4{transition-delay:.27s}
+
+  /* INDEX — the homepage work index (replaces hero + portfolio) */
+  .index-hero{background:var(--black);color:#f2f2ee;padding:calc(var(--pad) + 78px) 0 40px;overflow:hidden}
+  .index-eyebrow{text-align:center;color:#726f66;margin-bottom:18px}
+  .index-layout{display:grid;grid-template-columns:180px 1fr 150px;gap:0;align-items:start;max-width:1320px;margin:0 auto;padding:0 var(--pad)}
+  .index-sidebar{position:sticky;top:38svh;align-self:start;font-family:var(--mono);font-size:12px;line-height:2.6;padding-top:6px}
+  .index-client{color:#5a5850;transition:color .35s;display:flex;align-items:center;gap:8px;white-space:nowrap}
+  .index-client .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:0;transform:scale(.4);transition:opacity .3s,transform .3s;flex:none}
+  .index-client.active{color:var(--accent)}
+  .index-client.active .dot{opacity:1;transform:scale(1)}
+  .index-column{display:flex;flex-direction:column;gap:14svh;padding:8svh 0}
+  .index-card{position:relative;border:1px solid #232320;border-radius:14px;background:linear-gradient(160deg,#161614,#0d0d0c);overflow:hidden;box-shadow:0 40px 80px -50px rgba(0,0,0,.8);opacity:0;transform:translateY(40px) scale(.98);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .index-card.in{opacity:1;transform:translateY(0) scale(1)}
+  .index-card-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid #232320;background:#131311}
+  .index-card-bar i{width:8px;height:8px;border-radius:50%;background:#2c2c28;display:block}
+  .index-card-bar span{margin-left:8px;font-family:var(--mono);font-size:11px;color:#726f66}
+  .index-card-img{aspect-ratio:16/10.5;position:relative;overflow:hidden;background:#111}
+  .index-card-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+  .index-card:hover .index-card-img img{transform:scale(1.035)}
+  .index-card-img--pending{display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#1a1a18,#0c0c0b)}
+  .index-card-headline{font-family:var(--fat);font-style:italic;font-size:clamp(2rem,5vw,3.4rem);line-height:.92;text-align:center;background:linear-gradient(100deg,#5572ff,#f3d66b);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .index-card-link{position:absolute;inset:0;z-index:2}
+  .index-card-wip{position:absolute;top:14px;right:14px;z-index:3;border:1px solid var(--accent);color:var(--accent);font:400 .6rem var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:rgba(11,11,11,.7)}
+  .index-meta{position:sticky;top:38svh;align-self:start;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:#726f66;line-height:1.7}
+  .index-meta-count{margin-top:22px;display:flex;justify-content:flex-end;align-items:baseline;gap:3px}
+  .index-meta-count #indexCounter{font-family:var(--sans);font-weight:700;font-size:22px;color:var(--accent);letter-spacing:-.02em}
+  .index-meta-count .of{color:#454340}
+  @media(max-width:900px){
+    .index-layout{grid-template-columns:1fr;padding:0 22px}
+    .index-sidebar,.index-meta{display:none}
+    .index-column{gap:8svh;padding:4svh 0}
+  }
+
+  /* FORGE STORY — quiet, two lines */
+  .forge-story{background:var(--white);padding:64px 0;border-bottom:1px solid var(--line)}
+  .forge-story-line{display:flex;align-items:flex-start;gap:14px;max-width:64ch;margin:0 auto;text-align:left;font-family:var(--sans);font-size:clamp(1.05rem,1.8vw,1.3rem);line-height:1.55;color:var(--muted)}
+  .forge-story-line .lime-dot.small{margin-top:9px}
+
+  /* CREDENTIALS STRIP — proof, not prose */
+  .credentials-strip{background:var(--white);padding:0 0 72px}
+  .credentials-actions{display:flex;justify-content:center;margin-top:34px}
 
   /* HERO — centered Webforge identity */
   .hero{min-height:100svh;display:flex;align-items:center;position:relative;padding:128px 0 70px;overflow:hidden}
@@ -1274,9 +1315,7 @@
   <a href="#top" class="logo" aria-label="Webforge home">WEBFORGE</a>
   <nav class="navlinks" aria-label="Primary">
     <a class="n" href="#work">Work</a>
-    <a class="n" href="#services">Services</a>
-    <a class="n" href="#difference">About</a>
-    <a class="n" href="#process">Process</a>
+    <a class="n" href="#about">About</a>
     <a class="n" href="#contact">Contact</a>
     <a class="pill fill" href="#contact">Get in touch <span>→</span></a>
   </nav>
@@ -1285,89 +1324,107 @@
 
 <div class="menu" id="menu" aria-hidden="true">
   <button class="close" id="menuClose">Close</button>
-  <a href="#work">Work</a><a href="#build">What I build</a><a href="#services">Services</a><a href="#process">Process</a><a href="#contact">Start a project</a>
+  <a href="#work">Work</a><a href="#about">About</a><a href="#contact">Start a project</a>
 </div>
 
 <main id="top">
 
-  <!-- 01 HERO — centered Webforge -->
-  <section class="hero s-white">
-    <div class="wrap hero-grid">
-      <div class="hero-center">
-        <div class="hero-logo ombre-text rv">WEBFORGE</div>
-        <div class="hero-logo-web ombre-text rv d2">S T U D I O</div>
-        <div class="hero-rule rv d2"></div>
+  <!-- 01 INDEX — the homepage. Work does the talking. -->
+  <section class="index-hero" id="work">
+    <div class="wrap">
+      <div class="index-eyebrow mono rv">5 projects. No padding.</div>
+    </div>
+    <div class="index-layout">
+      <div class="index-sidebar" id="indexSidebar" aria-hidden="true">
+        <div class="index-client active" data-i="0"><span class="dot"></span>Vugy India</div>
+        <div class="index-client" data-i="1"><span class="dot"></span>Ammax Decor</div>
+        <div class="index-client" data-i="2"><span class="dot"></span>Sriram Cables</div>
+        <div class="index-client" data-i="3"><span class="dot"></span>SNG Cosmetics</div>
+        <div class="index-client" data-i="4"><span class="dot"></span>Rabaani Jewels</div>
+      </div>
 
-        <h1 class="hero-statement rv d2">We build websites that<br>take businesses <span class="neon-word">higher.</span></h1>
-
-        <p class="name-note rv d2">A forge takes raw material and shapes it until it can hold weight. Webforge does the same with websites — structure, then design, then content, until the thing actually performs, not just impresses.</p>
-
-        <div class="proof-grid hero-proof-grid rv d3" aria-label="Platforms, credentials and experience">
-          <div class="proof-card">
-            <div class="brand-lockup">
-              <svg class="shopify-logo" viewBox="0 0 60 68" aria-hidden="true" role="img">
-                <path fill="#95BF47" d="M48.2 13.3c0-.3-.3-.5-.5-.5s-4-.3-4-.3-2.7-2.6-3-2.9c-.3-.3-.9-.2-1.1-.1 0 0-.6.2-1.5.5-.9-2.6-2.5-5-5.3-5h-.3C31.7.5 30.7 0 29.9 0c-6.1.1-9 7.7-9.9 11.5-2.4.7-4.1 1.3-4.3 1.3-1.3.4-1.4.5-1.6 1.7C14 15.5 10.6 42 10.6 42l26.8 5 14.5-3.1S48.2 13.6 48.2 13.3zM33.7 9.7l-2.4.7v-.5c0-1.6-.2-2.8-.6-3.8 1.5.2 2.5 1.9 3 3.6zm-4.7-3.2c.4 1 .7 2.4.7 4.3v.3l-4.9 1.5c.9-3.6 2.7-5.4 4.2-6.1zm-1.9-1.8c.3 0 .6.1.8.3-2 .9-4.1 3.3-5 8.1l-3.9 1.2c1.1-3.7 3.5-9.6 8.1-9.6z"/>
-                <path fill="#5E8E3E" d="M47.7 12.8s-4-.3-4-.3-2.7-2.6-3-2.9c-.1-.1-.3-.2-.4-.2L37.4 47l14.5-3.1S48.2 13.6 48.2 13.3c0-.3-.3-.5-.5-.5z"/>
-                <path fill="#fff" d="M35.8 19.3l-1.8 5.3s-1.6-.8-3.4-.8c-2.7 0-2.8 1.7-2.8 2.1 0 2.3 6.1 3.2 6.1 8.7 0 4.3-2.7 7.1-6.4 7.1-4.5 0-6.7-2.8-6.7-2.8l1.2-4s2.3 2 4.3 2c1.3 0 1.8-1 1.8-1.8 0-3-5-3.1-5-8.1 0-4.2 3-8.3 9.1-8.3 2.4 0 3.6.8 3.6.8z"/>
-              </svg>
-              <span class="brand-wordmark shopify-wordmark">shopify</span>
-            </div>
-            <div class="desc">Select Partner</div>
-          </div>
-          <div class="proof-card">
-            <div class="brand-lockup">
-              <svg class="wordpress-logo" viewBox="0 0 24 24" aria-hidden="true" role="img">
-                <path fill="#21759B" d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/>
-              </svg>
-              <span class="brand-wordmark wordpress-wordmark">WordPress</span>
-            </div>
-            <div class="desc">Website Platform</div>
-          </div>
-          <div class="proof-card">
-            <div class="num">4</div>
-            <div class="desc">Years as a D2C founder</div>
-          </div>
-          <div class="proof-card">
-            <div class="num neon-num">50+</div>
-            <div class="desc">Websites developed</div>
-          </div>
+      <div class="index-column" id="indexColumn">
+        <div class="index-card" data-i="0">
+          <div class="index-card-bar"><i></i><i></i><i></i><span>vugyindia.com</span></div>
+          <div class="index-card-img"><img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fvugyindia.com%2F?w=1200" loading="lazy" alt="Vugy India website preview"></div>
+          <a class="index-card-link" href="https://vugyindia.com" target="_blank" rel="noopener" aria-label="Visit Vugy India"></a>
         </div>
-
-
-        <div class="hero-actions rv d4">
-          <a class="pill fill" href="#contact"><span class="dot"></span> Start a conversation <span>→</span></a>
-          <a class="pill ghost" href="#work">View our work <span>→</span></a>
+        <div class="index-card" data-i="1">
+          <div class="index-card-bar"><i></i><i></i><i></i><span>ammaxdecor.com</span></div>
+          <div class="index-card-img"><img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fammaxdecor.com%2F?w=1200" loading="lazy" alt="Ammax Decor website preview"></div>
+          <a class="index-card-link" href="https://ammaxdecor.com" target="_blank" rel="noopener" aria-label="Visit Ammax Decor"></a>
         </div>
+        <div class="index-card" data-i="2">
+          <div class="index-card-bar"><i></i><i></i><i></i><span>sriramcables.com</span></div>
+          <div class="index-card-img"><img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fsriram-cables.vercel.app%2F?w=1200" loading="lazy" alt="Sriram Cables website preview"></div>
+          <span class="index-card-wip">Work in progress</span>
+        </div>
+        <div class="index-card" data-i="3">
+          <div class="index-card-bar"><i></i><i></i><i></i><span>sngcosmetics.in</span></div>
+          <div class="index-card-img"><img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fsngcosmetics.in%2F?w=1200" loading="lazy" alt="SNG Cosmetics website preview"></div>
+          <a class="index-card-link" href="https://sngcosmetics.in" target="_blank" rel="noopener" aria-label="Visit SNG Cosmetics"></a>
+        </div>
+        <div class="index-card" data-i="4">
+          <div class="index-card-bar"><i></i><i></i><i></i><span>rabaanijewels.com</span></div>
+          <div class="index-card-img index-card-img--pending"><span class="index-card-headline">Quietly<br>precious</span></div>
+          <span class="index-card-wip">Work in progress</span>
+        </div>
+      </div>
 
-        <div class="hero-scroll rv d4" aria-hidden="true">Scroll to explore <i></i></div>
+      <div class="index-meta" id="indexMeta" aria-hidden="true">
+        <div class="index-meta-tags" id="indexMetaTags">Fashion / Made-to-measure<br>Shopify · D2C + Brand</div>
+        <div class="index-meta-count"><span id="indexCounter">01</span><span class="of"> / 05</span></div>
       </div>
     </div>
   </section>
 
-  <!-- 01 HERO — founder-led positioning -->
-  <section class="founder-strip founder-story">
-    <div class="wrap founder-story-wrap">
-      <div class="founder-story-grid">
-        <div class="founder-story-heading rv">
-          <h2 class="inverse-line"><span class="plain-black">Built by a</span><br><em class="plain-neon">D2C founder</em><br><span class="plain-black">who knows how to</span><br><strong class="plain-black">sell</strong><br><b class="plain-ombre">online.</b></h2>
-        </div>
-        <div class="founder-story-content rv d2">
-          <div class="founder-story-intro"><span class="lime-dot"></span><p>I spent four years building and running a D2C business. Now I build the websites for brands and businesses — with the same commercial lens.</p></div>
-          <div class="founder-story-actions">
-            <a class="pill fill" href="#contact"><span class="dot"></span> Start a project <span>→</span></a>
-            <a class="pill" href="#work">View selected work <span>→</span></a>
+  <!-- 01B FORGE STORY — quiet, two lines -->
+  <section class="forge-story" id="about">
+    <div class="wrap">
+      <p class="forge-story-line rv"><span class="lime-dot small"></span>A forge takes raw material and shapes it until it can hold weight. Webforge does the same with websites — built to perform, not just impress.</p>
+    </div>
+  </section>
+
+  <!-- 01C CREDENTIALS — proof, not prose -->
+  <section class="credentials-strip">
+    <div class="wrap">
+      <div class="proof-grid rv d2" aria-label="Platforms, credentials and experience">
+        <div class="proof-card">
+          <div class="brand-lockup">
+            <svg class="shopify-logo" viewBox="0 0 60 68" aria-hidden="true" role="img">
+              <path fill="#95BF47" d="M48.2 13.3c0-.3-.3-.5-.5-.5s-4-.3-4-.3-2.7-2.6-3-2.9c-.3-.3-.9-.2-1.1-.1 0 0-.6.2-1.5.5-.9-2.6-2.5-5-5.3-5h-.3C31.7.5 30.7 0 29.9 0c-6.1.1-9 7.7-9.9 11.5-2.4.7-4.1 1.3-4.3 1.3-1.3.4-1.4.5-1.6 1.7C14 15.5 10.6 42 10.6 42l26.8 5 14.5-3.1S48.2 13.6 48.2 13.3zM33.7 9.7l-2.4.7v-.5c0-1.6-.2-2.8-.6-3.8 1.5.2 2.5 1.9 3 3.6zm-4.7-3.2c.4 1 .7 2.4.7 4.3v.3l-4.9 1.5c.9-3.6 2.7-5.4 4.2-6.1zm-1.9-1.8c.3 0 .6.1.8.3-2 .9-4.1 3.3-5 8.1l-3.9 1.2c1.1-3.7 3.5-9.6 8.1-9.6z"/>
+              <path fill="#5E8E3E" d="M47.7 12.8s-4-.3-4-.3-2.7-2.6-3-2.9c-.1-.1-.3-.2-.4-.2L37.4 47l14.5-3.1S48.2 13.6 48.2 13.3c0-.3-.3-.5-.5-.5z"/>
+              <path fill="#fff" d="M35.8 19.3l-1.8 5.3s-1.6-.8-3.4-.8c-2.7 0-2.8 1.7-2.8 2.1 0 2.3 6.1 3.2 6.1 8.7 0 4.3-2.7 7.1-6.4 7.1-4.5 0-6.7-2.8-6.7-2.8l1.2-4s2.3 2 4.3 2c1.3 0 1.8-1 1.8-1.8 0-3-5-3.1-5-8.1 0-4.2 3-8.3 9.1-8.3 2.4 0 3.6.8 3.6.8z"/>
+            </svg>
+            <span class="brand-wordmark shopify-wordmark">shopify</span>
           </div>
-          <div class="founder-story-tags-grid">
-            <div class="proof-card"><div class="desc">New store/website development</div></div>
-            <div class="proof-card"><div class="desc">Existing store/website re-design</div></div>
-            <div class="proof-card"><div class="desc">Consultation only</div></div>
-            <div class="proof-card"><div class="desc">Maintenance and ongoing support</div></div>
-          </div>
+          <div class="desc">Select Partner</div>
         </div>
+        <div class="proof-card">
+          <div class="brand-lockup">
+            <svg class="wordpress-logo" viewBox="0 0 24 24" aria-hidden="true" role="img">
+              <path fill="#21759B" d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/>
+            </svg>
+            <span class="brand-wordmark wordpress-wordmark">WordPress</span>
+          </div>
+          <div class="desc">Website Platform</div>
+        </div>
+        <div class="proof-card">
+          <div class="num">4</div>
+          <div class="desc">Years as a D2C founder</div>
+        </div>
+        <div class="proof-card">
+          <div class="num neon-num">50+</div>
+          <div class="desc">Websites developed</div>
+        </div>
+      </div>
+      <div class="credentials-actions rv d3">
+        <a class="pill fill" href="#contact"><span class="dot"></span> Start a conversation <span>→</span></a>
       </div>
     </div>
   </section>
 
+  <div data-legacy="true" style="display:none">
 
   <!-- 02 DIFFERENCE — black -->
   <section class="diff sec s-black" id="difference">
@@ -1748,6 +1805,9 @@
     </div>
   </section>
 
+  </div>
+  <!-- end legacy sections (preserved, hidden from homepage) -->
+
   <!-- 12 CTA — neon -->
   <section class="cta sec s-ivory" id="contact">
     <div class="wrap">
@@ -1783,6 +1843,9 @@
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.13/lenis.min.js"></script>
 <script>
 (function(){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14,rootMargin:'0px 0px -6% 0px'});
@@ -1813,16 +1876,70 @@
 
   /* Playful interactions */
   var cursor=document.getElementById('cursorOrb');
-  if(cursor && window.matchMedia('(pointer:fine)').matches){
+  var fine=window.matchMedia('(pointer:fine)').matches;
+  if(cursor && fine){
     window.addEventListener('mousemove',function(e){
       cursor.classList.add('on');
       cursor.style.left=e.clientX+'px'; cursor.style.top=e.clientY+'px';
     },{passive:true});
-    document.querySelectorAll('a,button,.q,.taste-btn,.type-row,.proj').forEach(function(el){
+    document.querySelectorAll('a,button,.q,.taste-btn,.type-row,.proj,.index-card').forEach(function(el){
       el.addEventListener('mouseenter',function(){cursor.style.transform='translate(-50%,-50%) scale(1.8)';});
       el.addEventListener('mouseleave',function(){cursor.style.transform='translate(-50%,-50%) scale(1)';});
     });
   }
+
+  /* Magnetic pull on primary buttons */
+  if(fine && window.gsap){
+    document.querySelectorAll('.pill').forEach(function(btn){
+      btn.addEventListener('mousemove',function(e){
+        var r=btn.getBoundingClientRect();
+        var mx=e.clientX-(r.left+r.width/2), my=e.clientY-(r.top+r.height/2);
+        gsap.to(btn,{x:mx*.25,y:my*.4,duration:.4,ease:'power2.out'});
+      });
+      btn.addEventListener('mouseleave',function(){gsap.to(btn,{x:0,y:0,duration:.5,ease:'elastic.out(1,.4)'});});
+    });
+  }
+
+  /* Smooth scroll (Lenis) — skipped entirely for reduced-motion users */
+  var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduceMotion && window.Lenis){
+    var lenis=new Lenis({smoothWheel:true,duration:1.05});
+    function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
+    requestAnimationFrame(raf);
+    if(window.gsap && window.ScrollTrigger){
+      lenis.on('scroll',ScrollTrigger.update);
+      gsap.ticker.add(function(t){lenis.raf(t*1000);});
+      gsap.ticker.lagSmoothing(0);
+    }
+  }
+
+  /* Work index — active card drives sidebar + meta panel; cards reveal on scroll */
+  (function(){
+    var cards=[].slice.call(document.querySelectorAll('.index-card'));
+    if(!cards.length) return;
+    var sidebarItems=[].slice.call(document.querySelectorAll('.index-client'));
+    var counter=document.getElementById('indexCounter');
+    var tagsEl=document.getElementById('indexMetaTags');
+    var tagsByIndex=[
+      'Fashion / Made-to-measure<br>Shopify · D2C + Brand',
+      'Interiors / Decor<br>WordPress · Brand + Catalogue',
+      'Manufacturing / Industrial<br>WordPress · Business',
+      'Beauty / Cosmetics<br>D2C + Catalogue',
+      'Jewellery<br>Brand + Ecommerce'
+    ];
+    function setActive(i){
+      sidebarItems.forEach(function(el){el.classList.toggle('active',+el.dataset.i===i);});
+      if(counter) counter.textContent=('0'+(i+1)).slice(-2);
+      if(tagsEl && tagsByIndex[i]) tagsEl.innerHTML=tagsByIndex[i];
+    }
+    var revealIO=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting) e.target.classList.add('in');});
+    },{threshold:.2,rootMargin:'0px 0px -8% 0px'});
+    var activeIO=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting) setActive(+e.target.dataset.i);});
+    },{threshold:0,rootMargin:'-45% 0px -45% 0px'});
+    cards.forEach(function(c){revealIO.observe(c);activeIO.observe(c);});
+  })();
 
   /* Taste chooser */
   var tasteBtns=[].slice.call(document.querySelectorAll('.taste-btn'));
