@@ -101,7 +101,7 @@
   .index-card-img{height:min(56vh,58vw);position:relative;overflow:hidden;background:#111}
   .index-card-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:opacity .3s}
   .index-gl{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:5;pointer-events:none}
-  .index-gl.ready ~ .index-layout .index-card-img img{opacity:0}
+  .index-card-img img.gl-hidden{opacity:0}
   @media(max-width:900px){.index-gl{display:none}}
   .index-card-img--pending{display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#1a1a18,#0c0c0b)}
   .index-card-headline{font-family:var(--fat);font-style:italic;font-size:clamp(2rem,5vw,3.4rem);line-height:.92;text-align:center;background:linear-gradient(100deg,#5572ff,#f3d66b);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -1922,6 +1922,7 @@
      driving a rendered position). Desktop + non-reduced-motion only: mobile and
      reduced-motion get plain native scroll, same as Obys's own fallback. */
   (function(){
+   try{
     if(reduceMotion || window.innerWidth<900){ return; }
     var main=document.getElementById('top'), footer=document.querySelector('footer');
     if(!main) return;
@@ -1990,6 +1991,10 @@
       requestAnimationFrame(tick);
     }
     tick();
+   }catch(e){
+     /* any failure here must not leave the page stuck non-scrollable */
+     document.documentElement.classList.remove('fake-scroll');
+   }
   })();
 
   /* Work index — active card drives sidebar + meta panel; cards reveal scroll-linked, not on a timer */
@@ -2134,7 +2139,7 @@
     }
     animate();
   }
-  function initIndexGLSafe(){ try{ initIndexGL(); }catch(e){} }
+  function initIndexGLSafe(){ try{ initIndexGL(); }catch(e){ console.error('initIndexGL failed:',e); } }
   function startIndexGL(){ requestAnimationFrame(function(){requestAnimationFrame(initIndexGLSafe);}); }
   if(document.readyState==='complete'){ startIndexGL(); }
   else{ window.addEventListener('load',startIndexGL); }
