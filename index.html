@@ -29,6 +29,8 @@
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;background:var(--black);color:#f2f2ee;font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  html.fake-scroll,html.fake-scroll body{height:100vh;overflow:hidden}
+  html.fake-scroll main,html.fake-scroll footer{will-change:transform}
   a{color:inherit;text-decoration:none}
   h1,h2,h3{margin:0;font-weight:600}
   .wrap{width:min(calc(100% - (var(--pad)*2)),var(--max));margin:0 auto}
@@ -1848,15 +1850,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 (function(){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14,rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('.rv,.kw').forEach(function(el){io.observe(el);});
 
   var nav=document.getElementById('nav'),prog=document.getElementById('progress');
-  function onScroll(){var y=window.scrollY||0;nav.classList.toggle('scrolled',y>40);var h=document.documentElement.scrollHeight-window.innerHeight;prog.style.width=(h>0?(y/h*100):0)+'%';}
-  window.addEventListener('scroll',function(){requestAnimationFrame(onScroll);},{passive:true});onScroll();
+  function onScroll(y){
+    if(y===undefined) y=window.scrollY||0;
+    nav.classList.toggle('scrolled',y>40);
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    prog.style.width=(h>0?(y/h*100):0)+'%';
+  }
+  window.addEventListener('scroll',function(){requestAnimationFrame(function(){onScroll();});},{passive:true});onScroll();
 
   var menu=document.getElementById('menu');
   document.getElementById('burger').addEventListener('click',function(){menu.classList.add('open');});
@@ -1911,19 +1917,80 @@
     });
   }
 
-  /* Smooth scroll (Lenis) — driven by the GSAP ticker so it and ScrollTrigger share one clock.
-     Skipped entirely for reduced-motion users, who get plain native scroll. */
-  var lenis=null;
-  if(!reduceMotion && window.Lenis){
-    lenis=new Lenis({smoothWheel:true,duration:.7,easing:function(t){return 1-Math.pow(1-t,3);}});
-    if(window.gsap && window.ScrollTrigger){
-      lenis.on('scroll',ScrollTrigger.update);
-      gsap.ticker.add(function(time){lenis.raf(time*1000);});
-      gsap.ticker.lagSmoothing(0);
-    }else{
-      (function raf(t){lenis.raf(t);requestAnimationFrame(raf);})();
+  /* Virtual scroll — the page itself never really scrolls, matching how Obys actually
+     works (their document.scrollHeight is one viewport; everything is wheel/touch input
+     driving a rendered position). Desktop + non-reduced-motion only: mobile and
+     reduced-motion get plain native scroll, same as Obys's own fallback. */
+  (function(){
+    if(reduceMotion || window.innerWidth<900){ return; }
+    var main=document.getElementById('top'), footer=document.querySelector('footer');
+    if(!main) return;
+
+    document.documentElement.classList.add('fake-scroll');
+
+    var current=0, target=0, max=0;
+    function recalc(){
+      max=Math.max(0, main.getBoundingClientRect().height + (footer?footer.getBoundingClientRect().height:0) - window.innerHeight);
+      target=Math.min(target,max); current=Math.min(current,max);
     }
-  }
+    recalc();
+    window.addEventListener('resize',recalc);
+
+    window.addEventListener('wheel',function(e){
+      target=Math.min(max,Math.max(0,target+e.deltaY));
+      e.preventDefault();
+    },{passive:false});
+
+    var touchY=null;
+    window.addEventListener('touchstart',function(e){touchY=e.touches[0].clientY;},{passive:true});
+    window.addEventListener('touchmove',function(e){
+      if(touchY===null) return;
+      var dy=touchY-e.touches[0].clientY; touchY=e.touches[0].clientY;
+      target=Math.min(max,Math.max(0,target+dy*1.6));
+      e.preventDefault();
+    },{passive:false});
+
+    window.addEventListener('keydown',function(e){
+      var step=window.innerHeight*.85;
+      if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+      if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){target=Math.min(max,target+step);e.preventDefault();}
+      else if(e.key==='ArrowUp'||e.key==='PageUp'){target=Math.max(0,target-step);e.preventDefault();}
+      else if(e.key==='Home'){target=0;}
+      else if(e.key==='End'){target=max;}
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click',function(e){
+        var id=a.getAttribute('href').slice(1);
+        var el=document.getElementById(id);
+        if(!el || id==='top'){ if(id==='top'){e.preventDefault();target=0;} return; }
+        e.preventDefault();
+        var r=el.getBoundingClientRect();
+        target=Math.min(max,Math.max(0,current+r.top));
+      });
+    });
+
+    var hasGsapProxy=window.gsap && window.ScrollTrigger;
+    if(hasGsapProxy){
+      ScrollTrigger.scrollerProxy(document.body,{
+        scrollTop:function(value){ if(arguments.length){target=value;current=value;} return current; },
+        getBoundingClientRect:function(){ return {top:0,left:0,width:window.innerWidth,height:window.innerHeight}; },
+        pinType:'transform'
+      });
+      ScrollTrigger.defaults({scroller:document.body});
+    }
+
+    function tick(){
+      current+=(target-current)*.11;
+      var t='translate3d(0,'+(-current)+'px,0)';
+      main.style.transform=t;
+      if(footer) footer.style.transform=t;
+      if(hasGsapProxy) ScrollTrigger.update();
+      onScroll(current);
+      requestAnimationFrame(tick);
+    }
+    tick();
+  })();
 
   /* Work index — active card drives sidebar + meta panel; cards reveal scroll-linked, not on a timer */
   (function(){
