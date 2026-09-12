@@ -133,6 +133,22 @@
   .credentials-strip{background:var(--black);padding:0 0 72px;--line:#232320;--muted:#9e9d97;color:#f2f2ee}
   .credentials-actions{display:flex;justify-content:center;margin-top:34px}
 
+  /* Closing statement — giant scrolling phrase behind a centered CTA.
+     Vanilla rebuild of a shadcn "cta69" component, matching this site's
+     own tokens instead of Tailwind/React. */
+  .cta69{position:relative;overflow:hidden;padding:120px 0;text-align:center;background:var(--black);color:#f2f2ee;--strong:#F7F6F2;--muted:#9e9d97;--line:#232320;border-top:1px solid #232320}
+  .cta69-marquee{position:absolute;inset:0;display:flex;align-items:center;overflow:hidden;pointer-events:none;user-select:none}
+  .cta69-marquee-track{display:flex;width:max-content;flex:none;white-space:nowrap;opacity:.1;animation:cta69Marquee 40s linear infinite}
+  .cta69-marquee-track span{font-family:var(--sans);font-weight:800;font-size:19vw;line-height:1;letter-spacing:-.03em;color:var(--strong)}
+  @keyframes cta69Marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.cta69-marquee-track{animation:none}}
+  .cta69-inner{position:relative;max-width:720px;margin:0 auto;padding:0 var(--pad);display:flex;flex-direction:column;align-items:center}
+  .cta69-badge{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:7px 16px}
+  .cta69-heading{margin-top:28px;font-family:var(--sans);font-weight:700;letter-spacing:-.03em;line-height:1.05;font-size:clamp(2.2rem,6vw,4.2rem);color:var(--strong)}
+  .cta69-note{margin-top:20px;max-width:44ch;color:var(--muted);font-size:1.1rem;line-height:1.5}
+  .cta69-btn{margin-top:40px}
+  .cta69-footnote{margin-top:28px}
+
   /* HERO — centered Webforge identity */
   .hero{min-height:100svh;display:flex;align-items:center;position:relative;padding:128px 0 70px;overflow:hidden}
   .hero-grid{display:block;width:100%;text-align:center}
@@ -1440,6 +1456,20 @@
     </div>
   </section>
 
+  <!-- 01D CLOSING STATEMENT — giant marquee behind a centered CTA -->
+  <section class="cta69">
+    <div class="cta69-marquee" aria-hidden="true">
+      <div class="cta69-marquee-track" data-marquee-phrase="Worth keeping"></div>
+    </div>
+    <div class="cta69-inner">
+      <span class="cta69-badge mono rv">Last word</span>
+      <h2 class="cta69-heading rv d2">Let's build something worth keeping.</h2>
+      <p class="cta69-note rv d3">No decks, no detours — bring the problem, and I'll bring the build.</p>
+      <a class="pill fill cta69-btn rv d3" href="contact.html"><span class="dot"></span> Start the conversation <span>→</span></a>
+      <p class="cta69-footnote mono rv d4">One conversation. No pressure, no decks.</p>
+    </div>
+  </section>
+
   <div data-legacy="true" style="display:none">
 
   <!-- 02 DIFFERENCE — black -->
@@ -1864,6 +1894,15 @@
 (function(){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14,rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('.rv,.kw').forEach(function(el){io.observe(el);});
+
+  /* Marquee backdrop — [data-marquee-phrase="X"] fills itself with two
+     identical halves of "X · " repeated, each half wider than the screen, so
+     translating by exactly -50% loops seamlessly with no visible seam. */
+  document.querySelectorAll('[data-marquee-phrase]').forEach(function(track){
+    var line=track.dataset.marqueePhrase+' · ';
+    var repeated=line.repeat(8);
+    track.innerHTML='<span>'+repeated+'</span><span>'+repeated+'</span>';
+  });
 
   var nav=document.getElementById('nav'),prog=document.getElementById('progress');
   function onScroll(y){
