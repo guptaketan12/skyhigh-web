@@ -11,8 +11,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <style>
-  .work-hero h1{font-size:clamp(2.6rem,6.4vw,5.6rem);line-height:.94;letter-spacing:-.04em;max-width:16ch;color:var(--strong)}
-  .work-hero p{margin-top:22px;max-width:52ch;color:var(--muted);font-size:1.05rem;line-height:1.5}
+  /* Stream hero — two mirrored rails of project screenshots ride a 3D
+     corridor from a vanishing point toward the viewer. Vanilla rebuild of a
+     shadcn "image-stream-hero" component: the geometry/keyframe math is
+     ported as-is (see the JS below), rendered with plain DOM + CSS custom
+     properties instead of React, using this project's own screenshots. */
+  .stream-hero{position:relative;overflow:hidden;container-type:inline-size;min-height:min(78vh,660px);display:flex;align-items:center;padding:96px 0 40px}
+  .stream-hero-stage{position:absolute;inset:0;pointer-events:none}
+  .stream-hero-inner3d{position:absolute;inset:0;transform-style:preserve-3d}
+  .stream-card{position:absolute;overflow:hidden;background:#111;backface-visibility:hidden;box-shadow:0 20px 50px -20px rgba(0,0,0,.7)}
+  .stream-card img{width:100%;height:100%;object-fit:cover;display:block}
+  .stream-hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 62% 58% at 50% 50%,rgba(11,11,11,.8) 0%,rgba(11,11,11,.4) 45%,rgba(11,11,11,0) 76%)}
+  .stream-hero-content{position:relative;z-index:2;width:100%;text-align:center}
+  .stream-hero-content h1{font-size:clamp(2.6rem,6.4vw,5.6rem);line-height:.94;letter-spacing:-.04em;max-width:16ch;margin:0 auto;color:var(--strong)}
+  .stream-hero-content p{margin:22px auto 0;max-width:52ch;color:var(--muted);font-size:1.05rem;line-height:1.5}
+  @media(prefers-reduced-motion:reduce){.stream-hero-stage{display:none}}
 
   .proj{display:grid;grid-template-columns:1fr;gap:28px;padding:clamp(40px,6vw,84px) 0;border-bottom:1px solid var(--line);align-items:center}
   @media(min-width:900px){.proj{grid-template-columns:.8fr 1.2fr;gap:56px}.proj.rev .m{order:2}.proj.rev .fr{order:1}}
@@ -59,10 +72,13 @@
 </div>
 
 <main>
-  <section class="page-hero work-hero wrap sec" style="padding-bottom:20px">
-    <div class="mono page-eyebrow rv">Selected work</div>
-    <h1 class="scramble rv d2">Actual websites. Built to work.</h1>
-    <p class="rv d3">Five projects — no padding, no concept-only filler. Real builds for real businesses, across fashion, interiors, industrial, beauty and jewellery.</p>
+  <section class="stream-hero" id="streamHero">
+    <div class="stream-hero-scrim" aria-hidden="true"></div>
+    <div class="stream-hero-content wrap">
+      <div class="mono page-eyebrow rv">Selected work</div>
+      <h1 class="scramble rv d2">Actual websites. Built to work.</h1>
+      <p class="rv d3">Five projects — no padding, no concept-only filler. Real builds for real businesses, across fashion, interiors, industrial, beauty and jewellery.</p>
+    </div>
   </section>
 
   <section class="wrap" style="padding-top:0;padding-bottom:60px">
@@ -157,5 +173,81 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="main.js"></script>
+<script>
+/* Stream hero corridor — ported from the reference React component's own
+   geometry/keyframe math (see the block comment on ImageStreamHero for the
+   full reasoning). Depth is authored as apparent size, sampled into real
+   @keyframes so the curve is exact, not approximated with a CSS easing
+   function. Everything is in cqw so it stays proportional at any width. */
+(function(){
+  var stageHost = document.getElementById('streamHero');
+  if(!stageHost) return;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduceMotion) return;
+
+  var IMAGES = [
+    'images/vugy-india.jpg',
+    'images/ammax-decor.jpg',
+    'images/sriram-cables.jpg',
+    'images/sng-cosmetics.jpg'
+  ];
+  var P = {
+    perspective:30, cardWidth:18, cardHeight:25, cardRadius:.4,
+    birthHeight:2.6, exitHeight:46, railBirth:-11, railExit:44,
+    fan:3.3, turnBirth:6, turnExit:28, stops:24
+  };
+  var CARDS=9, SPEED=18, AXIS=55;
+
+  function buildKeyframes(dir,name){
+    var steps=[];
+    for(var s=0;s<=P.stops;s++){
+      var u=s/P.stops;
+      var scale=(P.birthHeight/P.cardHeight)*Math.pow(P.exitHeight/P.birthHeight,u);
+      var z=P.perspective*(1-1/scale);
+      var rail=P.railExit-(P.railExit-P.railBirth)*Math.pow(1-u,P.fan);
+      var turn=P.turnBirth+(P.turnExit-P.turnBirth)*u;
+      steps.push((u*100).toFixed(2)+'%{transform:translate3d('+(dir*rail).toFixed(2)+'cqw,0,'+z.toFixed(2)+'cqw) rotateY('+(-dir*turn).toFixed(2)+'deg)}');
+    }
+    return '@keyframes '+name+'{'+steps.join('')+'}';
+  }
+
+  var uid='ish'+Math.random().toString(36).slice(2,8);
+  var rightName=uid+'r', leftName=uid+'l';
+
+  var styleTag=document.createElement('style');
+  styleTag.textContent=buildKeyframes(1,rightName)+buildKeyframes(-1,leftName);
+  document.head.appendChild(styleTag);
+
+  var stage=document.createElement('div');
+  stage.className='stream-hero-stage';
+  stage.setAttribute('aria-hidden','true');
+  stage.style.perspective=P.perspective+'cqw';
+  stage.style.perspectiveOrigin='50% '+AXIS+'%';
+
+  var inner=document.createElement('div');
+  inner.className='stream-hero-inner3d';
+  stage.appendChild(inner);
+
+  [rightName,leftName].forEach(function(name){
+    for(var i=0;i<CARDS;i++){
+      var src=IMAGES[i % IMAGES.length];
+      var el=document.createElement('div');
+      el.className='stream-card';
+      el.style.left='50%'; el.style.top=AXIS+'%';
+      el.style.width=P.cardWidth+'cqw'; el.style.height=P.cardHeight+'cqw';
+      el.style.marginLeft=(-P.cardWidth/2)+'cqw'; el.style.marginTop=(-P.cardHeight/2)+'cqw';
+      el.style.borderRadius=P.cardRadius+'cqw';
+      el.style.animation=name+' '+SPEED+'s linear infinite';
+      el.style.animationDelay=(-(i*SPEED)/CARDS)+'s';
+      var img=document.createElement('img');
+      img.src=src; img.loading='lazy'; img.decoding='async'; img.draggable=false; img.alt='';
+      el.appendChild(img);
+      inner.appendChild(el);
+    }
+  });
+
+  stageHost.insertBefore(stage, stageHost.firstChild);
+})();
+</script>
 </body>
 </html>
