@@ -30,7 +30,6 @@
   html{scroll-behavior:smooth}
   body{margin:0;background:var(--black);color:#f2f2ee;font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   html.fake-scroll,html.fake-scroll body{height:100vh;overflow:hidden}
-  html.fake-scroll main,html.fake-scroll footer{will-change:transform}
   a{color:inherit;text-decoration:none}
   h1,h2,h3{margin:0;font-weight:600}
   .wrap{width:min(calc(100% - (var(--pad)*2)),var(--max));margin:0 auto}
@@ -94,14 +93,17 @@
   .index-client.active{color:var(--accent)}
   .index-client.active .dot{opacity:1;transform:scale(1)}
   .index-column{display:flex;flex-direction:column;gap:10svh;padding:6svh 0}
+  .index-column.stepped{display:block;position:relative;padding:6svh 0}
   .index-card{position:relative;border:1px solid #3a3a36;border-radius:14px;background:linear-gradient(160deg,#161614,#0d0d0c);overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.03),0 40px 80px -50px rgba(0,0,0,.8);will-change:transform,opacity;max-height:64vh}
+  .index-column.stepped .index-card{transition:opacity .5s ease}
+  .index-column.stepped .index-card:not(.step-active){position:absolute;inset:6svh 0 auto 0;opacity:0;pointer-events:none}
+  .index-column.stepped .index-card.step-active{opacity:1;pointer-events:auto}
   .index-card-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid #232320;background:#131311}
   .index-card-bar i{width:8px;height:8px;border-radius:50%;background:#2c2c28;display:block}
   .index-card-bar span{margin-left:8px;font-family:var(--mono);font-size:11px;color:#726f66}
   .index-card-img{height:min(56vh,58vw);position:relative;overflow:hidden;background:#111}
   .index-card-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:opacity .3s}
   .index-gl{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:5;pointer-events:none}
-  .index-card-img img.gl-hidden{opacity:0}
   @media(max-width:900px){.index-gl{display:none}}
   .index-card-img--pending{display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#1a1a18,#0c0c0b)}
   .index-card-headline{font-family:var(--fat);font-style:italic;font-size:clamp(2rem,5vw,3.4rem);line-height:.92;text-align:center;background:linear-gradient(100deg,#5572ff,#f3d66b);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -111,6 +113,7 @@
   .index-meta-count{margin-top:22px;display:flex;justify-content:flex-end;align-items:baseline;gap:3px}
   .index-meta-count #indexCounter{font-family:var(--sans);font-weight:700;font-size:22px;color:var(--accent);letter-spacing:-.02em}
   .index-meta-count .of{color:#454340}
+  .index-hint{margin-top:16px;opacity:.75}
   @media(max-width:900px){
     .index-layout{grid-template-columns:1fr;padding:0 22px}
     .index-sidebar,.index-meta{display:none}
@@ -1378,6 +1381,7 @@
       <div class="index-meta" id="indexMeta" aria-hidden="true">
         <div class="index-meta-tags" id="indexMetaTags">Fashion / Made-to-measure<br>Shopify · D2C + Brand</div>
         <div class="index-meta-count"><span id="indexCounter">01</span><span class="of"> / 05</span></div>
+        <div class="index-hint mono" id="indexHint">Scroll for next</div>
       </div>
     </div>
   </section>
@@ -1849,7 +1853,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 (function(){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14,rootMargin:'0px 0px -6% 0px'});
@@ -1917,93 +1920,22 @@
     });
   }
 
-  /* Virtual scroll — the page itself never really scrolls, matching how Obys actually
-     works (their document.scrollHeight is one viewport; everything is wheel/touch input
-     driving a rendered position). Desktop + non-reduced-motion only: mobile and
-     reduced-motion get plain native scroll, same as Obys's own fallback. */
-  (function(){
-   try{
-    if(reduceMotion || window.innerWidth<900){ return; }
-    var main=document.getElementById('top'), footer=document.querySelector('footer');
-    if(!main) return;
-
-    document.documentElement.classList.add('fake-scroll');
-
-    var current=0, target=0, max=0;
-    function recalc(){
-      max=Math.max(0, main.getBoundingClientRect().height + (footer?footer.getBoundingClientRect().height:0) - window.innerHeight);
-      target=Math.min(target,max); current=Math.min(current,max);
-    }
-    recalc();
-    window.addEventListener('resize',recalc);
-
-    window.addEventListener('wheel',function(e){
-      target=Math.min(max,Math.max(0,target+e.deltaY));
-      e.preventDefault();
-    },{passive:false});
-
-    var touchY=null;
-    window.addEventListener('touchstart',function(e){touchY=e.touches[0].clientY;},{passive:true});
-    window.addEventListener('touchmove',function(e){
-      if(touchY===null) return;
-      var dy=touchY-e.touches[0].clientY; touchY=e.touches[0].clientY;
-      target=Math.min(max,Math.max(0,target+dy*1.6));
-      e.preventDefault();
-    },{passive:false});
-
-    window.addEventListener('keydown',function(e){
-      var step=window.innerHeight*.85;
-      if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
-      if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){target=Math.min(max,target+step);e.preventDefault();}
-      else if(e.key==='ArrowUp'||e.key==='PageUp'){target=Math.max(0,target-step);e.preventDefault();}
-      else if(e.key==='Home'){target=0;}
-      else if(e.key==='End'){target=max;}
-    });
-
-    document.querySelectorAll('a[href^="#"]').forEach(function(a){
-      a.addEventListener('click',function(e){
-        var id=a.getAttribute('href').slice(1);
-        var el=document.getElementById(id);
-        if(!el || id==='top'){ if(id==='top'){e.preventDefault();target=0;} return; }
-        e.preventDefault();
-        var r=el.getBoundingClientRect();
-        target=Math.min(max,Math.max(0,current+r.top));
-      });
-    });
-
-    var hasGsapProxy=window.gsap && window.ScrollTrigger;
-    if(hasGsapProxy){
-      ScrollTrigger.scrollerProxy(document.body,{
-        scrollTop:function(value){ if(arguments.length){target=value;current=value;} return current; },
-        getBoundingClientRect:function(){ return {top:0,left:0,width:window.innerWidth,height:window.innerHeight}; },
-        pinType:'transform'
-      });
-      ScrollTrigger.defaults({scroller:document.body});
-    }
-
-    function tick(){
-      current+=(target-current)*.11;
-      var t='translate3d(0,'+(-current)+'px,0)';
-      main.style.transform=t;
-      if(footer) footer.style.transform=t;
-      if(hasGsapProxy) ScrollTrigger.update();
-      onScroll(current);
-      requestAnimationFrame(tick);
-    }
-    tick();
-   }catch(e){
-     /* any failure here must not leave the page stuck non-scrollable */
-     document.documentElement.classList.remove('fake-scroll');
-   }
-  })();
-
-  /* Work index — active card drives sidebar + meta panel; cards reveal scroll-linked, not on a timer */
+  /* Index step-lock — the first 5 wheel/touch/key "scrolls" step through the 5
+     projects with the page completely frozen (no real scroll happens at all,
+     only the active project card crossfades); scrolling past the 5th project
+     releases into plain, fully native scroll for the rest of the page.
+     Scrolling back up to the very top re-locks and steps back through them.
+     Desktop + non-reduced-motion only: mobile and reduced-motion fall back to
+     a plain vertically-stacked scrollable list, same as before. */
   (function(){
     var cards=[].slice.call(document.querySelectorAll('.index-card'));
-    if(!cards.length) return;
+    var column=document.getElementById('indexColumn');
+    if(!cards.length || !column) return;
+
     var sidebarItems=[].slice.call(document.querySelectorAll('.index-client'));
     var counter=document.getElementById('indexCounter');
     var tagsEl=document.getElementById('indexMetaTags');
+    var hintEl=document.getElementById('indexHint');
     var tagsByIndex=[
       'Fashion / Made-to-measure<br>Shopify · D2C + Brand',
       'Interiors / Decor<br>WordPress · Brand + Catalogue',
@@ -2011,35 +1943,18 @@
       'Beauty / Cosmetics<br>D2C + Catalogue',
       'Jewellery<br>Brand + Ecommerce'
     ];
+    var STEPS=cards.length;
+
     function setActive(i){
       sidebarItems.forEach(function(el){el.classList.toggle('active',+el.dataset.i===i);});
       if(counter) counter.textContent=('0'+(i+1)).slice(-2);
       if(tagsEl && tagsByIndex[i]) tagsEl.innerHTML=tagsByIndex[i];
     }
 
-    if(window.gsap && window.ScrollTrigger && !reduceMotion){
-      gsap.set(cards,{opacity:0,y:60,scale:.94});
-      cards.forEach(function(card){
-        gsap.to(card,{
-          opacity:1,y:0,scale:1,ease:'none',
-          scrollTrigger:{trigger:card,start:'top 98%',end:'top 35%',scrub:.4}
-        });
-      });
-      /* Active card = whichever is actually closest to viewport center right now —
-         computed directly on every scroll tick, not inferred from enter/leave order
-         (which breaks on fast/instant scrolls). */
-      function updateActive(){
-        var mid=innerHeight/2, best=0, bestDist=Infinity;
-        cards.forEach(function(card,i){
-          var r=card.getBoundingClientRect();
-          var d=Math.abs((r.top+r.bottom)/2-mid);
-          if(d<bestDist){bestDist=d;best=i;}
-        });
-        setActive(best);
-      }
-      ScrollTrigger.create({trigger:'.index-hero',start:'top bottom',end:'bottom top',onUpdate:updateActive,onRefresh:updateActive});
-      updateActive();
-    }else{
+    var stepped = !reduceMotion && window.innerWidth>=900;
+
+    if(!stepped){
+      if(hintEl) hintEl.style.display='none';
       var revealIO=new IntersectionObserver(function(es){
         es.forEach(function(e){if(e.isIntersecting) e.target.style.opacity=1;});
       },{threshold:.2,rootMargin:'0px 0px -8% 0px'});
@@ -2047,26 +1962,93 @@
         es.forEach(function(e){if(e.isIntersecting) setActive(+e.target.dataset.i);});
       },{threshold:0,rootMargin:'-45% 0px -45% 0px'});
       cards.forEach(function(c){c.style.transition='opacity .6s ease';revealIO.observe(c);activeIO.observe(c);});
+      return;
     }
+
+    column.classList.add('stepped');
+    var stepIndex=0, locked=true, cooldown=false;
+
+    function goTo(i){
+      stepIndex=Math.max(0,Math.min(STEPS-1,i));
+      cards.forEach(function(c,n){c.classList.toggle('step-active',n===stepIndex);});
+      setActive(stepIndex);
+      if(hintEl) hintEl.textContent = stepIndex===STEPS-1 ? 'Scroll to continue' : 'Scroll for next';
+      if(window.__indexSetActiveImage) window.__indexSetActiveImage(stepIndex);
+    }
+    goTo(0);
+
+    function lock(v){
+      locked=v;
+      document.documentElement.classList.toggle('fake-scroll',v);
+    }
+    lock(true);
+
+    function cool(){ cooldown=true; setTimeout(function(){cooldown=false;},550); }
+
+    function step(dir){
+      if(cooldown) return;
+      if(dir>0){
+        if(stepIndex<STEPS-1){ goTo(stepIndex+1); cool(); }
+        else { lock(false); }
+      }else if(stepIndex>0){
+        goTo(stepIndex-1); cool();
+      }
+    }
+
+    window.addEventListener('wheel',function(e){
+      if(locked){
+        e.preventDefault();
+        step(e.deltaY>0?1:-1);
+      }else if(window.scrollY<=0 && e.deltaY<0){
+        e.preventDefault();
+        lock(true);
+        goTo(STEPS-1);
+      }
+    },{passive:false});
+
+    var touchY=null;
+    window.addEventListener('touchstart',function(e){touchY=e.touches[0].clientY;},{passive:true});
+    window.addEventListener('touchmove',function(e){
+      if(touchY===null) return;
+      var dy=touchY-e.touches[0].clientY;
+      if(locked){
+        e.preventDefault();
+        if(Math.abs(dy)>44){ step(dy>0?1:-1); touchY=e.touches[0].clientY; }
+      }else if(window.scrollY<=0 && dy<0 && Math.abs(dy)>44){
+        e.preventDefault();
+        lock(true); goTo(STEPS-1); touchY=e.touches[0].clientY;
+      }
+    },{passive:false});
+
+    window.addEventListener('keydown',function(e){
+      if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+      if(locked){
+        if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){ e.preventDefault(); step(1); }
+        else if(e.key==='ArrowUp'||e.key==='PageUp'){ e.preventDefault(); step(-1); }
+      }else if(window.scrollY<=0 && (e.key==='ArrowUp'||e.key==='PageUp')){
+        e.preventDefault(); lock(true); goTo(STEPS-1);
+      }
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click',function(){ if(locked) lock(false); });
+    });
   })();
 
-  /* WebGL image layer — real DOM stays for layout/links/SEO; Three.js renders the
-     visible pixels on top, synced to each card's live getBoundingClientRect every
-     frame, with a cursor-ripple shader on hover. Desktop only, and only if a WebGL
-     context and Three.js are actually available — otherwise the real <img> shows. */
+  /* WebGL image layer — optional visual polish only. The real <img> inside each
+     card is the actual content (SEO, accessibility, and a guaranteed-correct
+     fallback); when a WebGL context + texture are available, Three.js draws
+     the current step's image on top of it. If WebGL fails or a texture never
+     loads, the real image underneath is already showing, so nothing breaks. */
   function initIndexGL(){
     var canvas=document.getElementById('glCanvas');
-    var imgWraps=[].slice.call(document.querySelectorAll('.index-card-img'));
-    if(!canvas || !imgWraps.length || !window.THREE || reduceMotion || window.innerWidth<900) return;
+    if(!canvas || !window.THREE || reduceMotion || window.innerWidth<900) return;
 
     var renderer;
-    try{
-      renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true,powerPreference:'high-performance'});
-    }catch(e){ return; }
-    if(!renderer) return;
+    try{ renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true}); }
+    catch(e){ return; }
 
     renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));
-    renderer.outputEncoding=THREE.sRGBEncoding;
 
     var scene=new THREE.Scene();
     var camera=new THREE.OrthographicCamera(0,innerWidth,0,innerHeight,-10,10);
@@ -2075,66 +2057,51 @@
     var loader=new THREE.TextureLoader();
     loader.crossOrigin='anonymous';
 
-    var vert='varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}';
-    var frag=[
-      'uniform sampler2D uTex;','uniform vec2 uMouse;','uniform float uHover;',
-      'uniform float uTime;','uniform float uOpacity;','uniform float uHasTex;',
-      'varying vec2 vUv;',
-      'void main(){',
-      '  vec2 uv=vec2(vUv.x,1.0-vUv.y);',
-      '  float dist=distance(uv,uMouse);',
-      '  float ripple=sin(dist*36.0-uTime*3.2)*0.028*uHover*smoothstep(0.55,0.0,dist);',
-      '  vec2 dir=normalize(uv-uMouse+0.0001);',
-      '  vec4 tex=texture2D(uTex,uv+dir*ripple);',
-      '  gl_FragColor=vec4(tex.rgb,tex.a*uOpacity*uHasTex);',
-      '}'
-    ].join('\n');
+    var mat=new THREE.MeshBasicMaterial({transparent:true,opacity:0,side:THREE.DoubleSide});
+    var mesh=new THREE.Mesh(new THREE.PlaneGeometry(1,1),mat);
+    scene.add(mesh);
 
-    var items=[];
-    imgWraps.forEach(function(wrap){
-      var img=wrap.querySelector('img');
-      if(!img) return;
-      var mat=new THREE.ShaderMaterial({
-        uniforms:{uTex:{value:null},uMouse:{value:new THREE.Vector2(.5,.5)},uHover:{value:0},uTime:{value:0},uOpacity:{value:1},uHasTex:{value:0}},
-        vertexShader:vert,fragmentShader:frag,transparent:true
-      });
-      var mesh=new THREE.Mesh(new THREE.PlaneGeometry(1,1),mat);
-      scene.add(mesh);
-      var it={wrap:wrap,card:wrap.closest('.index-card'),mesh:mesh,mat:mat,hoverTarget:0};
-      items.push(it);
+    var activeWrap=null, currentTex=null;
+
+    function setActiveImage(i){
+      var card=document.querySelectorAll('.index-card')[i];
+      var wrap=card?card.querySelector('.index-card-img'):null;
+      var img=wrap?wrap.querySelector('img'):null;
+      if(!wrap || !img){ activeWrap=null; mat.opacity=0; return; }
+      activeWrap=wrap;
+      mat.opacity=0;
       var src=img.currentSrc||img.src;
-      loader.load(src,function(tex){tex.encoding=THREE.sRGBEncoding;mat.uniforms.uTex.value=tex;mat.uniforms.uHasTex.value=1;},undefined,function(){/* load failed — real <img> stays visible under transparent plane */});
-      wrap.addEventListener('mousemove',function(e){
-        var r=wrap.getBoundingClientRect();
-        mat.uniforms.uMouse.value.set((e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height);
-      });
-      wrap.addEventListener('mouseenter',function(){it.hoverTarget=1;});
-      wrap.addEventListener('mouseleave',function(){it.hoverTarget=0;});
-    });
-
-    if(!items.length) return;
-    canvas.classList.add('ready');
+      loader.load(src,function(tex){
+        if(activeWrap!==wrap){ tex.dispose(); return; }
+        if(currentTex) currentTex.dispose();
+        tex.flipY=false;
+        currentTex=tex;
+        mat.map=tex; mat.needsUpdate=true;
+        mat.opacity=1;
+      },undefined,function(){ /* failed to load — real <img> keeps showing underneath */ });
+    }
+    window.__indexSetActiveImage=setActiveImage;
+    setActiveImage(0);
 
     function resize(){
-      var w=innerWidth,h=innerHeight;
-      camera.right=w; camera.bottom=h; camera.updateProjectionMatrix();
-      renderer.setSize(w,h,false);
+      camera.right=innerWidth; camera.bottom=innerHeight; camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth,innerHeight,false);
     }
     resize();
     window.addEventListener('resize',resize);
 
-    var clock=new THREE.Clock();
     function animate(){
       requestAnimationFrame(animate);
-      var t=clock.getElapsedTime();
-      items.forEach(function(it){
-        var r=it.wrap.getBoundingClientRect();
-        it.mesh.scale.set(r.width,r.height,1);
-        it.mesh.position.set(r.left+r.width/2,r.top+r.height/2,0);
-        it.mat.uniforms.uTime.value=t;
-        it.mat.uniforms.uHover.value+=(it.hoverTarget-it.mat.uniforms.uHover.value)*.12;
-        it.mat.uniforms.uOpacity.value=it.card?parseFloat(getComputedStyle(it.card).opacity):1;
-      });
+      if(activeWrap){
+        var r=activeWrap.getBoundingClientRect();
+        mesh.visible = r.width>0 && r.height>0;
+        if(mesh.visible){
+          mesh.scale.set(r.width,r.height,1);
+          mesh.position.set(r.left+r.width/2,r.top+r.height/2,0);
+        }
+      }else{
+        mesh.visible=false;
+      }
       renderer.render(scene,camera);
     }
     animate();
