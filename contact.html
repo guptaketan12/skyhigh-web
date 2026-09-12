@@ -37,6 +37,23 @@
   .next-step .no{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
   .next-step h3{margin-top:10px;font-family:var(--sans);font-weight:600;letter-spacing:-.03em;font-size:1.3rem;color:var(--strong)}
   .next-step p{margin:8px 0 0;color:var(--muted);line-height:1.4;font-size:.94rem}
+
+  /* Closing CTA — giant scrolling phrase behind a centered statement.
+     Vanilla rebuild of a shadcn/Tailwind "cta69" component: same layout and
+     motion, built against this site's own tokens instead of Tailwind/React
+     since the project has no build step or component toolchain. */
+  .cta69{position:relative;overflow:hidden;padding:120px 0;text-align:center;border-top:1px solid var(--line)}
+  .cta69-marquee{position:absolute;inset:0;display:flex;align-items:center;overflow:hidden;pointer-events:none;user-select:none}
+  .cta69-marquee-track{display:flex;width:max-content;flex:none;white-space:nowrap;opacity:.05;animation:cta69Marquee 40s linear infinite}
+  .cta69-marquee-track span{font-family:var(--sans);font-weight:800;font-size:19vw;line-height:1;letter-spacing:-.03em;color:var(--strong)}
+  @keyframes cta69Marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.cta69-marquee-track{animation:none}}
+  .cta69-inner{position:relative;max-width:720px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;align-items:center}
+  .cta69-badge{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:7px 16px}
+  .cta69-heading{margin-top:28px;font-family:var(--sans);font-weight:700;letter-spacing:-.03em;line-height:1.05;font-size:clamp(2.2rem,6vw,4.2rem);color:var(--strong)}
+  .cta69-note{margin-top:20px;max-width:44ch;color:var(--muted);font-size:1.1rem;line-height:1.5}
+  .cta69-btn{margin-top:40px}
+  .cta69-footnote{margin-top:28px}
 </style>
 </head>
 <body>
@@ -104,6 +121,19 @@
       <div class="next-step rv d3"><div class="no">03</div><h3>Timeline</h3><p>Responsibilities, milestones, dates — agreed up front.</p></div>
     </div>
     <p class="rv d4" style="margin-top:30px"><a class="pill ghost" style="border:1px solid var(--line)" href="services.html">See the full process <span>→</span></a></p>
+  </section>
+
+  <section class="cta69">
+    <div class="cta69-marquee" aria-hidden="true">
+      <div class="cta69-marquee-track" data-marquee-phrase="Worth keeping"></div>
+    </div>
+    <div class="cta69-inner">
+      <span class="cta69-badge mono rv">Last word</span>
+      <h2 class="cta69-heading rv d2">Let's build something worth keeping.</h2>
+      <p class="cta69-note rv d3">No decks, no detours — bring the problem, and I'll bring the build.</p>
+      <a class="pill fill cta69-btn rv d3" href="mailto:REPLACE@EMAIL.com"><span class="dot"></span> Start the conversation <span>→</span></a>
+      <p class="cta69-footnote mono rv d4">One conversation. No pressure, no decks.</p>
+    </div>
   </section>
 </main>
 

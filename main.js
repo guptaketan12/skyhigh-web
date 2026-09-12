@@ -8,6 +8,15 @@
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14,rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
 
+  /* Marquee backdrop — [data-marquee-phrase="X"] fills itself with two
+     identical halves of "X · " repeated, each half wider than the screen, so
+     translating by exactly -50% loops seamlessly with no visible seam. */
+  document.querySelectorAll('[data-marquee-phrase]').forEach(function(track){
+    var line=track.dataset.marqueePhrase+' · ';
+    var repeated=line.repeat(8);
+    track.innerHTML='<span>'+repeated+'</span><span>'+repeated+'</span>';
+  });
+
   var nav=document.getElementById('nav'),prog=document.getElementById('progress');
   function onScroll(){
     var y=window.scrollY||0;
