@@ -1967,6 +1967,7 @@
 
     column.classList.add('stepped');
     var stepIndex=0, locked=true, cooldown=false;
+    window.__indexGetActiveStep=function(){ return stepIndex; };
 
     function goTo(i){
       stepIndex=Math.max(0,Math.min(STEPS-1,i));
@@ -2081,7 +2082,7 @@
       },undefined,function(){ /* failed to load — real <img> keeps showing underneath */ });
     }
     window.__indexSetActiveImage=setActiveImage;
-    setActiveImage(0);
+    setActiveImage(window.__indexGetActiveStep ? window.__indexGetActiveStep() : 0);
 
     function resize(){
       camera.right=innerWidth; camera.bottom=innerHeight; camera.updateProjectionMatrix();
