@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Webforge</title>
+<meta name="description" content="Start a project with Webforge. Bring the problem — we'll figure out the build." />
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .contact-hero h1{font-size:clamp(2.6rem,6.8vw,6.4rem);line-height:.94;letter-spacing:-.04em;max-width:16ch;color:var(--strong)}
+  .contact-hero p{margin-top:22px;max-width:52ch;color:var(--muted);font-size:1.05rem;line-height:1.5}
+
+  .problem-list{margin-top:44px;border-top:1px solid var(--line)}
+  .problem-item{display:grid;grid-template-columns:44px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid var(--line);transition:padding .35s}
+  .problem-item:hover{padding-left:12px}
+  .problem-item .pn{font-family:var(--mono);font-size:.7rem;color:var(--muted);padding-top:6px}
+  .problem-item .pt{font-family:var(--sans);font-size:clamp(1.1rem,2vw,1.5rem);letter-spacing:-.02em;color:var(--strong)}
+
+  .contact-methods{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}
+  @media(min-width:700px){.contact-methods{grid-template-columns:repeat(3,1fr)}}
+  .contact-method{background:var(--black);padding:30px 26px;display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:150px;transition:background .3s,color .3s}
+  .contact-method:hover{background:var(--accent);color:var(--ink)}
+  .contact-method .label{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .contact-method:hover .label{color:#1a1a05}
+  .contact-method .value{font-family:var(--sans);font-weight:600;font-size:clamp(1.1rem,1.8vw,1.4rem);letter-spacing:-.02em}
+
+  .placeholder-note{margin-top:14px;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;color:var(--muted);max-width:60ch}
+
+  .next-steps{display:grid;grid-template-columns:1fr;gap:0;margin-top:44px;border-top:1px solid var(--line)}
+  @media(min-width:820px){.next-steps{grid-template-columns:repeat(3,1fr)}}
+  .next-step{padding:24px 0;border-bottom:1px solid var(--line)}
+  @media(min-width:820px){.next-step{padding:24px 24px 24px 0;border-bottom:0;border-right:1px solid var(--line)}.next-step:last-child{border-right:0}}
+  .next-step .no{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+  .next-step h3{margin-top:10px;font-family:var(--sans);font-weight:600;letter-spacing:-.03em;font-size:1.3rem;color:var(--strong)}
+  .next-step p{margin:8px 0 0;color:var(--muted);line-height:1.4;font-size:.94rem}
+</style>
+</head>
+<body>
+<div class="cursor-orb" id="cursorOrb" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a href="index.html" class="logo" aria-label="Webforge home">WEBFORGE</a>
+  <nav class="navlinks" aria-label="Primary">
+    <a class="n" href="work.html">Work</a>
+    <a class="n" href="about.html">About</a>
+    <a class="n" href="services.html">Services</a>
+    <a class="n current" href="contact.html">Contact</a>
+    <a class="pill fill" href="contact.html">Get in touch <span>→</span></a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <button class="close" id="menuClose">Close</button>
+  <a href="index.html">Home</a><a href="work.html">Work</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Start a project</a>
+</div>
+
+<main>
+  <section class="page-hero contact-hero wrap sec" style="padding-bottom:20px">
+    <div class="mono page-eyebrow rv">Getting started</div>
+    <h1 class="scramble rv d2">Bring me the problem. We'll figure out the build.</h1>
+    <p class="rv d3">You don't need a technical brief. Tell me what isn't working, what you want to launch, or what the business needs next.</p>
+  </section>
+
+  <section class="wrap" style="padding-top:0;padding-bottom:20px">
+    <div class="problem-list">
+      <div class="problem-item rv"><div class="pn">01</div><div class="pt">"We need a website for our new brand, business or product."</div></div>
+      <div class="problem-item rv"><div class="pn">02</div><div class="pt">"Our Shopify store feels outdated."</div></div>
+      <div class="problem-item rv"><div class="pn">03</div><div class="pt">"We need a better way to showcase the catalogue."</div></div>
+      <div class="problem-item rv"><div class="pn">04</div><div class="pt">"A campaign is coming. We need the site ready."</div></div>
+      <div class="problem-item rv"><div class="pn">05</div><div class="pt">"We need someone to keep the website moving."</div></div>
+    </div>
+  </section>
+
+  <section class="sec wrap" style="padding-top:20px">
+    <div class="mono rv">Reach out</div>
+    <div class="contact-methods rv d2">
+      <a class="contact-method" href="mailto:REPLACE@EMAIL.com">
+        <div class="label">Email</div>
+        <div class="value">REPLACE@EMAIL.com</div>
+      </a>
+      <a class="contact-method" href="https://wa.me/REPLACE-NUMBER" target="_blank" rel="noopener">
+        <div class="label">WhatsApp</div>
+        <div class="value">Message directly</div>
+      </a>
+      <a class="contact-method" href="https://linkedin.com/in/REPLACE" target="_blank" rel="noopener">
+        <div class="label">LinkedIn</div>
+        <div class="value">Connect</div>
+      </a>
+    </div>
+    <p class="placeholder-note">Email, WhatsApp number and LinkedIn above are placeholders — swap in the real details and these links go live immediately.</p>
+  </section>
+
+  <section class="sec wrap" style="padding-top:0">
+    <div class="mono rv">What happens next</div>
+    <div class="next-steps">
+      <div class="next-step rv"><div class="no">01</div><h3>Discovery</h3><p>A complimentary call. We map the business, the audience, the scope.</p></div>
+      <div class="next-step rv d2"><div class="no">02</div><h3>Scope + quote</h3><p>Clear deliverables. A proposal you can actually read.</p></div>
+      <div class="next-step rv d3"><div class="no">03</div><h3>Timeline</h3><p>Responsibilities, milestones, dates — agreed up front.</p></div>
+    </div>
+    <p class="rv d4" style="margin-top:30px"><a class="pill ghost" style="border:1px solid var(--line)" href="services.html">See the full process <span>→</span></a></p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="mono">Webforge / Digital</div>
+    <div class="foot-links"><a href="work.html">Work</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Contact</a></div>
+    <div class="intent">Built with intention. Kept slightly playful.</div>
+    <div class="mono">© <span id="yr"></span> Webforge</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

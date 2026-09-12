@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Services — Webforge</title>
+<meta name="description" content="Shopify and WordPress builds, ongoing website management, and clear engagement models — projects, retainers, or longer-term support." />
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .svc-hero h1{font-size:clamp(2.6rem,6.4vw,5.6rem);line-height:.94;letter-spacing:-.04em;max-width:18ch;color:var(--strong)}
+  .svc-hero p{margin-top:22px;max-width:52ch;color:var(--muted);font-size:1.05rem;line-height:1.5}
+
+  /* ways to work */
+  .way-cards{display:grid;grid-template-columns:1fr;gap:18px;margin-top:44px}
+  @media(min-width:820px){.way-cards{grid-template-columns:repeat(3,1fr)}}
+  .way-card{border:1px solid var(--line);border-radius:14px;padding:clamp(24px,3vw,36px);min-height:210px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .35s,background .35s,color .35s,border-color .35s}
+  .way-card:hover{transform:translateY(-4px);background:var(--accent);color:var(--ink);border-color:var(--accent)}
+  .way-card .k{font-family:var(--sans);font-weight:600;letter-spacing:-.03em;font-size:clamp(1.4rem,2.6vw,2rem);line-height:.96;color:var(--strong)}
+  .way-card:hover .k{color:var(--ink)}
+  .way-card p{margin:14px 0 0;color:var(--muted);font-size:.98rem;line-height:1.45}
+  .way-card:hover p{color:#1a1a05}
+
+  /* shopify lane */
+  .keyword-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);margin-top:44px;border:1px solid var(--line)}
+  @media(min-width:700px){.keyword-grid{grid-template-columns:1fr 1fr}}
+  .keyword{background:var(--black);padding:26px 22px}
+  .keyword .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .keyword h3{margin-top:10px;font-family:var(--sans);font-weight:600;letter-spacing:-.03em;font-size:clamp(1.2rem,2vw,1.6rem);color:var(--strong)}
+
+  /* process steps */
+  .steps{margin-top:44px;border-top:1px solid var(--line)}
+  .step{display:grid;grid-template-columns:1fr;gap:6px;padding:clamp(20px,2.8vw,32px) 0;border-bottom:1px solid var(--line)}
+  @media(min-width:820px){.step{grid-template-columns:64px 240px 1fr;gap:34px;align-items:baseline}}
+  .step .no{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+  .step .h{font-family:var(--sans);font-weight:600;letter-spacing:-.03em;font-size:clamp(1.3rem,2.4vw,1.8rem);line-height:.96;color:var(--strong)}
+  .step .d{color:var(--muted);max-width:52ch;margin:0;line-height:1.45}
+  .step.pay .h{color:var(--accent)}
+
+  /* maintenance marquee */
+  .marquee-wrap{overflow:hidden;margin-top:44px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .marquee{display:flex;gap:14px;padding:18px 0;width:max-content;animation:marquee 26s linear infinite}
+  @media(prefers-reduced-motion:reduce){.marquee{animation:none}}
+  .marquee-card{flex:none;border:1px solid var(--line);border-radius:12px;padding:18px 24px;min-width:190px}
+  .marquee-card .big{font-family:var(--sans);font-weight:700;letter-spacing:-.03em;font-size:1.3rem;color:var(--strong)}
+  .marquee-card .small{margin-top:6px;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  .carelist{list-style:none;margin:44px 0 0;padding:0;border-top:1px solid var(--line)}
+  .carelist li{display:flex;align-items:center;justify-content:space-between;padding:20px 2px;border-bottom:1px solid var(--line);font-size:clamp(1rem,1.5vw,1.15rem);transition:padding .35s}
+  .carelist li i{font-style:normal;color:var(--muted);transition:transform .35s,color .35s}
+  .carelist li:hover{padding-left:12px}
+  .carelist li:hover i{transform:translate(4px,-4px);color:var(--accent)}
+
+  /* client collaboration */
+  .cli{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,64px)}
+  @media(min-width:900px){.cli{grid-template-columns:1.1fr .9fr}}
+  .cli p{color:var(--muted);max-width:44ch;line-height:1.5;font-size:1.05rem}
+  .cli p b{color:var(--strong);font-weight:600}
+  .prov{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+  .prov li{padding:15px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:1rem}
+  .prov li span{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+  /* fit checklist */
+  .fit-col{display:grid;gap:0;margin-top:44px;border-top:1px solid var(--line)}
+  .fit-item{display:grid;grid-template-columns:44px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid var(--line)}
+  .fit-item .fno{font-family:var(--mono);font-size:.7rem;color:var(--muted);padding-top:4px}
+  .fit-item h3{font-family:var(--sans);font-weight:500;letter-spacing:-.03em;font-size:clamp(1.1rem,2vw,1.4rem);color:var(--strong)}
+  .fit-item p{margin:8px 0 0;color:var(--muted);line-height:1.45}
+
+  .svc-cta{text-align:center}
+  .svc-cta h2{font-size:clamp(2.4rem,6vw,5rem);line-height:.9;letter-spacing:-.04em;max-width:18ch;margin:0 auto}
+</style>
+</head>
+<body>
+<div class="cursor-orb" id="cursorOrb" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a href="index.html" class="logo" aria-label="Webforge home">WEBFORGE</a>
+  <nav class="navlinks" aria-label="Primary">
+    <a class="n" href="work.html">Work</a>
+    <a class="n" href="about.html">About</a>
+    <a class="n current" href="services.html">Services</a>
+    <a class="n" href="contact.html">Contact</a>
+    <a class="pill fill" href="contact.html">Get in touch <span>→</span></a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <button class="close" id="menuClose">Close</button>
+  <a href="index.html">Home</a><a href="work.html">Work</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Start a project</a>
+</div>
+
+<main>
+  <section class="page-hero svc-hero wrap sec" style="padding-bottom:20px">
+    <div class="mono page-eyebrow rv">Services</div>
+    <h1 class="scramble rv d2">The things a website actually needs.</h1>
+    <p class="rv d3">Builds are only one part of the job. The rest is making the site easier to use, easier to update, and easier for a customer to say yes to.</p>
+  </section>
+
+  <section class="sec wrap" style="padding-top:0">
+    <div class="mono rv">Ways to work</div>
+    <h2 class="head h-md rv d2" style="margin-top:16px">A project. A retainer.<br>Or someone on the inside.</h2>
+    <div class="way-cards">
+      <div class="way-card rv"><div class="k">Projects</div><p>A complete website, start to finish, for a business or brand.</p></div>
+      <div class="way-card rv d2"><div class="k">Ongoing support</div><p>For brands whose website needs to keep changing.</p></div>
+      <div class="way-card rv d3"><div class="k">Longer-term / full-time</div><p>For teams who want someone who understands the build and the commercial side behind it.</p></div>
+    </div>
+  </section>
+
+  <section class="sec wrap" style="padding-top:0">
+    <div class="mono rv">Shopify, properly</div>
+    <h2 class="head h-md rv d2" style="margin-top:16px">The things a Shopify <em>brand</em> needs.</h2>
+    <div class="keyword-grid">
+      <div class="keyword rv"><div class="k">01 / Store setup</div><h3>Store build &amp; redesign</h3></div>
+      <div class="keyword rv"><div class="k">02 / Experience</div><h3>Theme customisation</h3></div>
+      <div class="keyword rv"><div class="k">03 / Commerce</div><h3>Product &amp; collection setup</h3></div>
+      <div class="keyword rv"><div class="k">04 / Conversion</div><h3>Audit &amp; optimisation</h3></div>
+      <div class="keyword rv"><div class="k">05 / Growth</div><h3>Landing pages</h3></div>
+      <div class="keyword rv"><div class="k">06 / Migration</div><h3>Store migration</h3></div>
+      <div class="keyword rv"><div class="k">07 / Support</div><h3>Ongoing website management</h3></div>
+      <div class="keyword rv"><div class="k">08 / Troubleshooting</div><h3>Fixes &amp; refinements</h3></div>
+    </div>
+  </section>
+
+  <section class="sec wrap" style="padding-top:0">
+    <div class="mono rv">Process</div>
+    <h2 class="head h-md rv d2" style="margin-top:16px">A good project should feel <em>simple.</em></h2>
+    <div class="steps">
+      <div class="step rv"><div class="no">01</div><div class="h">Discovery</div><p class="d">A complimentary call. We map the business, the audience, the scope.</p></div>
+      <div class="step rv"><div class="no">02</div><div class="h">Scope + quote</div><p class="d">Clear deliverables. A proposal you can actually read.</p></div>
+      <div class="step rv"><div class="no">03</div><div class="h">Timeline</div><p class="d">Responsibilities, milestones, dates — agreed up front.</p></div>
+      <div class="step rv pay"><div class="no">04</div><div class="h">25% advance</div><p class="d">Work begins once the 25% advance is in.</p></div>
+      <div class="step rv"><div class="no">05</div><div class="h">Concept</div><p class="d">We lock the visual direction before building on it.</p></div>
+      <div class="step rv"><div class="no">06</div><div class="h">Development</div><p class="d">The approved concept becomes a working website.</p></div>
+      <div class="step rv"><div class="no">07</div><div class="h">Two revisions</div><p class="d">Two structured revision rounds, included.</p></div>
+      <div class="step rv pay"><div class="no">08</div><div class="h">Handover</div><p class="d">Final checks, balance, and the keys are yours.</p></div>
+    </div>
+  </section>
+
+  <section class="sec wrap" style="padding-top:0">
+    <div class="mono rv">After launch</div>
+    <h2 class="head h-md rv d2" style="margin-top:16px">Launch isn't the finish. We offer <em>maintenance</em> too.</h2>
+    <p class="rv d3" style="margin-top:18px;max-width:60ch;color:var(--muted)">Your business keeps moving — new collections, new offers, festive campaigns, new products. Your website should move with it.</p>
+    <div class="marquee-wrap rv d2">
+      <div class="marquee">
+        <div class="marquee-card"><div class="big">NEW DROP</div><div class="small">Collection update ↗</div></div>
+        <div class="marquee-card"><div class="big">SALE</div><div class="small">Promotion ↗</div></div>
+        <div class="marquee-card"><div class="big">FESTIVE</div><div class="small">Campaign ↗</div></div>
+        <div class="marquee-card"><div class="big">NEW PRODUCT</div><div class="small">Catalogue ↗</div></div>
+        <div class="marquee-card"><div class="big">HOMEPAGE</div><div class="small">Refresh ↗</div></div>
+        <div class="marquee-card"><div class="big">OFFER</div><div class="small">Merchandising ↗</div></div>
+        <div class="marquee-card"><div class="big">NEW DROP</div><div class="small">Collection update ↗</div></div>
+        <div class="marquee-card"><div class="big">SALE</div><div class="small">Promotion ↗</div></div>
+        <div class="marquee-card"><div class="big">FESTIVE</div><div class="small">Campaign ↗</div></div>
+        <div class="marquee-card"><div class="big">NEW PRODUCT</div><div class="small">Catalogue ↗</div></div>
+        <div class="marquee-card"><div class="big">HOMEPAGE</div><div class="small">Refresh ↗</div></div>
+        <div class="marquee-card"><div class="big">OFFER</div><div class="small">Merchandising ↗</div></div>
+      </div>
+    </div>
+    <ul class="carelist rv d3">
+      <li><span>New collections</span><i aria-hidden="true">&#8599;</i></li>
+      <li><span>Product updates</span><i aria-hidden="true">&#8599;</i></li>
+      <li><span>Discounts &amp; offers</span><i aria-hidden="true">&#8599;</i></li>
+      <li><span>Festive campaigns</span><i aria-hidden="true">&#8599;</i></li>
+      <li><span>Homepage / banner updates</span><i aria-hidden="true">&#8599;</i></li>
+      <li><span>Ongoing digital support</span><i aria-hidden="true">&#8599;</i></li>
+    </ul>
+  </section>
+
+  <section class="sec wrap" style="padding-top:0">
+    <div class="mono rv">Working together</div>
+    <h2 class="head h-md rv d2" style="margin-top:16px">Bring the brand.<br>I'll build the <em>experience.</em></h2>
+    <div class="cli" style="margin-top:34px">
+      <div class="rv">
+        <p>You bring the raw material — logo and identity, images, video, product information, and any copy you have. I turn it into the website.</p>
+        <p><b>The sooner it arrives, the faster we move. Timelines hold when the assets do.</b></p>
+      </div>
+      <ul class="prov rv d2">
+        <li>Logo &amp; brand identity <span>You</span></li>
+        <li>Images <span>You</span></li>
+        <li>Video <span>You</span></li>
+        <li>Product information <span>You</span></li>
+        <li>Copy / content <span>You</span></li>
+        <li>Design, build &amp; launch <span>Me</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec wrap" style="padding-top:0">
+    <div class="mono rv">A good fit</div>
+    <h2 class="head h-md rv d2" style="margin-top:16px">We'll probably get along if you care about <em>the details.</em></h2>
+    <div class="fit-col">
+      <div class="fit-item rv"><div class="fno">01</div><div><h3>You care how the business looks online.</h3><p>Not because appearances are everything — because credibility changes what happens next.</p></div></div>
+      <div class="fit-item rv d2"><div class="fno">02</div><div><h3>You want the website to actually do something.</h3><p>Sell, explain, showcase, generate an enquiry, or make the next step obvious.</p></div></div>
+      <div class="fit-item rv d3"><div class="fno">03</div><div><h3>You can bring the raw material.</h3><p>Brand identity, images, video, product information and the pieces that make the business yours.</p></div></div>
+    </div>
+  </section>
+
+  <section class="sec wrap svc-cta">
+    <div class="mono rv">Getting started</div>
+    <h2 class="head rv d2" style="margin-top:16px">Bring me the problem.<br>We'll figure out the <em>build.</em></h2>
+    <div style="margin-top:34px" class="rv d3">
+      <a class="pill fill" href="contact.html"><span class="dot"></span> Start a conversation <span>→</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="mono">Webforge / Digital</div>
+    <div class="foot-links"><a href="work.html">Work</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Contact</a></div>
+    <div class="intent">Built with intention. Kept slightly playful.</div>
+    <div class="mono">© <span id="yr"></span> Webforge</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

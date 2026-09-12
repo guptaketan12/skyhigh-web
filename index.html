@@ -48,6 +48,10 @@
       background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#D8FF35}
   .kw--sm .t{font-size:clamp(58px,11vw,150px)}
 
+  /* neon — solid-lime emphasis for important words in running text (distinct
+     from .kw, which is the big gradient headline treatment) */
+  em{font-style:italic;color:var(--accent);text-shadow:0 0 6px rgba(216,255,53,.55),0 0 18px rgba(216,255,53,.35),0 0 42px rgba(216,255,53,.18)}
+
   .head{font-family:var(--sans);font-weight:600;line-height:.84;letter-spacing:-.045em}
   .h-xl{font-size:clamp(3.2rem,10vw,9.4rem)}
   .h-lg{font-size:clamp(2.6rem,7vw,7rem)}
@@ -91,7 +95,7 @@
   .index-client{color:#5a5850;transition:color .35s;display:flex;align-items:center;gap:8px;white-space:nowrap}
   .index-client .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:0;transform:scale(.4);transition:opacity .3s,transform .3s;flex:none}
   .index-client.active{color:var(--accent)}
-  .index-client.active .dot{opacity:1;transform:scale(1)}
+  .index-client.active .dot{opacity:1;transform:scale(1);box-shadow:0 0 6px 1px rgba(216,255,53,.7)}
   .index-column{display:flex;flex-direction:column;gap:10svh;padding:6svh 0}
   .index-column.stepped{display:block;position:relative;padding:6svh 0}
   .index-card{position:relative;border:1px solid #3a3a36;border-radius:14px;background:linear-gradient(160deg,#161614,#0d0d0c);overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.03),0 40px 80px -50px rgba(0,0,0,.8);will-change:transform,opacity;max-height:64vh}
@@ -148,7 +152,8 @@
   .brand-wordmark{font-family:var(--sans);font-size:clamp(1.35rem,2.3vw,2.1rem);color:var(--strong);white-space:nowrap}
   .shopify-wordmark{font-style:italic;font-weight:800;letter-spacing:-.02em;text-transform:lowercase}
   .wordpress-wordmark{font-family:var(--fat);font-weight:400;letter-spacing:-.005em;text-transform:uppercase}
-  .num.neon-num{color:var(--accent)}
+  .num.neon-num{color:var(--accent);text-shadow:0 0 8px rgba(216,255,53,.5),0 0 24px rgba(216,255,53,.3)}
+  .proof-card:hover .num.neon-num{text-shadow:none}
   .hero-proof-row{display:grid;grid-template-columns:1fr 1px 1fr;align-items:center;max-width:800px;margin:48px auto 0;text-align:left}
   .hero-proof-item{display:flex;align-items:center;gap:18px;padding:0 26px}
   .hero-proof-item:first-child{justify-content:flex-end}
@@ -313,6 +318,8 @@
   footer{background:var(--black);color:#f2f2ee;padding:clamp(30px,5vh,54px) 0 clamp(26px,4vh,40px);border-top:1px solid #232320;--muted:#9e9d97;--line:#232320}
   .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;align-items:center}
   .foot .intent{font-family:var(--fat);font-size:1.1rem;background:var(--ombre);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#D8FF35}
+  .foot-links{display:flex;gap:22px;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .foot-links a:hover{color:var(--accent)}
 
   @media(max-width:760px){ .navlinks{display:none}.burger{display:flex} }
   @media(prefers-reduced-motion:reduce){
@@ -1226,7 +1233,7 @@
     margin:0;font-family:var(--sans);font-size:clamp(1.08rem,1.45vw,1.42rem);
     line-height:1.48;letter-spacing:-.02em;color:#686862
   }
-  .lime-dot{display:block;width:14px;height:14px;border-radius:50%;background:var(--lime);margin-top:8px;flex:none}
+  .lime-dot{display:block;width:14px;height:14px;border-radius:50%;background:var(--lime);margin-top:8px;flex:none;box-shadow:0 0 8px 1px rgba(216,255,53,.6)}
   .lime-dot.small{width:9px;height:9px;margin-top:4px}
   .founder-story-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:42px}
   .founder-story-actions .pill{min-height:58px;padding:0 25px}
@@ -1318,19 +1325,20 @@
 <div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
-  <a href="#top" class="logo" aria-label="Webforge home">WEBFORGE</a>
+  <a href="index.html" class="logo" aria-label="Webforge home">WEBFORGE</a>
   <nav class="navlinks" aria-label="Primary">
-    <a class="n" href="#work">Work</a>
-    <a class="n" href="#about">About</a>
-    <a class="n" href="#contact">Contact</a>
-    <a class="pill fill" href="#contact">Get in touch <span>→</span></a>
+    <a class="n" href="work.html">Work</a>
+    <a class="n" href="about.html">About</a>
+    <a class="n" href="services.html">Services</a>
+    <a class="n" href="contact.html">Contact</a>
+    <a class="pill fill" href="contact.html">Get in touch <span>→</span></a>
   </nav>
   <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
 </header>
 
 <div class="menu" id="menu" aria-hidden="true">
   <button class="close" id="menuClose">Close</button>
-  <a href="#work">Work</a><a href="#about">About</a><a href="#contact">Start a project</a>
+  <a href="work.html">Work</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Start a project</a>
 </div>
 
 <main id="top">
@@ -1389,7 +1397,7 @@
   <!-- 01B FORGE STORY — quiet, two lines -->
   <section class="forge-story" id="about">
     <div class="wrap">
-      <p class="forge-story-line rv"><span class="lime-dot small"></span>A forge takes raw material and shapes it until it can hold weight. Webforge does the same with websites — built to perform, not just impress.</p>
+      <p class="forge-story-line rv"><span class="lime-dot small"></span>A forge takes raw material and shapes it until it can hold weight. Webforge does the same with websites — built to <em>perform</em>, not just impress.</p>
     </div>
   </section>
 
@@ -1427,7 +1435,7 @@
         </div>
       </div>
       <div class="credentials-actions rv d3">
-        <a class="pill fill" href="#contact"><span class="dot"></span> Start a conversation <span>→</span></a>
+        <a class="pill fill" href="contact.html"><span class="dot"></span> Start a conversation <span>→</span></a>
       </div>
     </div>
   </section>
@@ -1844,9 +1852,8 @@
 <footer>
   <div class="wrap foot">
     <div class="mono">Webforge / Digital</div>
-    <div class="mono">Shopify · WordPress · D2C · Ecommerce · Business</div>
+    <div class="foot-links"><a href="work.html">Work</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Contact</a></div>
     <div class="intent">Built with intention. Kept slightly playful.</div>
-    <div class="mono" style="max-width:32ch;text-align:right">Shopify tier language is a planned positioning element until official confirmation.</div>
     <div class="mono">© <span id="yr"></span> Webforge</div>
   </div>
 </footer>

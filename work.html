@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Work — Webforge</title>
+<meta name="description" content="Actual websites built by Webforge — Shopify, WordPress, D2C brand and catalogue work. Real builds, no concept-only projects." />
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .work-hero h1{font-size:clamp(2.6rem,6.4vw,5.6rem);line-height:.94;letter-spacing:-.04em;max-width:16ch;color:var(--strong)}
+  .work-hero p{margin-top:22px;max-width:52ch;color:var(--muted);font-size:1.05rem;line-height:1.5}
+
+  .proj{display:grid;grid-template-columns:1fr;gap:28px;padding:clamp(40px,6vw,84px) 0;border-bottom:1px solid var(--line);align-items:center}
+  @media(min-width:900px){.proj{grid-template-columns:.8fr 1.2fr;gap:56px}.proj.rev .m{order:2}.proj.rev .fr{order:1}}
+  .proj .idx{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+  .proj .name{font-family:var(--sans);font-weight:600;letter-spacing:-.045em;line-height:.86;font-size:clamp(2.2rem,5.4vw,4.6rem);margin:10px 0 16px;color:var(--strong)}
+  .proj .tags{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;line-height:1.9;color:var(--muted);text-transform:uppercase}
+  .proj .note{margin:16px 0 0;color:var(--muted);max-width:44ch;line-height:1.5}
+  .proj .wip{display:inline-block;margin-top:16px;padding:4px 10px;border:1px solid var(--accent);border-radius:999px;color:var(--accent);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase}
+  .proj .go{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid currentColor;padding-bottom:3px;color:var(--strong)}
+  .fr{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#161614,#0d0d0c);box-shadow:0 40px 80px -50px rgba(0,0,0,.8);transition:transform .5s cubic-bezier(.2,.6,.2,1)}
+  .proj:hover .fr{transform:translateY(-6px)}
+  .fr .bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid #232320;background:#131311}
+  .fr .bar i{width:8px;height:8px;border-radius:50%;background:#2c2c28;display:block}
+  .fr .bar span{margin-left:8px;font-family:var(--mono);font-size:11px;color:#726f66}
+  .fr .sc{aspect-ratio:16/11;position:relative;overflow:hidden;background:#111}
+  .fr .sc img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .6s cubic-bezier(.2,.6,.2,1)}
+  .proj:hover .sc img{transform:scale(1.035)}
+  .fr .sc-pending{display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#1a1a18,#0c0c0b)}
+  .fr .sc-headline{font-family:var(--fat);font-style:italic;font-size:clamp(2rem,5vw,3.2rem);line-height:.92;text-align:center;background:linear-gradient(100deg,#5572ff,#f3d66b);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  .work-cta{text-align:center}
+  .work-cta h2{font-size:clamp(2.4rem,6vw,5rem);line-height:.9;letter-spacing:-.04em;max-width:18ch;margin:0 auto}
+</style>
+</head>
+<body>
+<div class="cursor-orb" id="cursorOrb" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a href="index.html" class="logo" aria-label="Webforge home">WEBFORGE</a>
+  <nav class="navlinks" aria-label="Primary">
+    <a class="n current" href="work.html">Work</a>
+    <a class="n" href="about.html">About</a>
+    <a class="n" href="services.html">Services</a>
+    <a class="n" href="contact.html">Contact</a>
+    <a class="pill fill" href="contact.html">Get in touch <span>→</span></a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <button class="close" id="menuClose">Close</button>
+  <a href="index.html">Home</a><a href="work.html">Work</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Start a project</a>
+</div>
+
+<main>
+  <section class="page-hero work-hero wrap sec" style="padding-bottom:20px">
+    <div class="mono page-eyebrow rv">Selected work</div>
+    <h1 class="scramble rv d2">Actual websites. Built to work.</h1>
+    <p class="rv d3">Five projects — no padding, no concept-only filler. Real builds for real businesses, across fashion, interiors, industrial, beauty and jewellery.</p>
+  </section>
+
+  <section class="wrap" style="padding-top:0;padding-bottom:60px">
+    <article class="proj rv">
+      <div class="m">
+        <div class="idx">01</div>
+        <div class="name">Vugy India</div>
+        <div class="tags">Fashion / Made-to-measure<br>Shopify · D2C + Brand</div>
+        <p class="note">A brand experience designed to make a considered purchase feel as considered online as it does offline.</p>
+        <a class="go" href="https://vugyindia.com" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+      <div class="fr">
+        <div class="bar"><i></i><i></i><i></i><span>vugyindia.com</span></div>
+        <div class="sc"><img src="images/vugy-india.jpg" loading="lazy" alt="Vugy India website preview"></div>
+      </div>
+    </article>
+
+    <article class="proj rev rv">
+      <div class="m">
+        <div class="idx">02</div>
+        <div class="name">Ammax Decor</div>
+        <div class="tags">Interiors / Decor<br>WordPress · Brand + Catalogue</div>
+        <p class="note">A visual-first catalogue experience for products that need room to speak.</p>
+        <a class="go" href="https://ammaxdecor.com" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+      <div class="fr">
+        <div class="bar"><i></i><i></i><i></i><span>ammaxdecor.com</span></div>
+        <div class="sc"><img src="images/ammax-decor.jpg" loading="lazy" alt="Ammax Decor website preview"></div>
+      </div>
+    </article>
+
+    <article class="proj rv">
+      <div class="m">
+        <div class="idx">03</div>
+        <div class="name">Sriram Cables</div>
+        <div class="tags">Manufacturing / Industrial<br>WordPress · Business</div>
+        <p class="note">A business-first digital presence for an industrial brand — currently being built.</p>
+        <span class="wip">Work in progress</span>
+      </div>
+      <div class="fr">
+        <div class="bar"><i></i><i></i><i></i><span>sriramcables.com</span></div>
+        <div class="sc"><img src="images/sriram-cables.jpg" loading="lazy" alt="Sriram Cables website preview"></div>
+      </div>
+    </article>
+
+    <article class="proj rev rv">
+      <div class="m">
+        <div class="idx">04</div>
+        <div class="name">SNG Cosmetics</div>
+        <div class="tags">Beauty / Cosmetics<br>D2C + Catalogue</div>
+        <p class="note">A beauty experience built around clarity, confidence and what gets someone to keep exploring.</p>
+        <a class="go" href="https://sngcosmetics.in" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+      <div class="fr">
+        <div class="bar"><i></i><i></i><i></i><span>sngcosmetics.in</span></div>
+        <div class="sc"><img src="images/sng-cosmetics.jpg" loading="lazy" alt="SNG Cosmetics website preview"></div>
+      </div>
+    </article>
+
+    <article class="proj rv" style="border-bottom:0">
+      <div class="m">
+        <div class="idx">05</div>
+        <div class="name">Rabaani Jewels</div>
+        <div class="tags">Jewellery<br>Brand + Ecommerce</div>
+        <p class="note">A jewellery experience in progress, where restraint does more work than noise.</p>
+        <span class="wip">Work in progress</span>
+      </div>
+      <div class="fr">
+        <div class="bar"><i></i><i></i><i></i><span>rabaanijewels.com</span></div>
+        <div class="sc sc-pending"><div class="sc-headline">Quietly<br>precious</div></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="sec wrap work-cta">
+    <div class="mono rv">Next</div>
+    <h2 class="head rv d2" style="margin-top:16px">Want to be <em>project six?</em></h2>
+    <div style="margin-top:34px" class="rv d3">
+      <a class="pill fill" href="contact.html"><span class="dot"></span> Start a conversation <span>→</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="mono">Webforge / Digital</div>
+    <div class="foot-links"><a href="work.html">Work</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Contact</a></div>
+    <div class="intent">Built with intention. Kept slightly playful.</div>
+    <div class="mono">© <span id="yr"></span> Webforge</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

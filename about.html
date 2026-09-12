@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — Webforge</title>
+<meta name="description" content="Webforge is run by a developer who spent four years building and running a D2C business before building websites for other people's." />
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .about-hero{position:relative;overflow:hidden}
+  .about-hero h1{font-size:clamp(2.6rem,6.4vw,5.6rem);line-height:.94;letter-spacing:-.04em;max-width:16ch;color:var(--strong)}
+  .about-hero p{margin-top:26px;max-width:56ch;color:var(--muted);font-size:clamp(1.02rem,1.5vw,1.22rem);line-height:1.55}
+
+  .diff-body{display:grid;grid-template-columns:1fr;gap:clamp(22px,4vw,64px);margin-top:44px}
+  @media(min-width:900px){.diff-body{grid-template-columns:1fr 1fr}}
+  .diff-body p{max-width:44ch;color:var(--muted);font-size:clamp(1.02rem,1.5vw,1.22rem);margin:0 0 18px;line-height:1.5}
+  .diff-body p b{color:var(--strong);font-weight:600}
+
+  .quote-sec{position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .quote-sec blockquote{margin:0;font-family:var(--fat);font-style:italic;font-size:clamp(1.6rem,3.6vw,3rem);line-height:1.15;letter-spacing:-.01em;max-width:24ch;color:var(--strong)}
+  .quote-sec cite{display:block;margin-top:22px;font-style:normal}
+
+  .why-list{border-top:1px solid var(--line);margin-top:44px}
+  .why-item{position:relative;display:grid;grid-template-columns:38px 1fr;gap:15px;padding:26px 0;border-bottom:1px solid var(--line);transition:padding .35s}
+  .why-item:hover{padding-left:14px}
+  .why-item .no{font-family:var(--mono);font-size:.65rem;color:var(--muted);padding-top:5px}
+  .why-item h3{font-family:var(--sans);font-weight:500;letter-spacing:-.04em;line-height:.95;font-size:clamp(1.3rem,2.6vw,2.2rem);color:var(--strong);transition:transform .35s,color .35s}
+  .why-item:hover h3{transform:translateX(5px);color:var(--accent)}
+  .why-item p{margin:10px 0 0;color:var(--muted);max-width:52ch;line-height:1.45}
+
+  .q-stack{border-top:1px solid var(--line);margin-top:44px}
+  .q{position:relative;padding:30px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:50px 1fr;gap:20px;cursor:default}
+  .q-no{font-family:var(--mono);font-size:.7rem;color:var(--muted);padding-top:8px}
+  .q-text{font-size:clamp(1.5rem,3.6vw,3rem);line-height:.9;letter-spacing:-.03em;font-weight:500;transition:transform .4s,color .4s}
+  .q-text span{color:var(--accent)}
+  .q:hover .q-text{transform:translateX(10px)}
+  .q-answer{max-height:0;overflow:hidden;color:var(--muted);line-height:1.45;max-width:52ch;transition:max-height .5s,padding .5s}
+  .q:hover .q-answer{max-height:110px;padding-top:14px}
+
+  .about-cta{text-align:center}
+  .about-cta h2{font-size:clamp(2.4rem,6vw,5rem);line-height:.9;letter-spacing:-.04em;max-width:18ch;margin:0 auto}
+</style>
+</head>
+<body>
+<div class="cursor-orb" id="cursorOrb" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a href="index.html" class="logo" aria-label="Webforge home">WEBFORGE</a>
+  <nav class="navlinks" aria-label="Primary">
+    <a class="n" href="work.html">Work</a>
+    <a class="n current" href="about.html">About</a>
+    <a class="n" href="services.html">Services</a>
+    <a class="n" href="contact.html">Contact</a>
+    <a class="pill fill" href="contact.html">Get in touch <span>→</span></a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <button class="close" id="menuClose">Close</button>
+  <a href="index.html">Home</a><a href="work.html">Work</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Start a project</a>
+</div>
+
+<main>
+  <section class="page-hero about-hero wrap sec" style="padding-bottom:20px">
+    <div class="mono page-eyebrow rv">About</div>
+    <h1 class="scramble rv d2">Most developers learn websites. I learned the business behind one.</h1>
+    <p class="rv d3">For four years, I built and ran a D2C business — as the person responsible for whether the whole thing worked. That teaches you something no brief can.</p>
+  </section>
+
+  <section class="sec wrap" style="padding-top:0">
+    <div class="diff-body">
+      <div class="rv">
+        <p>A website isn't finished when it's deployed. <b>That's when it starts working, or doesn't.</b></p>
+        <p>It's where people discover. Compare. Hesitate. Trust. Buy. Come back — or leave for good.</p>
+      </div>
+      <div class="rv d2">
+        <p>I build with all of that in the room — not as an afterthought, but as the actual starting point.</p>
+        <p><b>Business first. Code second.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec quote-sec wrap">
+    <blockquote class="rv">“Most customers will never meet your business. They will only ever meet your website — and they decide in seconds.”</blockquote>
+  </section>
+
+  <section class="sec wrap">
+    <div class="mono rv">Why me</div>
+    <h2 class="head h-md rv d2" style="margin-top:16px">A developer who thinks like an <em>owner.</em></h2>
+    <div class="why-list">
+      <div class="why-item rv"><div class="no">01</div><div><h3>Business first</h3><p>I don't open with code. I open with what the site has to achieve, and for whom.</p></div></div>
+      <div class="why-item rv d2"><div class="no">02</div><div><h3>Customer aware</h3><p>Four years selling D2C taught me design isn't decoration. Every screen changes what a customer notices, believes, and does next.</p></div></div>
+      <div class="why-item rv d3"><div class="no">03</div><div><h3>Design + development</h3><p>It has to look right and work right. One without the other doesn't sell.</p></div></div>
+      <div class="why-item rv d4"><div class="no">04</div><div><h3>Built to evolve</h3><p>Launch isn't the finish line. Collections change, offers change, businesses change. The site changes with them.</p></div></div>
+    </div>
+  </section>
+
+  <section class="sec wrap">
+    <div class="mono rv">How I think</div>
+    <h2 class="head h-md rv d2" style="margin-top:16px">I care about <em>this</em> before I care about code.</h2>
+    <div class="q-stack">
+      <div class="q rv"><div class="q-no">01</div><div><div class="q-text">What are you <span>selling?</span></div><div class="q-answer">Not just the product. The promise, the reason it matters, and what a customer needs to understand before they care.</div></div></div>
+      <div class="q rv"><div class="q-no">02</div><div><div class="q-text">Who are you <span>selling to?</span></div><div class="q-answer">Because a site for a jewellery brand shouldn't behave like a site for a cable manufacturer. Context changes everything.</div></div></div>
+      <div class="q rv"><div class="q-no">03</div><div><div class="q-text">Why should they <span>trust you?</span></div><div class="q-answer">Trust is designed into hierarchy, imagery, proof, product information, clarity and the details people barely notice.</div></div></div>
+      <div class="q rv"><div class="q-no">04</div><div><div class="q-text">What should happen <span>next?</span></div><div class="q-answer">Buy. Enquire. Call. Explore. Book. The best websites know the next move before the visitor has to think about it.</div></div></div>
+    </div>
+  </section>
+
+  <section class="sec wrap">
+    <div class="proof-grid rv" aria-label="Platforms, credentials and experience">
+      <div class="proof-card">
+        <div class="brand-lockup">
+          <svg class="shopify-logo" viewBox="0 0 60 68" aria-hidden="true" role="img">
+            <path fill="#95BF47" d="M48.2 13.3c0-.3-.3-.5-.5-.5s-4-.3-4-.3-2.7-2.6-3-2.9c-.3-.3-.9-.2-1.1-.1 0 0-.6.2-1.5.5-.9-2.6-2.5-5-5.3-5h-.3C31.7.5 30.7 0 29.9 0c-6.1.1-9 7.7-9.9 11.5-2.4.7-4.1 1.3-4.3 1.3-1.3.4-1.4.5-1.6 1.7C14 15.5 10.6 42 10.6 42l26.8 5 14.5-3.1S48.2 13.6 48.2 13.3zM33.7 9.7l-2.4.7v-.5c0-1.6-.2-2.8-.6-3.8 1.5.2 2.5 1.9 3 3.6zm-4.7-3.2c.4 1 .7 2.4.7 4.3v.3l-4.9 1.5c.9-3.6 2.7-5.4 4.2-6.1zm-1.9-1.8c.3 0 .6.1.8.3-2 .9-4.1 3.3-5 8.1l-3.9 1.2c1.1-3.7 3.5-9.6 8.1-9.6z"/>
+            <path fill="#5E8E3E" d="M47.7 12.8s-4-.3-4-.3-2.7-2.6-3-2.9c-.1-.1-.3-.2-.4-.2L37.4 47l14.5-3.1S48.2 13.6 48.2 13.3c0-.3-.3-.5-.5-.5z"/>
+            <path fill="#fff" d="M35.8 19.3l-1.8 5.3s-1.6-.8-3.4-.8c-2.7 0-2.8 1.7-2.8 2.1 0 2.3 6.1 3.2 6.1 8.7 0 4.3-2.7 7.1-6.4 7.1-4.5 0-6.7-2.8-6.7-2.8l1.2-4s2.3 2 4.3 2c1.3 0 1.8-1 1.8-1.8 0-3-5-3.1-5-8.1 0-4.2 3-8.3 9.1-8.3 2.4 0 3.6.8 3.6.8z"/>
+          </svg>
+          <span class="brand-wordmark shopify-wordmark">shopify</span>
+        </div>
+        <div class="desc">Store builds &amp; growth</div>
+      </div>
+      <div class="proof-card">
+        <div class="brand-lockup">
+          <svg class="wordpress-logo" viewBox="0 0 24 24" aria-hidden="true" role="img">
+            <path fill="#21759B" d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/>
+          </svg>
+          <span class="brand-wordmark wordpress-wordmark">WordPress</span>
+        </div>
+        <div class="desc">Catalogue &amp; business sites</div>
+      </div>
+      <div class="proof-card"><div class="num">4</div><div class="desc">Years as a D2C founder</div></div>
+      <div class="proof-card"><div class="num neon-num">50+</div><div class="desc">Websites developed</div></div>
+    </div>
+  </section>
+
+  <section class="sec wrap about-cta">
+    <div class="mono rv">Getting started</div>
+    <h2 class="head rv d2" style="margin-top:16px">Bring me the problem.<br>We'll figure out the <em>build.</em></h2>
+    <div style="margin-top:34px" class="rv d3">
+      <a class="pill fill" href="contact.html"><span class="dot"></span> Start a conversation <span>→</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="mono">Webforge / Digital</div>
+    <div class="foot-links"><a href="work.html">Work</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Contact</a></div>
+    <div class="intent">Built with intention. Kept slightly playful.</div>
+    <div class="mono">© <span id="yr"></span> Webforge</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
