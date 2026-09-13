@@ -73,6 +73,25 @@
   .cta69-note{margin-top:20px;max-width:44ch;color:var(--muted);font-size:1.1rem;line-height:1.5}
   .cta69-btn{margin-top:40px}
   .cta69-footnote{margin-top:28px}
+
+  /* Book a call — free 20-min audit/build call, opens the booking link in a
+     new tab rather than embedding it, so a not-yet-configured link never
+     shows a broken widget on this page. */
+  .book-call{padding:100px 0;text-align:center;border-top:1px solid var(--line)}
+  .book-call h2{font-size:clamp(2.2rem,5.4vw,3.8rem);line-height:1.05;letter-spacing:-.03em;max-width:20ch;margin:16px auto 0;color:var(--strong)}
+  .book-call p{margin:20px auto 0;max-width:52ch;color:var(--muted);font-size:1.05rem;line-height:1.5}
+  .book-call-actions{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:14px}
+  .book-call-note{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;color:var(--muted);max-width:50ch}
+
+  /* Testimonials — hidden (see data-pending on the section) until real
+     client videos replace the placeholder embed URLs. */
+  .testimonial-grid{display:grid;grid-template-columns:1fr;gap:28px;margin-top:44px}
+  @media(min-width:820px){.testimonial-grid{grid-template-columns:repeat(3,1fr)}}
+  .testimonial-video{position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#111;border:1px solid var(--line)}
+  .testimonial-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .testimonial-meta{margin-top:14px}
+  .testimonial-meta .name{font-family:var(--sans);font-weight:600;letter-spacing:-.02em;font-size:1.05rem;color:var(--strong)}
+  .testimonial-meta .role{margin-top:2px;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -101,7 +120,7 @@
     <div class="stream-hero-content wrap">
       <div class="mono page-eyebrow rv">Selected work</div>
       <h1 class="scramble rv d2">Actual websites. Built to work.</h1>
-      <p class="rv d3">Five projects — no padding, no concept-only filler. Real builds for real businesses, across fashion, interiors, industrial, beauty and jewellery.</p>
+      <p class="rv d3">Shopify and WordPress websites for D2C brands and growing businesses — built and kept working by one person, start to finish. No hand-offs, no rebuilds.</p>
     </div>
   </section>
 
@@ -223,6 +242,46 @@
     </div>
   </section>
 
+  <!-- TESTIMONIALS — hidden until real client videos replace the placeholder
+       embed URLs below. To activate: record (or ask each client for) a
+       30-60s video, upload it unlisted to YouTube or Loom, paste the embed
+       URL into each iframe's src, then delete style="display:none" on the
+       <section>. Same "ready, not yet real" pattern as the Calendly link
+       above and the contact details on the Contact page. -->
+  <section class="sec wrap testimonials" style="display:none" data-pending="testimonials">
+    <div class="mono rv">What clients say</div>
+    <h2 class="head h-md rv d2">Real people. Real projects.</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card rv">
+        <div class="testimonial-video">
+          <iframe data-src="REPLACE-VIDEO-EMBED-URL-1" title="Vugy India testimonial" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="testimonial-meta">
+          <div class="name">Vugy India</div>
+          <div class="role">Fashion · D2C</div>
+        </div>
+      </div>
+      <div class="testimonial-card rv d2">
+        <div class="testimonial-video">
+          <iframe data-src="REPLACE-VIDEO-EMBED-URL-2" title="Ammax Decor testimonial" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="testimonial-meta">
+          <div class="name">Ammax Decor</div>
+          <div class="role">Interiors · Decor</div>
+        </div>
+      </div>
+      <div class="testimonial-card rv d3">
+        <div class="testimonial-video">
+          <iframe data-src="REPLACE-VIDEO-EMBED-URL-3" title="SNG Cosmetics testimonial" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="testimonial-meta">
+          <div class="name">SNG Cosmetics</div>
+          <div class="role">Beauty · D2C</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="cta69">
     <div class="cta69-marquee" aria-hidden="true">
       <div class="cta69-marquee-track" data-marquee-phrase="Worth keeping"></div>
@@ -233,6 +292,16 @@
       <p class="cta69-note rv d3">No decks, no detours — bring the problem, and I'll bring the build.</p>
       <a class="pill fill cta69-btn rv d3" href="contact.html"><span class="dot"></span> Start the conversation <span>→</span></a>
       <p class="cta69-footnote mono rv d4">One conversation. No pressure, no decks.</p>
+    </div>
+  </section>
+
+  <section class="sec wrap book-call">
+    <div class="mono rv">No pressure, just 20 minutes</div>
+    <h2 class="rv d2">Free audit or build call — 20 minutes, no charge.</h2>
+    <p class="rv d3">Bring an existing website that needs fixing, or an idea for a new one. Either way, you'll leave with a clear next step — no pitch, no obligation.</p>
+    <div class="book-call-actions rv d3">
+      <a class="pill fill" href="https://calendly.com/REPLACE-CALENDLY-LINK/20min" target="_blank" rel="noopener"><span class="dot"></span> Schedule the call <span>→</span></a>
+      <p class="book-call-note">Calendly link above is a placeholder — create a free Calendly account, set up a 20-minute event type, and swap the link in and this goes live immediately.</p>
     </div>
   </section>
 </main>
