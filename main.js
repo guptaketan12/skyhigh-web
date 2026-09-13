@@ -1,6 +1,7 @@
 /* Webforge shared behavior — loaded on every page. Handles: reveal-on-
    scroll, nav scroll state, mobile menu, lerp cursor, magnetic buttons,
-   micro sound effects, and a text-scramble effect for .scramble headings. */
+   an opt-in ambient sound toggle, and a text-scramble effect for
+   .scramble headings. */
 (function(){
   var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -66,37 +67,61 @@
     });
   }
 
-  /* Micro sound effects — soft synthesized tones on hover/click for nav
-     links and CTA buttons, not a music track. Generated with the Web Audio
-     API rather than audio files, so there's nothing to source or license.
-     Browsers won't play audio before a genuine user gesture, so the context
-     is created lazily and also eagerly unlocked on the first pointerdown
-     anywhere, so hover ticks work as soon as possible rather than staying
-     silent until someone happens to click a sound-wired element first. */
-  if(fine && !reduceMotion && (window.AudioContext||window.webkitAudioContext)){
-    var actx;
-    function audioCtx(){
+  /* Ambient sound toggle — off by default, a visitor has to click it.
+     The pad is a few detuned sine oscillators through a slowly sweeping
+     filter, synthesized with the Web Audio API rather than a licensed
+     track, so there's nothing to source. It doesn't persist across
+     pages: a fresh document needs its own user gesture before audio can
+     play, so carrying an "on" flag over would just leave the button
+     lit with no sound until someone clicked again anyway. */
+  if(window.AudioContext||window.webkitAudioContext){
+    var ambientBtn=document.createElement('button');
+    ambientBtn.className='ambient-toggle';
+    ambientBtn.setAttribute('aria-label','Toggle ambient sound');
+    ambientBtn.setAttribute('aria-pressed','false');
+    ambientBtn.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path class="wave" d="M16.3 8.7a5 5 0 0 1 0 6.6"/></svg>';
+    document.body.appendChild(ambientBtn);
+
+    var actx, playing=false, liveNodes=[];
+    function startAmbient(){
       if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();
       if(actx.state==='suspended') actx.resume();
-      return actx;
+      var master=actx.createGain();
+      master.gain.setValueAtTime(0,actx.currentTime);
+      master.gain.linearRampToValueAtTime(.05,actx.currentTime+1.6);
+      master.connect(actx.destination);
+      var filter=actx.createBiquadFilter();
+      filter.type='lowpass'; filter.frequency.value=900;
+      filter.connect(master);
+      liveNodes=[filter,master];
+      [110,165,220].forEach(function(freq){
+        var osc=actx.createOscillator(), g=actx.createGain();
+        osc.type='sine'; osc.frequency.value=freq+(Math.random()*1.5-.75);
+        g.gain.value=.33;
+        osc.connect(g).connect(filter);
+        osc.start();
+        liveNodes.push(osc,g);
+      });
+      var lfo=actx.createOscillator(), lfoGain=actx.createGain();
+      lfo.frequency.value=.05; lfoGain.gain.value=350;
+      lfo.connect(lfoGain).connect(filter.frequency);
+      lfo.start();
+      liveNodes.push(lfo,lfoGain);
+      playing=true;
+      ambientBtn.classList.add('on');
+      ambientBtn.setAttribute('aria-pressed','true');
     }
-    document.addEventListener('pointerdown',audioCtx,{once:true});
-    function tone(freq,duration,peak,type){
-      var c=audioCtx();
-      var osc=c.createOscillator(), gain=c.createGain();
-      osc.type=type; osc.frequency.value=freq;
-      gain.gain.setValueAtTime(0,c.currentTime);
-      gain.gain.linearRampToValueAtTime(peak,c.currentTime+.008);
-      gain.gain.exponentialRampToValueAtTime(.0001,c.currentTime+duration);
-      osc.connect(gain).connect(c.destination);
-      osc.start(); osc.stop(c.currentTime+duration+.02);
+    function stopAmbient(){
+      var master=liveNodes[1], toStop=liveNodes;
+      if(master) master.gain.linearRampToValueAtTime(0,actx.currentTime+.6);
+      setTimeout(function(){
+        toStop.forEach(function(n){ try{ if(n.stop) n.stop(); n.disconnect(); }catch(e){} });
+      },650);
+      liveNodes=[]; playing=false;
+      ambientBtn.classList.remove('on');
+      ambientBtn.setAttribute('aria-pressed','false');
     }
-    function hoverTick(){ tone(1100,.06,.045,'sine'); }
-    function clickTick(){ tone(680,.08,.09,'triangle'); setTimeout(function(){tone(920,.06,.06,'triangle');},35); }
-    document.querySelectorAll('.navlinks a, .pill, .burger').forEach(function(el){
-      el.addEventListener('mouseenter',hoverTick);
-      el.addEventListener('click',clickTick);
-    });
+    ambientBtn.addEventListener('click',function(){ playing?stopAmbient():startAmbient(); });
   }
 
   /* Text scramble — headings marked .scramble decode from random characters

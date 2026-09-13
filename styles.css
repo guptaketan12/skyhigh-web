@@ -69,6 +69,15 @@ header.nav.scrolled{padding:12px var(--pad);background:rgba(11,11,11,.82);backdr
    hide the native pointer everywhere so only the lime dot shows. */
 html.has-custom-cursor,html.has-custom-cursor *{cursor:none!important}
 
+.ambient-toggle{position:fixed;right:22px;bottom:22px;z-index:150;width:44px;height:44px;border-radius:50%;
+  background:rgba(11,11,11,.72);backdrop-filter:blur(6px);border:1px solid var(--line);color:var(--muted);
+  display:flex;align-items:center;justify-content:center;padding:0;transition:color .3s,border-color .3s,background .3s}
+.ambient-toggle:hover{color:var(--strong);border-color:var(--muted)}
+.ambient-toggle.on{color:var(--accent);border-color:var(--accent);background:rgba(216,255,53,.1)}
+.ambient-toggle:not(.on) .wave{opacity:.35}
+.ambient-toggle .wave{transition:opacity .3s}
+@media(max-width:760px){.ambient-toggle{right:16px;bottom:16px;width:40px;height:40px}}
+
 /* film-grain texture — apply by adding an empty <div class="grain"></div> as
    the first child of any section that should carry it */
 .grain{position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;z-index:1;
