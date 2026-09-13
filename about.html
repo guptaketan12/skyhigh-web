@@ -25,12 +25,12 @@
   .quote-sec cite{display:block;margin-top:22px;font-style:normal}
 
   .why-list{border-top:1px solid var(--line);margin-top:44px}
-  .why-item{position:relative;display:grid;grid-template-columns:38px 1fr;gap:15px;padding:26px 0;border-bottom:1px solid var(--line);transition:padding .35s}
-  .why-item:hover{padding-left:14px}
+  .why-item{position:relative;display:grid;grid-template-columns:38px 1fr;gap:15px;padding:26px 0;border-bottom:1px solid var(--line);cursor:default}
   .why-item .no{font-family:var(--mono);font-size:.65rem;color:var(--muted);padding-top:5px}
-  .why-item h3{font-family:var(--sans);font-weight:500;letter-spacing:-.04em;line-height:.95;font-size:clamp(1.3rem,2.6vw,2.2rem);color:var(--strong);transition:transform .35s,color .35s}
-  .why-item:hover h3{transform:translateX(5px);color:var(--accent)}
-  .why-item p{margin:10px 0 0;color:var(--muted);max-width:52ch;line-height:1.45}
+  .why-item h3{font-family:var(--sans);font-weight:500;letter-spacing:-.04em;line-height:.95;font-size:clamp(1.3rem,2.6vw,2.2rem);color:var(--strong);transition:transform .4s,color .4s}
+  .why-item:hover h3{transform:translateX(10px);color:var(--accent)}
+  .why-item p{max-height:0;overflow:hidden;margin:0;color:var(--muted);max-width:52ch;line-height:1.45;transition:max-height .5s,padding .5s}
+  .why-item:hover p{max-height:110px;padding-top:10px}
 
   .q-stack{border-top:1px solid var(--line);margin-top:44px}
   .q{position:relative;padding:30px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:50px 1fr;gap:20px;cursor:default}
@@ -68,21 +68,8 @@
 <main>
   <section class="page-hero about-hero wrap sec" style="padding-bottom:20px">
     <div class="mono page-eyebrow rv">About</div>
-    <h1 class="scramble rv d2">Most developers learn websites. I learned the business behind one.</h1>
-    <p class="rv d3">For four years, I built and ran a D2C business — as the person responsible for whether the whole thing worked. That teaches you something no brief can.</p>
-  </section>
-
-  <section class="sec wrap" style="padding-top:0">
-    <div class="diff-body">
-      <div class="rv">
-        <p>A website isn't finished when it's deployed. <b>That's when it starts working, or doesn't.</b></p>
-        <p>It's where people discover. Compare. Hesitate. Trust. Buy. Come back — or leave for good.</p>
-      </div>
-      <div class="rv d2">
-        <p>I build with all of that in the room — not as an afterthought, but as the actual starting point.</p>
-        <p><b>Business first. Code second.</b></p>
-      </div>
-    </div>
+    <h1 class="scramble rv d2">One developer. No account managers, no hand-offs.</h1>
+    <p class="rv d3">Webforge is run by one person, end to end — which means nothing gets lost translating your business into a brief, or a brief into code.</p>
   </section>
 
   <section class="sec quote-sec wrap">

@@ -49,6 +49,15 @@
   .work-cta{text-align:center}
   .work-cta h2{font-size:clamp(2.4rem,6vw,5rem);line-height:.9;letter-spacing:-.04em;max-width:18ch;margin:0 auto}
 
+  /* Difference statement — moved here from the About page */
+  .about-hero{position:relative;overflow:hidden}
+  .about-hero h2{font-size:clamp(2.6rem,6.4vw,5.6rem);line-height:.94;letter-spacing:-.04em;max-width:16ch;color:var(--strong);font-weight:600}
+  .about-hero p{margin-top:26px;max-width:56ch;color:var(--muted);font-size:clamp(1.02rem,1.5vw,1.22rem);line-height:1.55}
+  .diff-body{display:grid;grid-template-columns:1fr;gap:clamp(22px,4vw,64px);margin-top:44px}
+  @media(min-width:900px){.diff-body{grid-template-columns:1fr 1fr}}
+  .diff-body p{max-width:44ch;color:var(--muted);font-size:clamp(1.02rem,1.5vw,1.22rem);margin:0 0 18px;line-height:1.5}
+  .diff-body p b{color:var(--strong);font-weight:600}
+
   /* Closing CTA — giant scrolling phrase behind a centered statement.
      Vanilla rebuild of a shadcn "cta69" component, matching this site's own
      tokens instead of Tailwind/React. */
@@ -166,6 +175,25 @@
         <div class="sc sc-pending"><div class="sc-headline">Quietly<br>precious</div></div>
       </div>
     </article>
+  </section>
+
+  <section class="sec wrap about-hero" style="padding-bottom:20px">
+    <div class="mono page-eyebrow rv">The difference</div>
+    <h2 class="scramble rv d2">Most developers learn websites. I learned the business behind one.</h2>
+    <p class="rv d3">For four years, I built and ran a D2C business — as the person responsible for whether the whole thing worked. That teaches you something no brief can.</p>
+  </section>
+
+  <section class="sec wrap" style="padding-top:0">
+    <div class="diff-body">
+      <div class="rv">
+        <p>A website isn't finished when it's deployed. <b>That's when it starts working, or doesn't.</b></p>
+        <p>It's where people discover. Compare. Hesitate. Trust. Buy. Come back — or leave for good.</p>
+      </div>
+      <div class="rv d2">
+        <p>I build with all of that in the room — not as an afterthought, but as the actual starting point.</p>
+        <p><b>Business first. Code second.</b></p>
+      </div>
+    </div>
   </section>
 
   <section class="sec wrap">
