@@ -1,7 +1,6 @@
-/* Webforge shared behavior — used by every page except the homepage (its
-   stepper/WebGL logic stays self-contained in index.html). Handles: reveal-
-   on-scroll, nav scroll state, mobile menu, lerp cursor, magnetic buttons,
-   and a small text-scramble effect for headings marked with .scramble. */
+/* Webforge shared behavior — loaded on every page. Handles: reveal-on-
+   scroll, nav scroll state, mobile menu, lerp cursor, magnetic buttons,
+   micro sound effects, and a text-scramble effect for .scramble headings. */
 (function(){
   var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -64,6 +63,39 @@
         gsap.to(btn,{x:bx*.25,y:by*.4,duration:.4,ease:'power2.out'});
       });
       btn.addEventListener('mouseleave',function(){gsap.to(btn,{x:0,y:0,duration:.5,ease:'elastic.out(1,.4)'});});
+    });
+  }
+
+  /* Micro sound effects — soft synthesized tones on hover/click for nav
+     links and CTA buttons, not a music track. Generated with the Web Audio
+     API rather than audio files, so there's nothing to source or license.
+     Browsers won't play audio before a genuine user gesture, so the context
+     is created lazily and also eagerly unlocked on the first pointerdown
+     anywhere, so hover ticks work as soon as possible rather than staying
+     silent until someone happens to click a sound-wired element first. */
+  if(fine && !reduceMotion && (window.AudioContext||window.webkitAudioContext)){
+    var actx;
+    function audioCtx(){
+      if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();
+      if(actx.state==='suspended') actx.resume();
+      return actx;
+    }
+    document.addEventListener('pointerdown',audioCtx,{once:true});
+    function tone(freq,duration,peak,type){
+      var c=audioCtx();
+      var osc=c.createOscillator(), gain=c.createGain();
+      osc.type=type; osc.frequency.value=freq;
+      gain.gain.setValueAtTime(0,c.currentTime);
+      gain.gain.linearRampToValueAtTime(peak,c.currentTime+.008);
+      gain.gain.exponentialRampToValueAtTime(.0001,c.currentTime+duration);
+      osc.connect(gain).connect(c.destination);
+      osc.start(); osc.stop(c.currentTime+duration+.02);
+    }
+    function hoverTick(){ tone(1100,.06,.045,'sine'); }
+    function clickTick(){ tone(680,.08,.09,'triangle'); setTimeout(function(){tone(920,.06,.06,'triangle');},35); }
+    document.querySelectorAll('.navlinks a, .pill, .burger').forEach(function(el){
+      el.addEventListener('mouseenter',hoverTick);
+      el.addEventListener('click',clickTick);
     });
   }
 
