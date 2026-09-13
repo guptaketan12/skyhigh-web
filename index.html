@@ -3,140 +3,56 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Webforge — We build websites that take businesses higher.</title>
-<meta name="description" content="Shopify and WordPress websites for D2C brands, businesses and catalogue experiences — built by a developer with real founder-side D2C experience." />
+<title>Webforge — Shopify &amp; WordPress websites</title>
+<meta name="description" content="Webforge builds Shopify and WordPress websites for D2C brands, businesses and catalogue experiences — actual websites, no concept-only projects." />
 <meta name="robots" content="index, follow" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Webforge — We build websites that take businesses higher." />
-<meta property="og:description" content="Shopify &amp; WordPress development from a developer who has run the business, not just built the site." />
-<meta property="og:image" content="https://REPLACE-WITH-DOMAIN/og-image.jpg" />
-<meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
 <style>
-  :root{
-    --accent:#D8FF35;
-    --ink:#0A0A0A; --strong:#0A0A0A; --muted:#6D6D68; --line:#E3E2DB;
-    --white:#FFFFFF; --black:#0B0B0B; --ivory:#D8FF35;
-    --lime:#D8FF35; --indigo:#D8FF35;
-    --sans:'Bricolage Grotesque',system-ui,sans-serif; --mono:'DM Mono',monospace; --fat:'Abril Fatface',Georgia,serif;
-    --ombre:linear-gradient(100deg,#1238FF 0%,#4E67E9 32%,#B98A3F 67%,#E7C85A 100%);
-    --ombre-d:linear-gradient(100deg,#5572FF 0%,#8E9AF2 28%,#D3A957 68%,#F3D66B 100%);
-    --grad:var(--ombre);
-    --pad:clamp(18px,4.4vw,72px); --max:1460px;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:var(--black);color:#f2f2ee;font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  html.fake-scroll,html.fake-scroll body{height:100vh;overflow:hidden}
-  a{color:inherit;text-decoration:none}
-  h1,h2,h3{margin:0;font-weight:600}
-  .wrap{width:min(calc(100% - (var(--pad)*2)),var(--max));margin:0 auto}
-  .mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;font-size:.7rem;color:var(--muted);font-weight:400}
-  .sec{padding:clamp(88px,13vh,168px) 0}
+  /* Stream hero — two mirrored rails of project screenshots ride a 3D
+     corridor from a vanishing point toward the viewer. Vanilla rebuild of a
+     shadcn "image-stream-hero" component: the geometry/keyframe math is
+     ported as-is (see the JS below), rendered with plain DOM + CSS custom
+     properties instead of React, using this project's own screenshots. */
+  .stream-hero{position:relative;overflow:hidden;container-type:inline-size;min-height:min(78vh,660px);display:flex;align-items:center;padding:96px 0 40px}
+  .stream-hero-stage{position:absolute;inset:0;pointer-events:none}
+  .stream-hero-inner3d{position:absolute;inset:0;transform-style:preserve-3d}
+  .stream-card{position:absolute;overflow:hidden;background:#111;backface-visibility:hidden;box-shadow:0 20px 50px -20px rgba(0,0,0,.7)}
+  .stream-card img{width:100%;height:100%;object-fit:cover;display:block}
+  .stream-hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 62% 58% at 50% 50%,rgba(11,11,11,.8) 0%,rgba(11,11,11,.4) 45%,rgba(11,11,11,0) 76%)}
+  .stream-hero-content{position:relative;z-index:2;width:100%;text-align:center}
+  .stream-hero-content h1{font-size:clamp(2.6rem,6.4vw,5.6rem);line-height:.94;letter-spacing:-.04em;max-width:16ch;margin:0 auto;color:var(--strong)}
+  .stream-hero-content p{margin:22px auto 0;max-width:52ch;color:var(--muted);font-size:1.05rem;line-height:1.5}
+  @media(prefers-reduced-motion:reduce){.stream-hero-stage{display:none}}
 
-  /* section background cycle: WHITE → BLACK → IVORY → repeat */
-  .s-white{background:var(--white);color:var(--ink)}
-  .s-ivory{background:var(--ivory);color:var(--ink);--line:#9BB51F}
-  .s-black{background:var(--black);color:#F7F6F2;--strong:#F7F6F2;--muted:#9E9D97;--line:#2B2B29;--grad:var(--ombre-d)}
+  .proj{display:grid;grid-template-columns:1fr;gap:28px;padding:clamp(40px,6vw,84px) 0;border-bottom:1px solid var(--line);align-items:center}
+  @media(min-width:900px){.proj{grid-template-columns:.8fr 1.2fr;gap:56px}.proj.rev .m{order:2}.proj.rev .fr{order:1}}
+  .proj .idx{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+  .proj .name{font-family:var(--sans);font-weight:600;letter-spacing:-.045em;line-height:.86;font-size:clamp(2.2rem,5.4vw,4.6rem);margin:10px 0 16px;color:var(--strong)}
+  .proj .tags{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;line-height:1.9;color:var(--muted);text-transform:uppercase}
+  .proj .note{margin:16px 0 0;color:var(--muted);max-width:44ch;line-height:1.5}
+  .proj .wip{display:inline-block;margin-top:16px;padding:4px 10px;border:1px solid var(--accent);border-radius:999px;color:var(--accent);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase}
+  .proj .go{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid currentColor;padding-bottom:3px;color:var(--strong)}
+  .fr{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#161614,#0d0d0c);box-shadow:0 40px 80px -50px rgba(0,0,0,.8);transition:transform .5s cubic-bezier(.2,.6,.2,1)}
+  .proj:hover .fr{transform:translateY(-6px)}
+  .fr .bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid #232320;background:#131311}
+  .fr .bar i{width:8px;height:8px;border-radius:50%;background:#2c2c28;display:block}
+  .fr .bar span{margin-left:8px;font-family:var(--mono);font-size:11px;color:#726f66}
+  .fr .sc{aspect-ratio:16/11;position:relative;overflow:hidden;background:#111}
+  .fr .sc img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .6s cubic-bezier(.2,.6,.2,1)}
+  .proj:hover .sc img{transform:scale(1.035)}
+  .fr .sc-pending{display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#1a1a18,#0c0c0b)}
+  .fr .sc-headline{font-family:var(--fat);font-style:italic;font-size:clamp(2rem,5vw,3.2rem);line-height:.92;text-align:center;background:linear-gradient(100deg,#5572ff,#f3d66b);-webkit-background-clip:text;background-clip:text;color:transparent}
 
-  /* headings black (section colour), only the keyword is ombre */
-  .head,.hero h1,.stmt .line,.cta h2{color:var(--strong)}
-  .kw{position:relative;display:inline-block;line-height:.8}
-  .kw .t{font-family:var(--fat);letter-spacing:-.01em;font-size:clamp(72px,15.5vw,208px);line-height:.78;display:inline-block;
-      background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#D8FF35}
-  .kw--sm .t{font-size:clamp(58px,11vw,150px)}
+  .work-cta{text-align:center}
+  .work-cta h2{font-size:clamp(2.4rem,6vw,5rem);line-height:.9;letter-spacing:-.04em;max-width:18ch;margin:0 auto}
 
-  /* neon — solid-lime emphasis for important words in running text (distinct
-     from .kw, which is the big gradient headline treatment) */
-  em{font-style:italic;color:var(--accent);text-shadow:0 0 6px rgba(216,255,53,.55),0 0 18px rgba(216,255,53,.35),0 0 42px rgba(216,255,53,.18)}
-
-  .head{font-family:var(--sans);font-weight:600;line-height:.84;letter-spacing:-.045em}
-  .h-xl{font-size:clamp(3.2rem,10vw,9.4rem)}
-  .h-lg{font-size:clamp(2.6rem,7vw,7rem)}
-  .h-md{font-size:clamp(2rem,4.6vw,4.6rem)}
-
-  .progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--ombre);z-index:120}
-
-  /* nav */
-  header.nav{position:fixed;inset:0 0 auto 0;z-index:100;display:flex;align-items:center;justify-content:space-between;
-      padding:18px var(--pad);color:#f2f2ee;transition:padding .4s,background .4s,color .4s}
-  header.nav.scrolled{padding:12px var(--pad);background:rgba(11,11,11,.82);backdrop-filter:blur(9px);border-bottom:1px solid #232320;color:#f2f2ee}
-  .logo{font-family:'Sora',var(--sans);font-size:clamp(.86rem,1.15vw,1.02rem);font-weight:800;letter-spacing:-.055em;text-transform:uppercase;display:inline-flex;align-items:baseline;gap:.34em;white-space:nowrap}.logo .logo-web{font-size:.48em;font-weight:600;letter-spacing:.16em;opacity:.72;position:relative;top:-.08em}
-  .brand-tagline{font-family:var(--mono);font-size:.72rem;line-height:1.35;letter-spacing:.02em;color:var(--muted);max-width:38ch}.navlinks{display:flex;align-items:center;gap:26px;font-size:.82rem}
-  .navlinks a.n{color:inherit;position:relative}
-  .navlinks a.n::after{content:"";position:absolute;left:0;bottom:-4px;height:2px;width:0;background:var(--ombre);transition:width .3s}
-  .navlinks a.n:hover::after{width:100%}
-  .pill{display:inline-flex;align-items:center;gap:9px;border:1px solid currentColor;padding:11px 17px;border-radius:999px;font-size:.8rem;transition:background .3s,color .3s,border-color .3s;cursor:pointer}
-  .pill .dot{width:9px;height:9px;border-radius:50%;background:var(--grad);flex:none}
-  .pill.fill{background:var(--accent);color:#0A0A0A;border-color:var(--accent)}
-  .pill.fill:hover{background:var(--accent);border-color:var(--accent)}
-  .pill.ghost:hover{background:var(--ink);color:var(--white)}
-  .s-black .pill.ghost:hover{background:#F7F6F2;color:var(--ink)}
-  .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;padding:8px;cursor:pointer}
-  .burger span{width:24px;height:2px;background:currentColor;display:block}
-
-  .menu{position:fixed;inset:0;background:var(--black);color:#F7F6F2;z-index:105;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:var(--pad);transform:translateY(-100%);transition:transform .55s cubic-bezier(.7,0,.2,1)}
-  .menu.open{transform:none}
-  .menu a{font-family:var(--sans);font-weight:600;font-size:clamp(2.4rem,11vw,4.5rem);line-height:1;letter-spacing:-.04em}
-  .menu a:hover{color:var(--lime)}
-  .menu .close{position:absolute;top:20px;right:var(--pad);font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;background:none;border:0;color:#F7F6F2;cursor:pointer}
-
-  .rv{opacity:0;transform:translateY(30px);transition:opacity .85s ease,transform .85s cubic-bezier(.2,.65,.2,1)}
-  .rv.in{opacity:1;transform:none}
-  .rv.d2{transition-delay:.09s}.rv.d3{transition-delay:.18s}.rv.d4{transition-delay:.27s}
-
-  /* INDEX — the homepage work index (replaces hero + portfolio) */
-  .index-hero{background:var(--black);color:#f2f2ee;padding:calc(var(--pad) + 78px) 0 40px;overflow:hidden}
-  .index-eyebrow{text-align:center;color:#726f66;margin-bottom:18px}
-  .index-layout{display:grid;grid-template-columns:180px 1fr 150px;gap:0;align-items:start;max-width:1320px;margin:0 auto;padding:0 var(--pad)}
-  .index-sidebar{position:sticky;top:38svh;align-self:start;font-family:var(--mono);font-size:12px;line-height:2.6;padding-top:6px}
-  .index-client{color:#5a5850;transition:color .35s;display:flex;align-items:center;gap:8px;white-space:nowrap}
-  .index-client .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:0;transform:scale(.4);transition:opacity .3s,transform .3s;flex:none}
-  .index-client.active{color:var(--accent)}
-  .index-client.active .dot{opacity:1;transform:scale(1);box-shadow:0 0 6px 1px rgba(216,255,53,.7)}
-  .index-column{display:flex;flex-direction:column;gap:10svh;padding:6svh 0}
-  .index-column.stepped{display:block;position:relative;padding:6svh 0}
-  .index-card{position:relative;border:1px solid #3a3a36;border-radius:14px;background:linear-gradient(160deg,#161614,#0d0d0c);overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.03),0 40px 80px -50px rgba(0,0,0,.8);will-change:transform,opacity;max-height:64vh}
-  .index-column.stepped .index-card{transition:opacity .5s ease}
-  .index-column.stepped .index-card:not(.step-active){position:absolute;inset:6svh 0 auto 0;opacity:0;pointer-events:none}
-  .index-column.stepped .index-card.step-active{opacity:1;pointer-events:auto}
-  .index-card-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid #232320;background:#131311}
-  .index-card-bar i{width:8px;height:8px;border-radius:50%;background:#2c2c28;display:block}
-  .index-card-bar span{margin-left:8px;font-family:var(--mono);font-size:11px;color:#726f66}
-  .index-card-img{height:min(56vh,58vw);position:relative;overflow:hidden;background:#111}
-  .index-card-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:opacity .3s}
-  .index-gl{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:5;pointer-events:none}
-  @media(max-width:900px){.index-gl{display:none}}
-  .index-card-img--pending{display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#1a1a18,#0c0c0b)}
-  .index-card-headline{font-family:var(--fat);font-style:italic;font-size:clamp(2rem,5vw,3.4rem);line-height:.92;text-align:center;background:linear-gradient(100deg,#5572ff,#f3d66b);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .index-card-link{position:absolute;inset:0;z-index:2}
-  .index-card-wip{position:absolute;top:14px;right:14px;z-index:3;border:1px solid var(--accent);color:var(--accent);font:400 .6rem var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:rgba(11,11,11,.7)}
-  .index-meta{position:sticky;top:38svh;align-self:start;text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:#726f66;line-height:1.7}
-  .index-meta-count{margin-top:22px;display:flex;justify-content:flex-end;align-items:baseline;gap:3px}
-  .index-meta-count #indexCounter{font-family:var(--sans);font-weight:700;font-size:22px;color:var(--accent);letter-spacing:-.02em}
-  .index-meta-count .of{color:#454340}
-  .index-hint{margin-top:16px;opacity:.75}
-  @media(max-width:900px){
-    .index-layout{grid-template-columns:1fr;padding:0 22px}
-    .index-sidebar,.index-meta{display:none}
-    .index-column{gap:8svh;padding:4svh 0}
-  }
-
-  /* FORGE STORY — quiet, two lines */
-  .forge-story{background:var(--black);padding:64px 0;border-bottom:1px solid #232320}
-  .forge-story-line{display:flex;align-items:flex-start;gap:14px;max-width:64ch;margin:0 auto;text-align:left;font-family:var(--sans);font-size:clamp(1.05rem,1.8vw,1.3rem);line-height:1.55;color:#9e9d97}
-  .forge-story-line .lime-dot.small{margin-top:9px}
-
-  /* CREDENTIALS STRIP — proof, not prose */
-  .credentials-strip{background:var(--black);padding:0 0 72px;--line:#232320;--muted:#9e9d97;color:#f2f2ee}
-  .credentials-actions{display:flex;justify-content:center;margin-top:34px}
-
-  /* Closing statement — giant scrolling phrase behind a centered CTA.
-     Vanilla rebuild of a shadcn "cta69" component, matching this site's
-     own tokens instead of Tailwind/React. */
-  .cta69{position:relative;overflow:hidden;padding:120px 0;text-align:center;background:var(--black);color:#f2f2ee;--strong:#F7F6F2;--muted:#9e9d97;--line:#232320;border-top:1px solid #232320}
+  /* Closing CTA — giant scrolling phrase behind a centered statement.
+     Vanilla rebuild of a shadcn "cta69" component, matching this site's own
+     tokens instead of Tailwind/React. */
+  .cta69{position:relative;overflow:hidden;padding:120px 0;text-align:center;border-top:1px solid var(--line)}
   .cta69-marquee{position:absolute;inset:0;display:flex;align-items:center;overflow:hidden;pointer-events:none;user-select:none}
   .cta69-marquee-track{display:flex;width:max-content;flex:none;white-space:nowrap;opacity:.1;animation:cta69Marquee 40s linear infinite}
   .cta69-marquee-track span{font-family:var(--sans);font-weight:800;font-size:19vw;line-height:1;letter-spacing:-.03em;color:var(--strong)}
@@ -148,1202 +64,15 @@
   .cta69-note{margin-top:20px;max-width:44ch;color:var(--muted);font-size:1.1rem;line-height:1.5}
   .cta69-btn{margin-top:40px}
   .cta69-footnote{margin-top:28px}
-
-  /* HERO — centered Webforge identity */
-  .hero{min-height:100svh;display:flex;align-items:center;position:relative;padding:128px 0 70px;overflow:hidden}
-  .hero-grid{display:block;width:100%;text-align:center}
-  .hero-center{max-width:1180px;margin:0 auto}
-  .hero-logo{font-family:'Sora',var(--sans);font-weight:800;letter-spacing:-.085em;line-height:.78;text-transform:uppercase;font-size:clamp(5rem,14.2vw,13.5rem);color:var(--ink);margin:0 auto;white-space:nowrap}
-  .hero-logo-web{font-family:'Sora',var(--sans);font-size:clamp(1.1rem,3.2vw,2.7rem);font-weight:500;letter-spacing:.32em;line-height:1;text-transform:uppercase;margin:.18em -0.32em 0 0}
-  .hero-rule{width:76px;height:6px;background:var(--ink);margin:26px auto 42px}
-  .hero-statement{font-family:var(--fat);font-weight:400;font-size:clamp(2.8rem,5.6vw,6.4rem);line-height:.93;letter-spacing:-.025em;max-width:920px;margin:0 auto;color:var(--ink)}
-  .hero-statement .neon-word{color:var(--accent)}
-  .name-note{font-family:var(--sans);font-size:clamp(.92rem,1.3vw,1.05rem);color:var(--muted);max-width:52ch;line-height:1.5;margin:26px auto 0}
-  .hero-proof-grid{width:min(100%,1180px);margin:42px auto 0}
-  .hero-proof-grid .proof-card{align-items:flex-start;text-align:left}
-  .proof-card:hover .num{color:var(--ink)}
-  .brand-lockup{display:flex;align-items:center;gap:12px}
-  .shopify-logo{width:46px;height:52px;flex:none;display:block}
-  .wordpress-logo{width:46px;height:46px;flex:none;display:block}
-  .brand-wordmark{font-family:var(--sans);font-size:clamp(1.35rem,2.3vw,2.1rem);color:var(--strong);white-space:nowrap}
-  .shopify-wordmark{font-style:italic;font-weight:800;letter-spacing:-.02em;text-transform:lowercase}
-  .wordpress-wordmark{font-family:var(--fat);font-weight:400;letter-spacing:-.005em;text-transform:uppercase}
-  .num.neon-num{color:var(--accent);text-shadow:0 0 8px rgba(216,255,53,.5),0 0 24px rgba(216,255,53,.3)}
-  .proof-card:hover .num.neon-num{text-shadow:none}
-  .hero-proof-row{display:grid;grid-template-columns:1fr 1px 1fr;align-items:center;max-width:800px;margin:48px auto 0;text-align:left}
-  .hero-proof-item{display:flex;align-items:center;gap:18px;padding:0 26px}
-  .hero-proof-item:first-child{justify-content:flex-end}
-  .hero-proof-icon{width:58px;height:58px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;flex:none;font-family:var(--mono);font-size:.72rem;color:var(--ink)}
-  .hero-proof-copy .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:5px}
-  .hero-proof-copy .d{font-family:var(--fat);font-size:1.05rem;line-height:1.05;color:var(--muted)}
-  .hero-proof-divider{height:68px;background:var(--line)}
-  .hero-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:40px}
-  .hero-actions .pill{min-width:250px;justify-content:center;padding:15px 22px}
-  .hero-scroll{margin-top:42px;font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:center;align-items:center;gap:12px}
-  .hero-scroll i{display:block;width:1px;height:34px;background:var(--ink);position:relative;overflow:hidden}
-  .hero-scroll i::after{content:'';position:absolute;left:0;top:-100%;width:100%;height:100%;background:var(--accent);animation:heroDrop 2.2s infinite}
-  @keyframes heroDrop{0%{transform:translateY(-100%)}55%,100%{transform:translateY(100%)}}
-  .hero .wordmark{display:none}
-  .hero .scrollcue{display:none}
-  .strip{margin-top:clamp(38px,7vh,74px)}
-  @media(max-width:760px){
-    .hero{padding-top:110px;padding-bottom:52px;min-height:100svh}
-    .hero-logo{font-size:clamp(3.5rem,16.5vw,7.2rem);letter-spacing:-.08em}
-    .hero-logo-web{font-size:clamp(.85rem,3.4vw,1.3rem);letter-spacing:.24em;margin-right:-.24em}
-    .hero-rule{width:58px;height:5px;margin:20px auto 30px}
-    .hero-statement{font-size:clamp(2.25rem,10vw,4.2rem);max-width:92vw}
-    .hero-services{margin-top:30px;line-height:2.4;letter-spacing:.12em}
-    .hero-services span+span::before{width:5px;height:5px;margin:0 11px}
-    .hero-proof-row{grid-template-columns:1fr;gap:20px;margin-top:38px;max-width:420px}
-    .hero-proof-divider{display:none}
-    .hero-proof-item,.hero-proof-item:first-child{justify-content:flex-start;padding:0}
-    .hero-proof-icon{width:48px;height:48px}
-    .hero-proof-copy .d{font-size:.95rem}
-    .hero-actions{margin-top:34px}
-    .hero-actions .pill{min-width:0;width:100%;max-width:330px}
-    .hero-scroll{margin-top:30px}
-  }
-  .scrollcue{position:absolute;left:var(--pad);bottom:22px;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px}
-  .scrollcue i{width:34px;height:1px;background:currentColor;position:relative;overflow:hidden}
-  .scrollcue i::after{content:"";position:absolute;inset:0;background:var(--accent);transform:translateX(-100%);animation:cue 2.4s infinite}
-  @keyframes cue{0%{transform:translateX(-100%)}55%{transform:translateX(100%)}100%{transform:translateX(100%)}}
-
-  /* DIFFERENCE */
-  .diff .lbl{margin-bottom:26px}
-  .diff .body{display:grid;grid-template-columns:1fr;gap:clamp(22px,4vw,64px);margin-top:44px}
-  @media(min-width:900px){.diff .body{grid-template-columns:1fr 1fr}}
-  .diff .body p{max-width:44ch;color:var(--muted);font-size:clamp(1.02rem,1.5vw,1.22rem);margin:0 0 18px;line-height:1.5}
-  .diff .body p b{color:var(--strong);font-weight:600}
-
-  /* STATEMENT — neon hover highlight */
-  .stmt .line{font-family:var(--sans);font-weight:600;line-height:.86;letter-spacing:-.05em;font-size:clamp(2.8rem,8.4vw,8.4rem);cursor:default}
-  .stmt .line .mark{background-image:linear-gradient(var(--lime),var(--lime));background-repeat:no-repeat;background-position:0 91%;background-size:0% 34%;transition:background-size .55s cubic-bezier(.72,0,.24,1),text-shadow .35s ease; padding:0 .02em}
-  .stmt .line:hover .mark{background-size:100% 34%;text-shadow:0 0 18px rgba(216,255,53,.38)}
-  .stmt .grp{padding:9vh 0;border-top:1px solid var(--line)}
-  .stmt .grp:first-child{border-top:0;padding-top:0}
-  .stmt .grp:last-child{padding-bottom:0}
-
-  /* WORK */
-  .work-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;border-bottom:1px solid var(--line);padding-bottom:22px}
-  .proj{display:grid;grid-template-columns:1fr;gap:22px;padding:clamp(40px,6vw,84px) 0;border-bottom:1px solid var(--line);align-items:center}
-  @media(min-width:900px){.proj{grid-template-columns:.8fr 1.2fr;gap:56px}.proj.rev .m{order:2}.proj.rev .fr{order:1}}
-  .proj .idx{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
-  .proj .name{font-family:var(--sans);font-weight:600;letter-spacing:-.045em;line-height:.86;font-size:clamp(2.4rem,6vw,5.4rem);margin:10px 0 16px;color:var(--strong)}
-  .proj .tags{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;line-height:1.9;color:var(--muted);text-transform:uppercase}
-  .proj .wip{display:inline-block;margin-top:10px;padding:4px 10px;border:1px solid var(--accent);border-radius:999px;color:var(--accent);font-size:.6rem;letter-spacing:.16em}
-  .proj .go{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid currentColor;padding-bottom:3px}
-  .fr{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 30px 60px -42px rgba(10,10,10,.4);transition:transform .6s cubic-bezier(.2,.6,.2,1)}
-  .proj:hover .fr{transform:translateY(-6px)}
-  .fr .bar{display:flex;align-items:center;gap:7px;padding:10px 13px;border-bottom:1px solid #ECECE6;background:#F7F7F3}
-  .fr .bar i{width:9px;height:9px;border-radius:50%;background:#DBDBD4;display:block}
-  .fr .bar .u{margin-left:10px;font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:#9A9A93}
-  .fr .sc{aspect-ratio:16/10;position:relative;background:linear-gradient(180deg,#fff,#FAFAF6);overflow:hidden}
-  .fr .sc img{width:100%;height:100%;border:0;display:block;object-fit:cover;object-position:top center}
-  .fr .stripe{position:absolute;right:9%;top:16%;width:16%;height:60%;background:linear-gradient(150deg,transparent 0 20%,var(--lime) 21% 52%,transparent 53%)}
-  .fr .stripe.i{background:linear-gradient(150deg,transparent 0 20%,var(--accent) 21% 52%,transparent 53%)}
-  .fr .big{position:absolute;left:6%;top:12%;font-weight:700;letter-spacing:-.05em;line-height:.8;font-size:clamp(1.6rem,3.4vw,3rem);color:#12120F;max-width:60%}
-  .mk{position:absolute;background:#EBEBE4}
-
-  /* BUILD storefront */
-  .build .head-wrap{max-width:22ch}
-  .stage{position:relative;height:360vh}
-  .sticky{position:sticky;top:0;height:100svh;display:grid;grid-template-columns:1fr;align-items:center;gap:34px;padding-top:66px}
-  @media(min-width:960px){.sticky{grid-template-columns:.66fr 1.34fr;gap:64px}}
-  .catlist .cat{padding:16px 0;border-top:1px solid var(--line);cursor:pointer;transition:padding .35s}
-  .catlist .cat:hover{padding-left:14px}
-  .catlist .cat .t{font-family:var(--sans);font-weight:600;letter-spacing:-.04em;line-height:.92;font-size:clamp(1.8rem,4vw,3.4rem);color:var(--muted);transition:color .35s}
-  .catlist .cat .d{max-height:0;overflow:hidden;color:var(--muted);font-size:.98rem;max-width:38ch;margin:0;transition:max-height .5s,margin .5s}
-  .catlist .cat.active .t,.catlist .cat:hover .t{color:var(--strong)}
-  .catlist .cat.active .d{max-height:120px;margin-top:9px}
-  .store{position:relative;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 44px 80px -54px rgba(10,10,10,.45)}
-  .store .bar{display:flex;align-items:center;gap:7px;padding:11px 15px;border-bottom:1px solid #ECECE6;background:#F7F7F3}
-  .store .bar i{width:9px;height:9px;border-radius:50%;background:#DBDBD4}
-  .store .bar .u{margin-left:9px;font-family:var(--mono);font-size:.64rem;color:#9A9A93}
-  .store .canvas{position:relative;aspect-ratio:16/10}
-  .scene{position:absolute;inset:0;opacity:0;transform:scale(1.03);transition:opacity .5s,transform .5s;padding:22px}
-  .scene.on{opacity:1;transform:none}
-  .scene .row{display:flex;gap:10px}
-  .scene .blk{background:#EBEBE4;border-radius:6px}
-  .scene .ind{background:var(--accent)}
-
-  /* SERVICES */
-  .svc .cols{display:grid;grid-template-columns:1fr;gap:clamp(30px,4vw,56px);margin-top:56px}
-  @media(min-width:820px){.svc .cols{grid-template-columns:repeat(3,1fr)}}
-  .svc .col h3{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;padding-bottom:15px;border-bottom:2px solid currentColor}
-  .svc .col ul{list-style:none;margin:18px 0 0;padding:0}
-  .svc .col ul li{padding:9px 0;color:var(--muted);border-bottom:1px solid var(--line);font-size:.98rem}
-
-  /* ONGOING SUPPORT */
-  .finish-grid{display:grid;grid-template-columns:1fr;gap:clamp(34px,6vw,80px)}
-  @media(min-width:900px){.finish-grid{grid-template-columns:1fr 1fr;align-items:start}}
-  .finish .head{line-height:.82}
-  .finish-col .fp{font-size:clamp(1.1rem,1.7vw,1.4rem);line-height:1.4;color:var(--muted);max-width:42ch;margin:0 0 clamp(30px,4vw,52px)}
-  .carelist{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-  .carelist li{display:flex;align-items:center;justify-content:space-between;padding:20px 2px;border-bottom:1px solid var(--line);font-size:clamp(1rem,1.5vw,1.15rem);transition:padding .35s}
-  .carelist li i{font-style:normal;color:var(--muted);transition:transform .35s,color .35s}
-  .carelist li:hover{padding-left:12px}
-  .carelist li:hover i{transform:translate(4px,-4px);color:var(--strong)}
-
-  /* WHY */
-  .why-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:7vw;align-items:start}
-  .why h2 em{font-family:var(--fat);font-style:italic;font-weight:500;letter-spacing:-.045em;color:var(--lime)}
-  .why .list{border-top:1px solid #3a3a37}
-  .why .item{position:relative;display:grid;grid-template-columns:38px 1fr;gap:15px;padding:20px 0;border-bottom:1px solid #3a3a37;transition:padding .35s;cursor:default}
-  .why .item:hover{padding-left:14px}
-  .why .item .no{font-family:var(--mono);font-size:.65rem;color:#7f7e78;padding-top:5px}
-  .why .item h3{font-family:var(--sans);font-weight:500;letter-spacing:-.04em;line-height:.95;font-size:clamp(1.3rem,2.6vw,2.4rem);color:var(--strong);transition:transform .35s,color .35s}
-  .why .item:hover h3{transform:translateX(5px);color:var(--lime)}
-  .why .item p{margin:10px 0 0;color:#aaa9a3;max-width:52ch;line-height:1.45}
-
-  /* PROCESS */
-  .steps{margin-top:52px;border-top:1px solid var(--line)}
-  .step{display:grid;grid-template-columns:1fr;gap:6px;padding:clamp(20px,2.8vw,32px) 0;border-bottom:1px solid var(--line)}
-  @media(min-width:820px){.step{grid-template-columns:64px 280px 1fr;gap:34px;align-items:baseline}}
-  .step .no{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
-  .step .h{font-family:var(--sans);font-weight:600;letter-spacing:-.03em;font-size:clamp(1.3rem,2.4vw,2rem);line-height:.96;color:var(--strong)}
-  .step .d{color:var(--muted);max-width:52ch;margin:0;line-height:1.45}
-  .step.pay .h{background:var(--ombre);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#1238FF}
-
-  /* CLIENT */
-  .cli{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,64px)}
-  @media(min-width:900px){.cli{grid-template-columns:1.1fr .9fr;align-items:center}}
-  .cli .body p{color:var(--muted);max-width:44ch;line-height:1.5;font-size:1.05rem}
-  .cli .body p b{color:var(--strong);font-weight:600}
-  .cli .prov{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-  .cli .prov li{padding:15px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:1rem}
-  .cli .prov li span{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-
-  /* ENGAGE */
-  .eng .cards{display:grid;grid-template-columns:1fr;gap:18px;margin-top:52px}
-  @media(min-width:820px){.eng .cards{grid-template-columns:repeat(3,1fr)}}
-  .eng .card{border:1px solid var(--line);border-radius:14px;padding:clamp(24px,3vw,36px);min-height:210px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .35s,background .35s,color .35s,border-color .35s}
-  .eng .card:hover{transform:translateY(-4px);background:var(--ink);color:#F7F6F2;border-color:var(--ink)}
-  .eng .card .k{font-family:var(--sans);font-weight:600;letter-spacing:-.03em;font-size:clamp(1.4rem,2.6vw,2rem);line-height:.96;color:var(--strong)}
-  .eng .card:hover .k{color:#F7F6F2}
-  .eng .card p{margin:14px 0 0;color:var(--muted);font-size:.98rem;line-height:1.45}
-  .eng .card:hover p{color:#C9C9C3}
-
-  /* CTA */
-  .cta h2{font-family:var(--sans);font-weight:700;line-height:.82;letter-spacing:-.05em;font-size:clamp(3rem,11vw,11rem)}
-  .cta .row{display:flex;flex-wrap:wrap;gap:14px;margin-top:44px}
-  .cta .contact{display:flex;flex-wrap:wrap;gap:8px 30px;margin-top:48px;font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-  .cta .contact a{border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .3s,color .3s}
-  .cta .contact a:hover{border-color:var(--accent);color:var(--strong)}
-
-  /* FOOTER */
-  footer{background:var(--black);color:#f2f2ee;padding:clamp(30px,5vh,54px) 0 clamp(26px,4vh,40px);border-top:1px solid #232320;--muted:#9e9d97;--line:#232320}
-  .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;align-items:center}
-  .foot .intent{font-family:var(--fat);font-size:1.1rem;background:var(--ombre);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#D8FF35}
-  .foot-links{display:flex;gap:22px;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-  .foot-links a:hover{color:var(--accent)}
-
-  @media(max-width:760px){ .navlinks{display:none}.burger{display:flex} }
-  @media(prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    .rv{opacity:1;transform:none;transition:none}
-    .scrollcue i::after{animation:none}
-  }
-
-  /* ===== PLUSH / PLAYFUL UPGRADE ===== */
-  body{cursor:default}
-  .cursor-orb{position:fixed;left:0;top:0;width:16px;height:16px;border-radius:50%;background:var(--accent);mix-blend-mode:screen;pointer-events:none;z-index:200;transition:opacity .25s ease;opacity:0}
-  .cursor-orb.on{opacity:.85}
-  .soft-noise{position:absolute;inset:0;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");mix-blend-mode:multiply}
-  .magnet{display:inline-flex}
-  .hero .huge-note{font-family:var(--mono);font-size:.63rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-top:24px;display:flex;gap:12px;align-items:center}
-  .hero .huge-note b{font-family:var(--sans);font-size:.78rem;color:var(--strong);font-weight:500;letter-spacing:0;text-transform:none}
-  .hero .wordmark{position:absolute;right:var(--pad);bottom:16px;font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl}
-  .hero-stage{transform-style:preserve-3d}
-  .eyebrow-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block;vertical-align:middle;margin-right:8px}
-  .hover-copy{position:relative;display:inline-block}
-  .hover-copy:after{content:"";position:absolute;left:0;bottom:-3px;width:100%;height:2px;background:var(--lime);transform:scaleX(0);transform-origin:right;transition:transform .4s}
-  .hover-copy:hover:after{transform:scaleX(1);transform-origin:left}
-
-  /* numbers / proof */
-  .proof{padding:12vh 0;background:var(--white)}
-  .proof-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .proof-card{padding:28px 18px;border-right:1px solid var(--line);min-height:170px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .35s,background .35s}
-  .proof-card:last-child{border-right:0}
-  .proof-card:hover{background:var(--lime);transform:translateY(-4px)}
-  .proof-card .num{font-family:var(--sans);font-size:clamp(3rem,6vw,6.5rem);font-weight:600;line-height:.8;letter-spacing:-.07em}
-  .proof-card .proof-names{font-family:var(--sans);font-size:clamp(1.3rem,2.2vw,1.9rem);font-weight:600;line-height:1.25;letter-spacing:-.02em}
-  .proof-card .desc{font-family:var(--mono);font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
-  .proof-card:hover .desc{color:var(--ink)}
-
-  /* client POV questions */
-  .questions{padding:16vh 0;background:var(--black);color:#F7F6F2;overflow:hidden}
-  .question-wrap{display:grid;grid-template-columns:.35fr 1.65fr;gap:7vw;align-items:start}
-  .questions .mono{color:#8f8e89}
-  .q-intro h2{font-size:clamp(3rem,6vw,6.5rem);line-height:.82;letter-spacing:-.06em;font-weight:500}
-  .q-intro h2 em{font-family:var(--fat);font-style:normal;color:var(--lime)}
-  .q-stack{border-top:1px solid #323230}
-  .q{position:relative;padding:34px 0;border-bottom:1px solid #323230;display:grid;grid-template-columns:55px 1fr;gap:20px;cursor:default}
-  .q-no{font-family:var(--mono);font-size:.7rem;color:#77756f;padding-top:10px}
-  .q-text{font-size:clamp(2rem,5.2vw,5.8rem);line-height:.86;letter-spacing:-.055em;font-weight:500;transition:transform .4s,color .4s}
-  .q:hover .q-text{transform:translateX(12px);color:white}
-  .q:hover .q-text span{color:var(--lime)}
-  .q-answer{max-height:0;overflow:hidden;color:#A8A7A1;line-height:1.45;max-width:52ch;transition:max-height .5s,padding .5s}
-  .q:hover .q-answer{max-height:110px;padding-top:16px}
-
-  /* playful choice */
-  
-  .taste-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:7vw;align-items:start}
-  .taste h2{font-size:clamp(3.2rem,7vw,7.7rem);line-height:.81;letter-spacing:-.065em;font-weight:500}
-  .taste h2 em{font-family:var(--fat);font-style:italic}
-  .taste-intro p{font-size:1.05rem;line-height:1.45;color:var(--muted);max-width:43ch}
-  .taste-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
-  .taste-btn{border:1px solid #bdb8aa;background:rgba(255,255,255,.38);padding:22px 18px;text-align:left;cursor:pointer;transition:background .35s,transform .35s,border-color .35s}
-  .taste-btn:hover,.taste-btn.active{background:var(--white);border-color:var(--ink);transform:translateY(-3px)}
-  .taste-btn h3{font-size:clamp(1.6rem,2.8vw,2.8rem);letter-spacing:-.04em;line-height:.9;font-weight:500;margin:0 0 12px}
-  .taste-btn p{font-size:.78rem;color:var(--muted);line-height:1.35;margin:0}
-  .taste-preview{margin-top:18px;border:1px solid var(--ink);background:#fff;border-radius:14px;min-height:250px;padding:18px;position:relative;overflow:hidden}
-  .taste-preview:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 75% 22%,rgba(93,85,255,.26),transparent 22%),radial-gradient(circle at 25% 75%,rgba(216,255,53,.58),transparent 26%);opacity:.7}
-  .taste-preview .pv-title{position:relative;font-size:clamp(2.5rem,5vw,5.5rem);letter-spacing:-.06em;line-height:.8;font-weight:600;max-width:75%;z-index:2}
-  .taste-preview .pv-mini{position:absolute;right:18px;bottom:16px;font:500 .58rem var(--mono);letter-spacing:.1em;z-index:2}
-
-  /* build transformation */
-  .transform-section{padding:17vh 0;background:var(--white)}
-  .transform-head{display:grid;grid-template-columns:1fr 1fr;gap:7vw;align-items:end;margin-bottom:70px}
-  .transform-head h2{font-size:clamp(3.2rem,7vw,8rem);line-height:.82;letter-spacing:-.065em;font-weight:500}
-  .transform-head h2 em{font-family:var(--fat);font-style:italic}
-  .transform-head p{max-width:420px;color:var(--muted);line-height:1.45;margin:0}
-  .builder-stage{height:360vh;position:relative}
-  .builder-sticky{position:sticky;top:0;height:100svh;display:grid;grid-template-columns:.72fr 1.28fr;gap:7vw;align-items:center}
-  .build-steps{border-top:1px solid var(--line)}
-  .build-step{border-bottom:1px solid var(--line);padding:18px 0;display:grid;grid-template-columns:50px 1fr;gap:20px;opacity:.35;transition:opacity .35s,padding .35s}
-  .build-step.active{opacity:1;padding-left:12px}
-  .build-step .bn{font:400 .7rem var(--mono);padding-top:5px}
-  .build-step .bt{font-size:clamp(1.6rem,3.5vw,3.3rem);font-weight:500;letter-spacing:-.04em;line-height:.9}
-  .build-stage{position:relative;border:1px solid var(--ink);border-radius:16px;background:#f7f7f3;min-height:420px;box-shadow:0 40px 90px -60px rgba(0,0,0,.6);transform-style:preserve-3d;transition:transform .5s}
-  .build-chrome{height:34px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 12px}
-  .build-chrome i{width:7px;height:7px;border-radius:50%;background:#bdbdb6}
-  .build-canvas{position:absolute;top:34px;left:0;right:0;bottom:0;overflow:hidden}
-  .layer{position:absolute;transition:all .55s cubic-bezier(.2,.7,.2,1);border:1px solid #cfcfc8;background:white}
-  .layer.wire{inset:28px;z-index:1;padding:30px}
-  .layer.design{inset:50px 40px;z-index:2;transform:translate(25px,25px);padding:25px}
-  .layer.content{inset:76px 60px;z-index:3;transform:translate(55px,55px);padding:22px}
-  .layer.live{inset:105px 80px;z-index:4;transform:translate(84px,84px);padding:20px;background:#fff}
-  .build-stage[data-step="0"] .layer.design,.build-stage[data-step="0"] .layer.content,.build-stage[data-step="0"] .layer.live{opacity:0;transform:translate(10px,10px)}
-  .build-stage[data-step="1"] .layer.design{opacity:1;transform:translate(0,0)}
-  .build-stage[data-step="1"] .layer.content,.build-stage[data-step="1"] .layer.live{opacity:0;transform:translate(10px,10px)}
-  .build-stage[data-step="2"] .layer.content{opacity:1;transform:translate(0,0)}
-  .build-stage[data-step="2"] .layer.live{opacity:0;transform:translate(10px,10px)}
-  .build-stage[data-step="3"] .layer.live{opacity:1;transform:translate(0,0)}
-  .wire .skel{border:1px dashed #bcbcb3;height:22px;margin-bottom:16px}
-  .wire .skel.big{height:120px}
-  .design .type{font-size:clamp(2rem,4.3vw,4.3rem);font-weight:600;letter-spacing:-.06em;line-height:.8}
-  .design .accent-block{position:absolute;right:15%;bottom:14%;width:24%;height:35%;background:var(--lime);transform:rotate(8deg)}
-  .content .type{font-size:2rem;font-weight:600;letter-spacing:-.05em;max-width:65%}
-  .content .copyline{height:8px;background:#deded8;margin-top:12px;width:80%}
-  .live .livebar{height:14px;background:#efefea;margin-bottom:22px}
-  .live .headline{font-size:2.4rem;font-weight:600;letter-spacing:-.06em;line-height:.8}
-  .live .cta-mini{display:inline-block;margin-top:30px;border-radius:999px;background:var(--black);color:white;font:400 .62rem var(--mono);padding:9px 12px;letter-spacing:.1em}
-  .builder-cap{margin-top:18px;font:400 .62rem var(--mono);letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
-
-  /* project hover annotations */
-  .proj .fr:after{content:"MOVE / HOVER";position:absolute;top:12px;right:12px;background:var(--lime);color:var(--ink);font:400 .54rem var(--mono);letter-spacing:.1em;padding:5px 8px;border-radius:999px;opacity:0;transform:translateY(-4px);transition:.3s;z-index:10}
-  .proj .fr{position:relative}
-  .proj:hover .fr:after{opacity:1;transform:none}
-  .proj .m .name{transition:transform .4s}
-  .proj:hover .m .name{transform:translateX(7px)}
-  .project-note{font-size:.82rem;line-height:1.45;color:var(--muted);max-width:42ch;margin-top:18px}
-  .proj:hover .project-note{color:var(--strong)}
-
-  /* annotations */
-  .annotation{position:relative}
-  .annotation .pin{position:absolute;display:flex;align-items:center;gap:8px;font:400 .57rem var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
-  .annotation .pin:before{content:"";width:34px;height:1px;background:currentColor}
-  .annotation .pin.a{top:16%;right:-40px}.annotation .pin.b{bottom:20%;left:-30px}
-  .annotated-card:hover .pin{color:var(--accent)}
-
-  /* maintenance playful */
-  .maint{padding:17vh 0;background:var(--black);color:#f7f6f2;overflow:hidden}
-  .maint-head{display:grid;grid-template-columns:1fr .8fr;gap:7vw;align-items:center}
-  .maint-head h2{font-size:clamp(3.4rem,7vw,8rem);line-height:.8;letter-spacing:-.065em;font-weight:500}
-  .maint-head h2 em{font-family:var(--fat);font-style:italic;color:var(--lime)}
-  .maint-head p{color:#9b9a94;max-width:430px;line-height:1.45;margin:0}
-  .maint-marquee{margin-top:70px;display:flex;gap:12px;white-space:nowrap;animation:marquee 24s linear infinite}
-  .maint-card{flex:0 0 auto;border:1px solid #44433f;padding:18px 22px;min-width:200px;border-radius:12px;background:#111}
-  .maint-card .big{font-size:1.35rem;letter-spacing:-.04em}
-  .maint-card .small{font:400 .6rem var(--mono);color:#8f8e89;letter-spacing:.1em;margin-top:8px}
-  .maint-card:nth-child(2n){transform:rotate(1.5deg)}.maint-card:nth-child(3n){transform:rotate(-1.5deg)}
-  @keyframes marquee{to{transform:translateX(-50%)}}
-  .maint .carelist{border-top:1px solid #3a3a37}
-  .maint .carelist li{border-bottom:1px solid #3a3a37;color:#f7f6f2}
-  .maint .carelist li i{color:#8f8e89}
-  .maint .carelist li:hover i{color:var(--lime)}
-
-  /* fit section */
-  .fit{padding:16vh 0;background:var(--ivory)}
-  .fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:7vw}
-  .fit h2{font-size:clamp(3.5rem,7vw,7.5rem);line-height:.81;letter-spacing:-.06em;font-weight:500}
-  .fit h2 em{font-family:var(--fat);font-style:italic}
-  .fit-col{border-top:1px solid #8FA90F}
-  .fit-item{padding:25px 0;border-bottom:1px solid #8FA90F;display:grid;grid-template-columns:34px 1fr;gap:20px}
-  .fit-item .fno{font:400 .65rem var(--mono);color:var(--accent);padding-top:5px}
-  .fit-item h3{font-size:clamp(1.35rem,2.4vw,2rem);font-weight:500;letter-spacing:-.035em;margin:0 0 8px}
-  .fit-item p{margin:0;color:var(--muted);line-height:1.45;max-width:48ch}
-  .fit-item.maybe h3{font-size:1.05rem;letter-spacing:0;font-family:var(--mono);text-transform:uppercase}
-
-  /* final CTA treatment */
-  .cta{overflow:hidden}
-  .cta .breath{font:400 .65rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:24px}
-  .cta .secret{display:inline-block;cursor:pointer;border-bottom:1px dashed var(--muted);color:var(--muted);margin-top:40px;font:400 .67rem var(--mono);letter-spacing:.08em;text-transform:uppercase;transition:color .25s}
-  .cta .secret:hover{color:var(--strong)}
-  .secret-reveal{opacity:0;max-height:0;overflow:hidden;transform:translateY(10px);transition:opacity .5s,max-height .6s,transform .5s;font-family:var(--fat);font-size:clamp(2rem,4vw,4rem);font-style:italic}
-  .secret-reveal.open{opacity:1;max-height:100px;transform:none;margin-top:16px}
-
-  @media(max-width:900px){
-    .proof-grid{grid-template-columns:1fr 1fr}
-    .proof-card:nth-child(2){border-right:0}
-    .proof-card:nth-child(-n+2){border-bottom:1px solid var(--line)}
-    .question-wrap,.taste-grid,.transform-head,.builder-sticky,.maint-head,.fit-grid{grid-template-columns:1fr;gap:34px}
-    .builder-stage{height:300vh}
-    .builder-sticky{height:auto;min-height:100svh;position:sticky;top:0}
-    .build-stage{min-height:340px}
-    .annotation .pin{display:none}
-  }
-  @media(max-width:600px){
-  .logo{font-size:.78rem;letter-spacing:-.055em}.logo .logo-web{font-size:.46em}.brand-tagline{font-size:.66rem;max-width:34ch}
-    .hero .wordmark{display:none}
-    .hero-stage{height:245px}
-    .proof-grid{grid-template-columns:1fr 1fr}
-    .proof-card{min-height:135px;padding:20px 12px}
-    .proof-card .num{font-size:3.5rem}
-    .taste-options{grid-template-columns:1fr}
-    .questions .q{grid-template-columns:34px 1fr}
-    .q-text{font-size:2.35rem}
-    .why .item{grid-template-columns:34px 1fr}
-    .build-stage{min-height:300px}
-    .layer.wire{inset:18px;padding:18px}
-    .layer.design{inset:35px 28px;padding:18px}
-    .layer.content{inset:52px 38px;padding:16px}
-    .layer.live{inset:70px 48px;padding:15px}
-    .live .headline{font-size:1.6rem}
-    .maint-marquee{margin-top:45px}
-  }
-
-
-  /* Neon sections: black type, restrained grid lines, premium contrast */
-  .s-ivory .mono{color:#344000}
-  .s-ivory .body p,.s-ivory .taste-intro p,.s-ivory .fit-item p{color:#394000}
-  .s-ivory .line{color:var(--ink)}
-  .s-ivory .pill{border-color:var(--ink)}
-  .s-ivory .pill.fill{background:var(--ink);color:#D8FF35;border-color:var(--ink)}
-  .s-ivory .pill.ghost:hover{background:var(--ink);color:#D8FF35}
-  .s-ivory .kw .t{background:var(--ombre);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#1238FF}
-  .s-ivory .proof-card:hover,.s-ivory .taste-btn:hover,.s-ivory .taste-btn.active{background:#fff}
-  .taste-preview{box-shadow:0 22px 50px rgba(10,10,10,.12)}
-
-
-  .type-row .current-dot{width:7px;height:7px;border-radius:50%;background:var(--ink);display:inline-block;margin-left:10px;opacity:0;transform:scale(.6);transition:opacity .35s,transform .35s}
-  .type-row.active .current-dot{opacity:1;transform:scale(1)}
-  @media(max-width:900px){
-    .type-row:before{inset:0 -8px}
-  }
-
-
-  /* === Neon active panels: screenshot-inspired interaction === */
-  .cat{
-    position:relative;
-    isolation:isolate;
-    margin-right:0;
-    padding-left:0;
-    transition:padding .45s cubic-bezier(.2,.7,.2,1), color .45s, background .45s, transform .45s;
-  }
-  .cat:before{
-    content:"";
-    position:absolute;
-    z-index:-1;
-    left:-22px;
-    right:-28px;
-    top:0;
-    bottom:0;
-    background:var(--accent);
-    transform:scaleY(0);
-    transform-origin:center;
-    transition:transform .55s cubic-bezier(.2,.7,.2,1);
-  }
-  .cat.active:before,.cat:hover:before{transform:scaleY(1)}
-  .cat.active,.cat:hover{padding-left:14px;padding-right:10px}
-  .cat.active .t,.cat:hover .t{color:#0A0A0A}
-  .cat.active .d,.cat:hover .d{color:#2F3500}
-  .cat .current-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#0A0A0A;margin-left:12px;vertical-align:middle;opacity:0;transform:scale(.5);transition:opacity .3s,transform .3s}
-  .cat.active .current-dot{opacity:1;transform:scale(1)}
-
-  .build-step{
-    position:relative;
-    isolation:isolate;
-    margin-right:0;
-    transition:opacity .35s,padding .45s,background .45s,transform .45s;
-  }
-  .build-step:before{
-    content:"";
-    position:absolute;
-    z-index:-1;
-    left:-18px;
-    right:-18px;
-    top:0;
-    bottom:0;
-    background:var(--accent);
-    transform:scaleY(0);
-    transform-origin:center;
-    transition:transform .55s cubic-bezier(.2,.7,.2,1);
-  }
-  .build-step.active:before,.build-step:hover:before{transform:scaleY(1)}
-  .build-step.active{padding-left:14px;padding-right:10px;opacity:1}
-  .build-step.active .bt,.build-step:hover .bt{color:#0A0A0A}
-  .build-step.active .bn,.build-step:hover .bn{color:#0A0A0A}
-
-  @media(max-width:900px){
-    .cat:before{left:-10px;right:-10px}
-    .build-step:before{left:-8px;right:-8px}
-  }
-
-
-  /* === GUARANTEED NEON PANEL: direct background, not a negative-z pseudo-element === */
-  .cat{
-    position:relative;
-    isolation:auto;
-    background:transparent !important;
-    transition:background .45s cubic-bezier(.2,.7,.2,1),padding .45s cubic-bezier(.2,.7,.2,1),transform .45s,color .3s;
-  }
-  .cat:before{display:none !important}
-  .cat.active,.cat:hover{
-    background:var(--accent) !important;
-    color:#0A0A0A !important;
-    padding-left:14px !important;
-    padding-right:10px !important;
-    margin-left:-14px;
-    margin-right:-10px;
-    box-shadow:0 18px 48px -38px rgba(0,0,0,.8);
-  }
-  .cat.active .t,.cat:hover .t,
-  .cat.active .d,.cat:hover .d,
-  .cat.active .mono,.cat:hover .mono{color:#0A0A0A !important}
-  .cat .current-dot{background:#0A0A0A !important}
-
-  .build-step{
-    position:relative;
-    isolation:auto;
-    background:transparent !important;
-    transition:background .45s cubic-bezier(.2,.7,.2,1),padding .45s cubic-bezier(.2,.7,.2,1),opacity .35s,color .3s;
-  }
-  .build-step:before{display:none !important}
-  .build-step.active,.build-step:hover{
-    background:var(--accent) !important;
-    color:#0A0A0A !important;
-    padding-left:14px !important;
-    padding-right:10px !important;
-    margin-left:-14px;
-    margin-right:-10px;
-  }
-  .build-step.active .bt,.build-step:hover .bt,
-  .build-step.active .bn,.build-step:hover .bn,
-  .build-step.active .builder-cap,.build-step:hover .builder-cap{color:#0A0A0A !important}
-
-  /* Make the selected state persist visibly while the scroll choreography is running. */
-  .cat.active .t{font-weight:650}
-  .build-step.active .bt{font-weight:650}
-
-  @media(max-width:900px){
-    .cat.active,.cat:hover,.build-step.active,.build-step:hover{
-      margin-left:-8px;margin-right:-8px;
-    }
-  }
-
-
-  /* =========================================================
-     COMMERCIAL / SHOPIFY POSITIONING UPGRADE
-     ========================================================= */
-  .partner-badge{
-    display:inline-flex;align-items:center;gap:9px;
-    border:1px solid var(--ink);padding:8px 11px;border-radius:999px;
-    font:500 .62rem var(--mono);letter-spacing:.09em;text-transform:uppercase;
-    background:var(--white);color:var(--ink);white-space:nowrap;
-  }
-  .partner-badge .pmark{width:9px;height:9px;border-radius:50%;
-    background:#D8FF35;
-  }
-  .partner-badge .pending{font-size:.48rem;letter-spacing:.08em;color:#6d6d68}
-  .hero-proof{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px}
-  .hero .proofline{font:400 .62rem var(--mono);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
-  .problem{padding:15vh 0;background:var(--black);color:#f7f6f2}
-  .problem-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:7vw;align-items:start}
-  .problem h2{font-size:clamp(3rem,6.7vw,7.6rem);line-height:.82;letter-spacing:-.065em;font-weight:500}
-  .problem h2 em{font-family:var(--fat);font-style:italic;color:var(--lime)}
-  .problem-intro p{font-size:1.1rem;line-height:1.45;color:#aaa9a3;max-width:45ch;margin:0 0 26px}
-  .problem-list{border-top:1px solid #3a3a37}
-  .problem-item{padding:20px 0;border-bottom:1px solid #3a3a37;display:grid;grid-template-columns:38px 1fr;gap:15px}
-  .problem-item .pn{font:400 .65rem var(--mono);color:#7f7e78;padding-top:5px}
-  .problem-item .pt{font-size:clamp(1.25rem,2.6vw,2.4rem);letter-spacing:-.04em;line-height:.95}
-  .problem-item:hover .pt{color:var(--lime);transform:translateX(5px)}
-  .problem-item .pt{transition:transform .35s,color .35s}
-
-  .shopify-lane{padding:16vh 0;background:var(--white)}
-  .shopify-lane-head{display:grid;grid-template-columns:1fr 1fr;gap:7vw;align-items:end}
-  .shopify-lane-head h2{font-size:clamp(3.2rem,7vw,8rem);line-height:.8;letter-spacing:-.065em;font-weight:500}
-  .shopify-lane-head h2 em{font-family:var(--fat);font-style:italic}
-  .shopify-lane-head p{margin:0;color:var(--muted);font-size:1.08rem;line-height:1.45;max-width:44ch}
-  .keyword-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:52px}
-  .keyword{border-top:1px solid var(--line);padding:18px 0 22px;position:relative}
-  .keyword:after{content:"";position:absolute;left:0;bottom:0;width:100%;height:4px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s}
-  .keyword:hover:after{transform:scaleX(1)}
-  .keyword .k{font:400 .63rem var(--mono);letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
-  .keyword h3{font-size:clamp(1.15rem,1.8vw,1.65rem);font-weight:500;letter-spacing:-.025em;line-height:.98;margin:12px 0 0}
-
-  .partner-explainer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:30px;align-items:center}
-  .partner-explainer p{margin:0;color:var(--muted);max-width:58ch;font-size:.9rem;line-height:1.45}
-  .partner-explainer .partner-note{font:400 .6rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right}
-
-  /* Tier badge strip */
-  .tier-strip{display:flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap}
-  .tier-strip .official-wordmark{font:600 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase}
-  .tier-strip .status{font:400 .55rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-
-  @media(max-width:900px){
-    .problem-grid,.shopify-lane-head,.why-grid{grid-template-columns:1fr;gap:34px}
-    .keyword-grid{grid-template-columns:1fr 1fr}
-    .partner-explainer{display:block}
-    .partner-explainer .partner-note{text-align:left;margin-top:15px}
-  }
-  @media(max-width:600px){
-  .logo{font-size:.78rem;letter-spacing:-.055em}.logo .logo-web{font-size:.46em}.brand-tagline{font-size:.66rem;max-width:34ch}
-    .keyword-grid{grid-template-columns:1fr}
-
-    .shopify-logo{width:34px;height:38px}
-    .wordpress-logo{width:34px;height:34px}
-    .brand-lockup{gap:9px}
-    .brand-wordmark{font-size:1.3rem}
-  }
-
-
-  /* Founder-led visual system */
-  .serif{font-family:var(--fat);font-style:italic;font-weight:500}
-  .founder-strip{background:var(--black);color:#F7F6F2;padding:14vh 0}
-  .founder-strip-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:7vw;align-items:end;margin-top:26px}
-  .founder-strip h2{font-size:clamp(3.5rem,7.4vw,8.5rem);line-height:.78;letter-spacing:-.065em;font-weight:500}
-  .founder-strip h2 span{font-family:var(--fat);font-style:italic;color:var(--lime)}
-  .founder-strip h2 em{font-family:var(--sans);font-style:normal;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:8px}
-  .founder-strip-copy{max-width:48ch;color:#aaa9a3;font-size:1.05rem;line-height:1.5}
-  .founder-strip-copy p{margin:0 0 18px}
-  .founder-strip-copy b{color:#F7F6F2;font-weight:500}
-  .cta-subline{font-size:clamp(1.3rem,3vw,3rem);letter-spacing:-.03em;font-family:var(--fat);font-style:italic;font-weight:500}
-  .founder-quote{margin-top:50px;border-top:1px solid #383835;padding-top:24px;font-size:clamp(1.5rem,3vw,2.6rem);letter-spacing:-.03em;line-height:.98}
-  .problem .problem-item:hover .pt{color:var(--lime)}
-  .shopify-lane{position:relative}
-  .shopify-lane:after{content:"SHOPIFY";position:absolute;right:var(--pad);top:11vh;font:500 .58rem var(--mono);letter-spacing:.2em;writing-mode:vertical-rl;color:#bdbdb5}
-  .tier-strip{border-top:1px solid currentColor;padding-top:16px}
-  .partner-explainer .partner-note{max-width:300px}
-  @media(max-width:900px){
-    .founder-strip-grid{grid-template-columns:1fr;gap:35px}
-    .shopify-lane:after{display:none}
-  }
-
-
-  /* Color rule:
-     white = clarity, black = conviction, neon = interaction/highlight. */
-
-
-  /* --- Refinement pass: editorial consistency --- */
-  .statement-neon{
-    font-family:var(--sans);
-    font-weight:700;
-    color:#1238FF;
-    background:var(--ombre);
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-    text-shadow:0 0 26px rgba(216,255,53,.16);
-    position:relative;
-    display:inline-block;
-  }
-  .statement-neon:after{
-    content:"";
-    position:absolute;
-    left:0;right:0;bottom:-4px;height:3px;
-    background:var(--ombre);
-    transform:scaleX(0);
-    transform-origin:left;
-    transition:transform .45s cubic-bezier(.2,.7,.2,1);
-  }
-  .statement-neon:hover:after{transform:scaleX(1)}
-  .taste-neon{
-    color:#1238FF !important;
-    background:var(--ombre);
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent !important;
-  }
-
-  /* Build / Structure / Design / Content / Live — one typographic system */
-  .build-step .bt{
-    font-family:var(--display-family) !important;
-    font-weight:600 !important;
-    letter-spacing:-.055em !important;
-    line-height:.90 !important;
-  }
-  .build-step .bn,
-  .build-step .builder-cap{
-    font-family:var(--mono) !important;
-    font-weight:400 !important;
-  }
-  .build-step.active .bt,
-  .build-step:hover .bt{font-weight:700 !important}
-  .builder-stage{height:300vh !important}
-  .builder-sticky{height:88svh !important;top:6svh !important}
-  .build-stage{min-height:430px !important}
-
-  /* Keep the after-launch icon column deliberately quiet */
-  .carelist li i{
-    width:20px;
-    display:inline-flex;
-    justify-content:center;
-    align-items:center;
-    font-size:1rem;
-    color:var(--strong);
-  }
-  .carelist li:hover i{color:var(--accent);transform:translate(4px,-4px)}
-
-  /* Header / section rhythm */
-  .statement .grp{padding:7vh 0}
-  .statement .grp:first-child{padding-top:0}
-  .statement .grp:last-child{padding-bottom:0}
-
-  @media(max-width:900px){
-    .builder-sticky{height:auto !important;min-height:88svh;top:0 !important}
-    .build-stage{min-height:330px !important}
-  }
-
-
-  /* Global highlight word: cobalt → warm gold ombré */
-  .ombre-text{
-    background:var(--ombre);
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-    color:#1238FF;
-  }
-  /* Neon remains reserved for interactive backgrounds, not static headline text. */
-
-
-  /* Hero visual removed per direction: keep the hero focused on typography + CTA. */
-  .hero-stage,.hero-stage .browser,.hero-stage .wordmark{display:none !important}
-
-
-  /* =========================================================
-     GLOBAL TYPOGRAPHY SYSTEM — CONSISTENT ACROSS THE SITE
-     ========================================================= */
-  :root{
-    --display-family:'Bricolage Grotesque',system-ui,sans-serif;
-    --display-weight:700;
-    --display-size:clamp(4rem,8.2vw,9rem);
-    --display-line:.80;
-    --display-track:-.062em;
-    --display-serif-size:clamp(4rem,8.2vw,9rem);
-  }
-
-  /* All major display headings use one shared system. */
-  .hero h1,
-  .head.h-xl,
-  .head.h-lg,
-  .head.h-md,
-  .founder-strip h2,
-  .statement-neon,
-  .stmt .line,
-  .problem h2,
-  .shopify-lane-head h2,
-  .taste h2,
-  .transform-head h2,
-  .maint-head h2,
-  .fit h2,
-  .cta h2{
-    font-family:var(--display-family) !important;
-    font-weight:var(--display-weight) !important;
-    letter-spacing:var(--display-track) !important;
-    line-height:var(--display-line) !important;
-  }
-
-  /* Major heading sizes: one scale, contextual sizes only where necessary. */
-  .hero h1,
-  .head.h-xl,
-  .head.h-lg,
-  .founder-strip h2,
-  .problem h2,
-  .shopify-lane-head h2,
-  .transform-head h2,
-  .maint-head h2,
-  .fit h2,
-  .cta h2{
-    font-size:var(--display-size) !important;
-  }
-
-  /* Secondary display headings use the same family, slightly smaller. */
-  .head.h-md{
-    font-size:clamp(3.2rem,6.8vw,7rem) !important;
-  }
-
-  /* Serif is an accent treatment, not a different sizing system. */
-  .serif,
-  .founder-strip h2 em,
-  .problem h2 em,
-  .shopify-lane-head h2 em,
-  .taste h2 em,
-  .transform-head h2 em,
-  .maint-head h2 em,
-  .fit h2 em,
-  .eng h2 span,
-  .statement-neon{
-    font-family:var(--fat) !important;
-    font-style:italic !important;
-    font-weight:500 !important;
-    letter-spacing:-.045em !important;
-  }
-
-  /* Ombré highlighted words stay the same visual scale as surrounding display type. */
-  .kw .t{
-    font-family:var(--fat) !important;
-    font-style:italic !important;
-    font-weight:500 !important;
-    font-size:var(--display-serif-size) !important;
-    line-height:.78 !important;
-    letter-spacing:-.045em !important;
-  }
-
-  /* But small keyword variants remain proportional, never disproportionately huge. */
-  .kw--sm .t{
-    font-size:clamp(3.3rem,6.3vw,7rem) !important;
-  }
-
-  /* Project names and interactive category titles share the same grotesk family. */
-  .proj .name,
-  .type-row h3,
-  .build-step .bt,
-  .q-text,
-  .keyword h3{
-    font-family:var(--display-family) !important;
-    font-weight:600 !important;
-    letter-spacing:-.055em !important;
-    line-height:.90 !important;
-  }
-
-  .proj .name{font-size:clamp(2.5rem,5.4vw,5.4rem) !important}
-  .type-row h3{font-size:clamp(2.2rem,4.3vw,5rem) !important}
-  .q-text{font-size:clamp(2.4rem,5vw,5.6rem) !important}
-
-  /* Founder section gets the exact same display size as the hero. */
-  .founder-strip h2{
-    font-size:var(--display-size) !important;
-  }
-
-  /* Statement lines should not introduce another font scale. */
-  .stmt .line{
-    font-size:var(--display-size) !important;
-  }
-
-  @media(max-width:900px){
-    :root{
-      --display-size:clamp(3.35rem,11vw,6.5rem);
-      --display-serif-size:clamp(3.35rem,11vw,6.5rem);
-    }
-    .head.h-md{font-size:clamp(2.9rem,9vw,5.5rem) !important}
-    .kw--sm .t{font-size:clamp(2.9rem,8.5vw,5.5rem) !important}
-  }
-
-  @media(max-width:600px){
-  .logo{font-size:.78rem;letter-spacing:-.055em}.logo .logo-web{font-size:.46em}.brand-tagline{font-size:.66rem;max-width:34ch}
-    :root{
-      --display-size:clamp(2.75rem,12.5vw,5rem);
-      --display-serif-size:clamp(2.75rem,12.5vw,5rem);
-    }
-    .stmt .line{font-size:clamp(2.75rem,12.5vw,5rem) !important}
-    .head.h-md{font-size:clamp(2.55rem,10vw,4.6rem) !important}
-    .kw--sm .t{font-size:clamp(2.55rem,10vw,4.6rem) !important}
-  }
-
-
-  /* =========================================================
-     TYPOGRAPHY LOCK — EVERY HEADING ON THE SITE
-     ========================================================= */
-  :root{
-    --display-size:clamp(3.8rem,7.6vw,8.6rem);
-    --display-line:.80;
-    --display-track:-.062em;
-    --display-weight:700;
-    --display-serif-size:clamp(3.8rem,7.6vw,8.6rem);
-  }
-
-  /* Every meaningful heading uses the same primary display family. */
-  h1,h2,h3,
-  .hero h1,
-  .head,
-  .founder-strip h2,
-  .statement-neon,
-  .stmt .line,
-  .problem h2,
-  .shopify-lane-head h2,
-  .transform-head h2,
-  .maint-head h2,
-  .fit h2,
-  .cta h2,
-  .proj .name,
-  .type-row h3,
-  .build-step .bt,
-  .q-text,
-  .keyword h3,
-  .eng .card .k,
-  .taste h2{
-    font-family:var(--display-family) !important;
-  }
-
-  /* MAIN DISPLAY HEADINGS */
-  .hero h1,
-  .head,
-  .founder-strip h2,
-  .stmt .line,
-  .problem h2,
-  .shopify-lane-head h2,
-  .transform-head h2,
-  .maint-head h2,
-  .fit h2,
-  .cta h2,
-  .taste h2{
-    font-weight:var(--display-weight) !important;
-    letter-spacing:var(--display-track) !important;
-    line-height:var(--display-line) !important;
-  }
-
-  /* All primary H1/H2 visual scales */
-  .hero h1,
-  .head.h-xl,
-  .head.h-lg,
-  .founder-strip h2,
-  .problem h2,
-  .shopify-lane-head h2,
-  .transform-head h2,
-  .maint-head h2,
-  .fit h2,
-  .cta h2{
-    font-size:var(--display-size) !important;
-  }
-
-  /* Section headings: same family/weight, slightly lower scale */
-  .head.h-md{
-    font-size:clamp(3.15rem,6.2vw,6.8rem) !important;
-  }
-
-  /* All serif accents follow the same dramatic scale rather than a separate type system. */
-  .serif,
-  .founder-strip h2 em,
-  .problem h2 em,
-  .shopify-lane-head h2 em,
-  .transform-head h2 em,
-  .maint-head h2 em,
-  .fit h2 em,
-  .taste h2 em,
-  .eng h2 span{
-    font-family:var(--fat) !important;
-    font-style:italic !important;
-    font-weight:500 !important;
-    letter-spacing:-.045em !important;
-  }
-
-  .kw .t{
-    font-family:var(--fat) !important;
-    font-style:italic !important;
-    font-weight:500 !important;
-    font-size:var(--display-serif-size) !important;
-    line-height:.78 !important;
-    letter-spacing:-.045em !important;
-  }
-  .kw--sm .t{
-    font-size:clamp(3.15rem,6.1vw,6.6rem) !important;
-  }
-
-  /* Secondary headings and labels */
-  .proj .name,
-  .type-row h3,
-  .build-step .bt,
-  .q-text{
-    font-weight:600 !important;
-    letter-spacing:-.055em !important;
-    line-height:.90 !important;
-  }
-  .proj .name{font-size:clamp(2.45rem,5.1vw,5.25rem) !important}
-  .type-row h3{font-size:clamp(2.15rem,4.0vw,4.8rem) !important}
-  .build-step .bt{font-size:clamp(2.05rem,3.6vw,3.5rem) !important}
-  .q-text{font-size:clamp(2.3rem,4.7vw,5.25rem) !important}
-  .keyword h3{font-size:clamp(1.15rem,1.75vw,1.6rem) !important;font-weight:600 !important;letter-spacing:-.03em !important}
-  .eng .card .k{font-size:clamp(1.35rem,2.3vw,2rem) !important;font-weight:600 !important;letter-spacing:-.035em !important;line-height:.95 !important}
-
-  /* Keep every heading from being overridden by inline legacy sizes. */
-  .head[style], h2[style], h3[style]{font-family:var(--display-family) !important}
-
-  @media(max-width:900px){
-    :root{
-      --display-size:clamp(3.25rem,10.8vw,6.3rem);
-      --display-serif-size:clamp(3.25rem,10.8vw,6.3rem);
-    }
-    .head.h-md{font-size:clamp(2.8rem,8.8vw,5.4rem) !important}
-    .kw--sm .t{font-size:clamp(2.8rem,8.6vw,5.2rem) !important}
-    .proj .name{font-size:clamp(2.25rem,7vw,4.7rem) !important}
-    .type-row h3{font-size:clamp(2rem,7vw,4.5rem) !important}
-    .build-step .bt{font-size:clamp(1.95rem,6vw,3.5rem) !important}
-  }
-
-  @media(max-width:600px){
-  .logo{font-size:.78rem;letter-spacing:-.055em}.logo .logo-web{font-size:.46em}.brand-tagline{font-size:.66rem;max-width:34ch}
-    :root{
-      --display-size:clamp(2.7rem,12vw,4.9rem);
-      --display-serif-size:clamp(2.7rem,12vw,4.9rem);
-    }
-    .head.h-md{font-size:clamp(2.55rem,10vw,4.5rem) !important}
-    .kw--sm .t{font-size:clamp(2.55rem,10vw,4.45rem) !important}
-    .stmt .line{font-size:clamp(2.7rem,12vw,4.9rem) !important}
-  }
-
-
-  /* Cobalt → gold ombré for editorial serif heading words */
-  .ombre-heading{
-    font-family:var(--fat) !important;
-    font-style:italic !important;
-    font-weight:500 !important;
-    background:var(--ombre) !important;
-    -webkit-background-clip:text !important;
-    background-clip:text !important;
-    -webkit-text-fill-color:transparent !important;
-    color:#1238FF !important;
-    letter-spacing:-.045em !important;
-  }
-  /* Keep the selected-work and transformation heading scale exactly aligned
-     with the surrounding display typography. */
-  #work .head.h-lg,
-  .transform-head h2{
-    font-family:var(--display-family) !important;
-    font-weight:var(--display-weight) !important;
-    letter-spacing:var(--display-track) !important;
-    line-height:var(--display-line) !important;
-  }
-  #work .ombre-heading,
-  .transform-head .ombre-heading{
-    font-size:1em !important;
-    line-height:.80 !important;
-  }
-
-
-@media (max-width:600px){
-  html,body{width:100%;overflow-x:hidden}
-  main{width:100%;overflow:hidden}
-  .sec,.hero,.founder-strip,.stmt,.work,.build,.services,.process,.care,.contact{width:100%;min-height:0}
-  .hero h1,.head,.founder-strip h2,.stmt .line,.problem h2,.shopify-lane-head h2,.transform-head h2,.maint-head h2,.fit h2,.cta h2{
-    max-width:100%!important;overflow-wrap:normal!important;word-break:normal!important;
-  }
-  .hero h1{
-    font-size:clamp(3rem,14.2vw,5rem)!important;
-    line-height:.82!important;letter-spacing:-.065em!important;
-  }
-  .founder-strip h2{
-    font-size:clamp(3rem,13.4vw,5rem)!important;
-    line-height:.82!important;letter-spacing:-.065em!important;
-  }
-  .head.h-xl,.head.h-lg{
-    font-size:clamp(2.9rem,12.8vw,5rem)!important;
-    line-height:.83!important;letter-spacing:-.06em!important;
-  }
-  .head.h-md{
-    font-size:clamp(2.7rem,11.5vw,4.6rem)!important;
-    line-height:.84!important;letter-spacing:-.06em!important;
-  }
-  .kw .t,.kw--sm .t,.ombre-heading,.statement-neon{
-    font-size:1em!important;line-height:.82!important;max-width:100%;
-  }
-  .founder-strip-grid,.proof-grid,.work-grid,.services-grid,.process-grid,.care-grid,.contact-grid{
-    min-width:0!important;width:100%!important;
-  }
-  .founder-strip-grid{grid-template-columns:1fr!important}
-  .builder-stage{height:auto!important;min-height:0!important}
-  .builder-sticky{position:relative!important;top:auto!important;height:auto!important;min-height:0!important}
-  .build-stage{min-height:300px!important;height:auto!important}
-  .browser,.build-stage,.project-browser{max-width:100%!important}
-  .nav,.nav-inner{max-width:100%;overflow:hidden}
-  .cta-subline{display:block;max-width:100%}
-}
-
-
-  /* Founder story — preserved from the founder-led concept */
-  .founder-story{background:#fff;color:var(--black);padding:8vh 0 7vh;min-height:78vh;display:flex;align-items:center}
-  .founder-story-wrap{width:100%}
-  .founder-story-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(360px,.88fr);gap:7vw;align-items:center}
-  .founder-story-heading h2{margin:0;font-family:var(--display-family);font-size:clamp(4.2rem,7.55vw,8.8rem);line-height:.82;letter-spacing:-.075em;font-weight:700}
-  .founder-story-heading h2 span,.founder-story-heading h2 strong{font-family:var(--display-family);font-style:normal;font-weight:700}
-  .founder-story-heading h2 em{font-family:var(--fat);font-style:italic;font-weight:500}
-  .founder-story-heading h2 b{font-family:var(--fat);font-style:italic;font-weight:500;background:var(--ombre);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .founder-story-content{max-width:560px;padding-top:1rem}
-  .founder-story-intro{display:grid;grid-template-columns:18px 1fr;gap:18px;align-items:start}
-  .founder-story-intro p{margin:0;font-size:clamp(1.05rem,1.45vw,1.45rem);line-height:1.48;letter-spacing:-.02em;color:#575754}
-  .lime-dot{display:block;width:14px;height:14px;border-radius:50%;background:var(--lime);margin-top:8px}
-  .lime-dot.small{width:9px;height:9px;margin-top:4px}
-  .founder-story-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:42px}
-  .founder-story-actions .pill{min-height:58px;padding:0 25px}
-  .founder-story-tags{margin-top:30px;font:500 .68rem var(--mono);letter-spacing:.12em;line-height:1.55;color:#686862;max-width:620px}
-  .founder-story-tags-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:30px;max-width:620px}
-  .founder-story-tags-grid .proof-card:nth-child(2n){border-right:0}
-  .founder-story-tags-grid .proof-card:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .founder-story-proof{display:flex;align-items:center;gap:13px;margin-top:38px;font-size:.95rem}
-  .founder-story-proof .mono{font-size:.68rem;letter-spacing:.13em;color:#55554f}
-  .founder-story-proof strong{font-family:var(--display-family);font-weight:650;margin-left:4px}
-  .founder-story-scroll{display:flex;align-items:center;gap:15px;margin-top:7vh;color:#66665f;font-size:.62rem;letter-spacing:.16em}
-  .founder-story-scroll span{display:block;width:50px;height:1px;background:#66665f}
-  @media(max-width:900px){
-    .founder-story{padding:9vh 0 6vh;min-height:auto}
-    .founder-story-grid{grid-template-columns:1fr;gap:45px}
-    .founder-story-content{max-width:680px;padding-top:0}
-  }
-  @media(max-width:600px){
-    .founder-story{padding:10vh 0 7vh}
-    .founder-story-heading h2{font-size:clamp(3.25rem,15vw,5rem);line-height:.86;letter-spacing:-.065em}
-    .founder-story-intro{grid-template-columns:14px 1fr;gap:13px}
-    .founder-story-intro p{font-size:1rem}
-    .founder-story-actions{margin-top:30px;gap:10px}
-    .founder-story-actions .pill{width:100%;justify-content:space-between}
-    .founder-story-tags{font-size:.58rem;margin-top:25px}
-    .founder-story-proof{flex-wrap:wrap;gap:9px}
-    .founder-story-scroll{margin-top:5vh}
-  }
-
-  /* =========================================================
-     WEBFORGE — FOUNDER-LED HERO (FIRST SECTION)
-     ========================================================= */
-  .founder-story{
-    background:#fff;color:var(--black);min-height:100svh;
-    padding:clamp(96px,9vh,128px) 0 clamp(34px,5vh,64px);
-    display:flex;align-items:stretch;overflow:hidden;
-  }
-  .founder-story-wrap{width:100%;max-width:none;margin:0;padding:0 clamp(22px,4.35vw,84px) 0 0}
-  .founder-story-grid{
-    display:grid;grid-template-columns:minmax(0,1.28fr) minmax(380px,.72fr);
-    gap:clamp(40px,7vw,120px);align-items:center;min-height:calc(100svh - 170px)
-  }
-  .founder-story-heading{align-self:start;padding-top:0;min-width:0}
-  .founder-story-heading h2{
-    margin:0;font-family:var(--display-family)!important;
-    font-size:clamp(4.7rem,8.15vw,9.7rem)!important;
-    line-height:.96!important;letter-spacing:-.078em!important;font-weight:700!important;
-    max-width:11ch;
-  }
-  .founder-story-heading h2 span,.founder-story-heading h2 strong{
-    font-family:var(--display-family)!important;font-style:normal;font-weight:700!important
-  }
-  .founder-story-heading h2 em{
-    font-family:var(--fat)!important;font-style:italic;font-weight:500!important;
-    letter-spacing:-.045em!important
-  }
-  .founder-story-heading h2 b{
-    font-family:var(--fat)!important;font-style:italic;font-weight:500!important;
-    background:var(--ombre);-webkit-background-clip:text;background-clip:text;
-    -webkit-text-fill-color:transparent;color:transparent;letter-spacing:-.045em!important
-  }
-  .founder-story-content{max-width:590px;padding-top:0;align-self:center}
-  .founder-story-intro{display:grid;grid-template-columns:18px 1fr;gap:18px;align-items:start}
-  .founder-story-intro p{
-    margin:0;font-family:var(--sans);font-size:clamp(1.08rem,1.45vw,1.42rem);
-    line-height:1.48;letter-spacing:-.02em;color:#686862
-  }
-  .lime-dot{display:block;width:14px;height:14px;border-radius:50%;background:var(--lime);margin-top:8px;flex:none;box-shadow:0 0 8px 1px rgba(216,255,53,.6)}
-  .lime-dot.small{width:9px;height:9px;margin-top:4px}
-  .founder-story-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:42px}
-  .founder-story-actions .pill{min-height:58px;padding:0 25px}
-  .founder-story-tags{
-    margin-top:30px;font:500 .68rem var(--mono);letter-spacing:.12em;line-height:1.55;
-    color:#686862;max-width:620px;text-transform:uppercase
-  }
-  .founder-story-proof{display:flex;align-items:center;gap:13px;margin-top:38px;font-size:.95rem}
-  .founder-story-proof .mono{font-size:.68rem;letter-spacing:.13em;color:#55554f}
-  .founder-story-proof strong{font-family:var(--display-family);font-weight:650;margin-left:4px}
-  .founder-story-scroll{display:flex;align-items:center;gap:15px;margin-top:clamp(28px,5vh,56px);color:#66665f;font-size:.62rem;letter-spacing:.16em}
-  .founder-story-scroll span{display:block;width:50px;height:1px;background:#66665f}
-
-  /* Inverse colour treatment — this headline only */
-  .founder-story-heading h2.inverse-line .inv-neon,
-  .founder-story-heading h2.inverse-line .inv-black{
-    display:inline-block;
-    padding:.025em .07em .035em;
-    margin-left:-.07em;
-    -webkit-text-fill-color:initial;
-    background:none;
-    color:var(--black);
-    box-decoration-break:clone;
-    -webkit-box-decoration-break:clone;
-  }
-  .founder-story-heading h2.inverse-line .inv-neon{
-    background:var(--lime);
-    color:var(--black);
-  }
-  .founder-story-heading h2.inverse-line .inv-black{
-    background:var(--black);
-    color:var(--lime);
-  }
-  .founder-story-heading h2.inverse-line .inv-neon b,
-  .founder-story-heading h2.inverse-line .inv-black b{color:inherit}
-
-  /* Founder headline treatment: text-only, with the requested neon and ombre accents. */
-  .founder-story-heading h2.inverse-line .plain-black,
-  .founder-story-heading h2.inverse-line .plain-neon,
-  .founder-story-heading h2.inverse-line .plain-ombre{
-    display:inline;
-    padding:0;
-    margin:0;
-    background:none !important;
-    box-decoration-break:clone;
-    -webkit-box-decoration-break:clone;
-    -webkit-text-fill-color:initial;
-    text-decoration:none;
-  }
-  .founder-story-heading h2.inverse-line .plain-black{
-    color:var(--black);
-  }
-  .founder-story-heading h2.inverse-line .plain-neon{
-    color:var(--lime);
-  }
-  .founder-story-heading h2.inverse-line .plain-ombre{
-    background:var(--ombre) !important;
-    -webkit-background-clip:text !important;
-    background-clip:text !important;
-    -webkit-text-fill-color:transparent !important;
-    color:transparent !important;
-  }
-
-  @media(max-width:1000px){
-    .founder-story-wrap{padding-right:var(--pad)}
-    .founder-story-grid{grid-template-columns:1fr;gap:48px;min-height:auto}
-    .founder-story-heading h2{max-width:12ch}
-    .founder-story-content{max-width:700px}
-  }
-  @media(max-width:600px){
-    .founder-story{padding:94px 0 38px;min-height:100svh}
-    .founder-story-wrap{padding:0 var(--pad)}
-    .founder-story-grid{gap:38px}
-    .founder-story-heading h2{font-size:clamp(3.35rem,15.2vw,5.2rem)!important;line-height:1!important;letter-spacing:-.068em!important;max-width:12ch}
-    .founder-story-intro{grid-template-columns:14px 1fr;gap:13px}
-    .founder-story-intro p{font-size:1rem;line-height:1.45}
-    .founder-story-actions{margin-top:30px;gap:10px}
-    .founder-story-actions .pill{width:100%;justify-content:space-between}
-    .founder-story-tags{font-size:.58rem;margin-top:25px}
-    .founder-story-proof{flex-wrap:wrap;gap:9px;margin-top:30px}
-    .founder-story-scroll{margin-top:42px}
-  }
-
 </style>
 </head>
 <body>
-<!-- Typography lock: Bricolage Grotesque 700 for display; Abril Fatface italic for dramatic highlighted words; DM Mono for labels. -->
 <div class="cursor-orb" id="cursorOrb" aria-hidden="true"></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
   <a href="index.html" class="logo" aria-label="Webforge home">WEBFORGE</a>
   <nav class="navlinks" aria-label="Primary">
-    <a class="n" href="work.html">Work</a>
     <a class="n" href="about.html">About</a>
     <a class="n" href="services.html">Services</a>
     <a class="n" href="contact.html">Contact</a>
@@ -1354,109 +83,99 @@
 
 <div class="menu" id="menu" aria-hidden="true">
   <button class="close" id="menuClose">Close</button>
-  <a href="work.html">Work</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Start a project</a>
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Start a project</a>
 </div>
 
-<main id="top">
-
-  <!-- 01 INDEX — the homepage. Work does the talking. -->
-  <section class="index-hero" id="work">
-    <canvas id="glCanvas" class="index-gl" aria-hidden="true"></canvas>
-    <div class="wrap">
-      <div class="index-eyebrow mono rv">5 projects. No padding.</div>
-    </div>
-    <div class="index-layout">
-      <div class="index-sidebar" id="indexSidebar" aria-hidden="true">
-        <div class="index-client active" data-i="0"><span class="dot"></span>Vugy India</div>
-        <div class="index-client" data-i="1"><span class="dot"></span>Ammax Decor</div>
-        <div class="index-client" data-i="2"><span class="dot"></span>Sriram Cables</div>
-        <div class="index-client" data-i="3"><span class="dot"></span>SNG Cosmetics</div>
-        <div class="index-client" data-i="4"><span class="dot"></span>Rabaani Jewels</div>
-      </div>
-
-      <div class="index-column" id="indexColumn">
-        <div class="index-card" data-i="0">
-          <div class="index-card-bar"><i></i><i></i><i></i><span>vugyindia.com</span></div>
-          <div class="index-card-img"><img src="images/vugy-india.jpg" loading="lazy" alt="Vugy India website preview"></div>
-          <a class="index-card-link" href="https://vugyindia.com" target="_blank" rel="noopener" aria-label="Visit Vugy India"></a>
-        </div>
-        <div class="index-card" data-i="1">
-          <div class="index-card-bar"><i></i><i></i><i></i><span>ammaxdecor.com</span></div>
-          <div class="index-card-img"><img src="images/ammax-decor.jpg" loading="lazy" alt="Ammax Decor website preview"></div>
-          <a class="index-card-link" href="https://ammaxdecor.com" target="_blank" rel="noopener" aria-label="Visit Ammax Decor"></a>
-        </div>
-        <div class="index-card" data-i="2">
-          <div class="index-card-bar"><i></i><i></i><i></i><span>sriramcables.com</span></div>
-          <div class="index-card-img"><img src="images/sriram-cables.jpg" loading="lazy" alt="Sriram Cables website preview"></div>
-          <span class="index-card-wip">Work in progress</span>
-        </div>
-        <div class="index-card" data-i="3">
-          <div class="index-card-bar"><i></i><i></i><i></i><span>sngcosmetics.in</span></div>
-          <div class="index-card-img"><img src="images/sng-cosmetics.jpg" loading="lazy" alt="SNG Cosmetics website preview"></div>
-          <a class="index-card-link" href="https://sngcosmetics.in" target="_blank" rel="noopener" aria-label="Visit SNG Cosmetics"></a>
-        </div>
-        <div class="index-card" data-i="4">
-          <div class="index-card-bar"><i></i><i></i><i></i><span>rabaanijewels.com</span></div>
-          <div class="index-card-img index-card-img--pending"><span class="index-card-headline">Quietly<br>precious</span></div>
-          <span class="index-card-wip">Work in progress</span>
-        </div>
-      </div>
-
-      <div class="index-meta" id="indexMeta" aria-hidden="true">
-        <div class="index-meta-tags" id="indexMetaTags">Fashion / Made-to-measure<br>Shopify · D2C + Brand</div>
-        <div class="index-meta-count"><span id="indexCounter">01</span><span class="of"> / 05</span></div>
-        <div class="index-hint mono" id="indexHint">Scroll for next</div>
-      </div>
+<main>
+  <section class="stream-hero" id="streamHero">
+    <div class="stream-hero-scrim" aria-hidden="true"></div>
+    <div class="stream-hero-content wrap">
+      <div class="mono page-eyebrow rv">Selected work</div>
+      <h1 class="scramble rv d2">Actual websites. Built to work.</h1>
+      <p class="rv d3">Five projects — no padding, no concept-only filler. Real builds for real businesses, across fashion, interiors, industrial, beauty and jewellery.</p>
     </div>
   </section>
 
-  <!-- 01B FORGE STORY — quiet, two lines -->
-  <section class="forge-story" id="about">
-    <div class="wrap">
-      <p class="forge-story-line rv"><span class="lime-dot small"></span>A forge takes raw material and shapes it until it can hold weight. Webforge does the same with websites — built to <em>perform</em>, not just impress.</p>
+  <section class="wrap" style="padding-top:0;padding-bottom:60px">
+    <article class="proj rv">
+      <div class="m">
+        <div class="idx">01</div>
+        <div class="name">Vugy India</div>
+        <div class="tags">Fashion / Made-to-measure<br>Shopify · D2C + Brand</div>
+        <p class="note">A brand experience designed to make a considered purchase feel as considered online as it does offline.</p>
+        <a class="go" href="https://vugyindia.com" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+      <div class="fr">
+        <div class="bar"><i></i><i></i><i></i><span>vugyindia.com</span></div>
+        <div class="sc"><img src="images/vugy-india.jpg" loading="lazy" alt="Vugy India website preview"></div>
+      </div>
+    </article>
+
+    <article class="proj rev rv">
+      <div class="m">
+        <div class="idx">02</div>
+        <div class="name">Ammax Decor</div>
+        <div class="tags">Interiors / Decor<br>WordPress · Brand + Catalogue</div>
+        <p class="note">A visual-first catalogue experience for products that need room to speak.</p>
+        <a class="go" href="https://ammaxdecor.com" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+      <div class="fr">
+        <div class="bar"><i></i><i></i><i></i><span>ammaxdecor.com</span></div>
+        <div class="sc"><img src="images/ammax-decor.jpg" loading="lazy" alt="Ammax Decor website preview"></div>
+      </div>
+    </article>
+
+    <article class="proj rv">
+      <div class="m">
+        <div class="idx">03</div>
+        <div class="name">Sriram Cables</div>
+        <div class="tags">Manufacturing / Industrial<br>WordPress · Business</div>
+        <p class="note">A business-first digital presence for an industrial brand — currently being built.</p>
+        <span class="wip">Work in progress</span>
+      </div>
+      <div class="fr">
+        <div class="bar"><i></i><i></i><i></i><span>sriramcables.com</span></div>
+        <div class="sc"><img src="images/sriram-cables.jpg" loading="lazy" alt="Sriram Cables website preview"></div>
+      </div>
+    </article>
+
+    <article class="proj rev rv">
+      <div class="m">
+        <div class="idx">04</div>
+        <div class="name">SNG Cosmetics</div>
+        <div class="tags">Beauty / Cosmetics<br>D2C + Catalogue</div>
+        <p class="note">A beauty experience built around clarity, confidence and what gets someone to keep exploring.</p>
+        <a class="go" href="https://sngcosmetics.in" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+      <div class="fr">
+        <div class="bar"><i></i><i></i><i></i><span>sngcosmetics.in</span></div>
+        <div class="sc"><img src="images/sng-cosmetics.jpg" loading="lazy" alt="SNG Cosmetics website preview"></div>
+      </div>
+    </article>
+
+    <article class="proj rv" style="border-bottom:0">
+      <div class="m">
+        <div class="idx">05</div>
+        <div class="name">Rabaani Jewels</div>
+        <div class="tags">Jewellery<br>Brand + Ecommerce</div>
+        <p class="note">A jewellery experience in progress, where restraint does more work than noise.</p>
+        <span class="wip">Work in progress</span>
+      </div>
+      <div class="fr">
+        <div class="bar"><i></i><i></i><i></i><span>rabaanijewels.com</span></div>
+        <div class="sc sc-pending"><div class="sc-headline">Quietly<br>precious</div></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="sec wrap work-cta">
+    <div class="mono rv">Next</div>
+    <h2 class="head rv d2" style="margin-top:16px">Want to be <em>project six?</em></h2>
+    <div style="margin-top:34px" class="rv d3">
+      <a class="pill fill" href="contact.html"><span class="dot"></span> Start a conversation <span>→</span></a>
     </div>
   </section>
 
-  <!-- 01C CREDENTIALS — proof, not prose -->
-  <section class="credentials-strip">
-    <div class="wrap">
-      <div class="proof-grid rv d2" aria-label="Platforms, credentials and experience">
-        <div class="proof-card">
-          <div class="brand-lockup">
-            <svg class="shopify-logo" viewBox="0 0 60 68" aria-hidden="true" role="img">
-              <path fill="#95BF47" d="M48.2 13.3c0-.3-.3-.5-.5-.5s-4-.3-4-.3-2.7-2.6-3-2.9c-.3-.3-.9-.2-1.1-.1 0 0-.6.2-1.5.5-.9-2.6-2.5-5-5.3-5h-.3C31.7.5 30.7 0 29.9 0c-6.1.1-9 7.7-9.9 11.5-2.4.7-4.1 1.3-4.3 1.3-1.3.4-1.4.5-1.6 1.7C14 15.5 10.6 42 10.6 42l26.8 5 14.5-3.1S48.2 13.6 48.2 13.3zM33.7 9.7l-2.4.7v-.5c0-1.6-.2-2.8-.6-3.8 1.5.2 2.5 1.9 3 3.6zm-4.7-3.2c.4 1 .7 2.4.7 4.3v.3l-4.9 1.5c.9-3.6 2.7-5.4 4.2-6.1zm-1.9-1.8c.3 0 .6.1.8.3-2 .9-4.1 3.3-5 8.1l-3.9 1.2c1.1-3.7 3.5-9.6 8.1-9.6z"/>
-              <path fill="#5E8E3E" d="M47.7 12.8s-4-.3-4-.3-2.7-2.6-3-2.9c-.1-.1-.3-.2-.4-.2L37.4 47l14.5-3.1S48.2 13.6 48.2 13.3c0-.3-.3-.5-.5-.5z"/>
-              <path fill="#fff" d="M35.8 19.3l-1.8 5.3s-1.6-.8-3.4-.8c-2.7 0-2.8 1.7-2.8 2.1 0 2.3 6.1 3.2 6.1 8.7 0 4.3-2.7 7.1-6.4 7.1-4.5 0-6.7-2.8-6.7-2.8l1.2-4s2.3 2 4.3 2c1.3 0 1.8-1 1.8-1.8 0-3-5-3.1-5-8.1 0-4.2 3-8.3 9.1-8.3 2.4 0 3.6.8 3.6.8z"/>
-            </svg>
-            <span class="brand-wordmark shopify-wordmark">shopify</span>
-          </div>
-          <div class="desc">Select Partner</div>
-        </div>
-        <div class="proof-card">
-          <div class="brand-lockup">
-            <svg class="wordpress-logo" viewBox="0 0 24 24" aria-hidden="true" role="img">
-              <path fill="#21759B" d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/>
-            </svg>
-            <span class="brand-wordmark wordpress-wordmark">WordPress</span>
-          </div>
-          <div class="desc">Website Platform</div>
-        </div>
-        <div class="proof-card">
-          <div class="num">4</div>
-          <div class="desc">Years as a D2C founder</div>
-        </div>
-        <div class="proof-card">
-          <div class="num neon-num">50+</div>
-          <div class="desc">Websites developed</div>
-        </div>
-      </div>
-      <div class="credentials-actions rv d3">
-        <a class="pill fill" href="contact.html"><span class="dot"></span> Start a conversation <span>→</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 01D CLOSING STATEMENT — giant marquee behind a centered CTA -->
   <section class="cta69">
     <div class="cta69-marquee" aria-hidden="true">
       <div class="cta69-marquee-track" data-marquee-phrase="Worth keeping"></div>
@@ -1469,812 +188,93 @@
       <p class="cta69-footnote mono rv d4">One conversation. No pressure, no decks.</p>
     </div>
   </section>
-
-  <div data-legacy="true" style="display:none">
-
-  <!-- 02 DIFFERENCE — black -->
-  <section class="diff sec s-black" id="difference">
-    <div class="wrap">
-      <div class="mono lbl rv">The difference</div>
-      <h2 class="head h-md rv d2" style="max-width:17ch">Most developers learn websites. I learned the business behind one.</h2>
-      <span class="kw kw--sm rv d2"><span class="t">first.</span></span>
-      <div class="body">
-        <div class="rv">
-          <p>For four years, I built and ran a D2C business — <b>as the person responsible for whether the whole thing worked.</b></p>
-          <p>That teaches you something no brief can. A website isn't finished when it's deployed. That's when it starts working, or doesn't.</p>
-        </div>
-        <div class="rv d2">
-          <p>It's where people discover. Compare. Hesitate. Trust. Buy. Come back — or leave for good.</p>
-          <p><b>I build with all of that in the room.</b></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 02B WHY — black -->
-  <section class="why sec s-black" id="why">
-    <div class="wrap why-grid">
-      <div>
-        <div class="mono rv">Why me</div>
-        <h2 class="head h-md rv d2" style="margin-top:22px">A developer who thinks like an <em>owner.</em></h2>
-      </div>
-      <div class="list rv d2">
-        <div class="item"><div class="no">01</div><div><h3>Business first</h3><p>I don't open with code. I open with what the site has to achieve, and for whom.</p></div></div>
-        <div class="item"><div class="no">02</div><div><h3>Customer aware</h3><p>Four years selling D2C taught me design isn't decoration. Every screen changes what a customer notices, believes, and does next.</p></div></div>
-        <div class="item"><div class="no">03</div><div><h3>Design + development</h3><p>It has to look right and work right. One without the other doesn't sell.</p></div></div>
-        <div class="item"><div class="no">04</div><div><h3>Built to evolve</h3><p>Launch isn't the finish line. Collections change, offers change, businesses change. The site changes with them.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 02C PROOF — white -->
-  <section class="proof">
-    <div class="wrap">
-      <div class="mono rv">Proof, without the theatre</div>
-      <div class="founder-quote rv">“Most customers will never meet your business. They will only ever meet your website — and they decide in seconds.”</div>
-      <div class="proof-grid" style="margin-top:32px">
-        <div class="proof-card rv"><div class="num">04</div><div class="desc">Years running a D2C business</div></div>
-        <div class="proof-card rv d2"><div class="proof-names">Vugy India<br>SNG Cosmetics<br>Ammax Decor</div><div class="desc">Recent work</div></div>
-        <div class="proof-card rv d3"><div class="num">02</div><div class="desc">Core platforms: Shopify + WordPress</div></div>
-        <div class="proof-card rv d4"><div class="num">∞</div><div class="desc">The website can keep evolving</div></div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- 02C PROBLEM FIRST — black -->
-  <section class="problem">
-    <div class="wrap problem-grid">
-      <div>
-        <div class="mono">Getting started</div>
-        <h2 style="margin-top:22px">Bring me the problem. We'll figure out the <em>build.</em></h2>
-      </div>
-      <div>
-        <div class="problem-intro">
-          <p>You don't need to arrive with a technical brief. Tell me what isn't working, what you want to launch, or what the business needs next.</p>
-        </div>
-        <div class="problem-list">
-          <div class="problem-item"><div class="pn">01</div><div class="pt">“We need a website for our new brand, business or product.”</div></div>
-          <div class="problem-item"><div class="pn">02</div><div class="pt">“Our Shopify store feels outdated.”</div></div>
-          <div class="problem-item"><div class="pn">03</div><div class="pt">“We need a better way to showcase the catalogue.”</div></div>
-          <div class="problem-item"><div class="pn">04</div><div class="pt">“A campaign is coming. We need the site ready.”</div></div>
-          <div class="problem-item"><div class="pn">05</div><div class="pt">“We need someone to keep the website moving.”</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 03 CLIENT POV — black -->
-  <section class="questions">
-    <div class="wrap question-wrap">
-      <div class="q-intro">
-        <div class="mono">How I think</div>
-        <h2 style="margin-top:22px">I care about <em>this</em> before I care about code.</h2>
-      </div>
-      <div class="q-stack">
-        <div class="q">
-          <div class="q-no">01</div>
-          <div>
-            <div class="q-text">What are you <span>selling?</span></div>
-            <div class="q-answer">Not just the product. The promise, the reason it matters, and what a customer needs to understand before they care.</div>
-          </div>
-        </div>
-        <div class="q">
-          <div class="q-no">02</div>
-          <div>
-            <div class="q-text">Who are you <span>selling to?</span></div>
-            <div class="q-answer">Because a site for a jewellery brand shouldn't behave like a site for a cable manufacturer. Context changes everything.</div>
-          </div>
-        </div>
-        <div class="q">
-          <div class="q-no">03</div>
-          <div>
-            <div class="q-text">Why should they <span>trust you?</span></div>
-            <div class="q-answer">Trust is designed into hierarchy, imagery, proof, product information, clarity and the details people barely notice.</div>
-          </div>
-        </div>
-        <div class="q">
-          <div class="q-no">04</div>
-          <div>
-            <div class="q-text">What should happen <span>next?</span></div>
-            <div class="q-answer">Buy. Enquire. Call. Explore. Book. The best websites know the next move before the visitor has to think about it.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 04 WORK — white -->
-  <section class="sec s-white" id="work">
-    <div class="wrap">
-      <div class="work-head">
-        <div>
-          <div class="mono rv">Selected work</div>
-          <h2 class="head h-lg rv d2" style="margin-top:10px">Actual websites.<br><span class="ombre-heading">Built to work.</span></h2>
-        </div>
-        <div class="mono rv d3">Actual builds · no concept-only work</div>
-      </div>
-
-      <article class="proj rv">
-        <div class="m"><div class="idx">01</div><div class="name">Vugy India</div>
-          <div class="tags">Fashion / Made-to-measure<br>Shopify · D2C + Brand</div><div class="project-note">A brand experience designed to make a considered purchase feel as considered online as it does offline.</div>
-          <a class="go" href="https://vugyindia.com" target="_blank" rel="noopener">Visit site ↗</a></div>
-        <div class="fr annotation annotated-card" aria-label="Vugy India website preview"><div class="pin a">Type</div><div class="pin b">Hierarchy</div><div class="bar"><i></i><i></i><i></i><span class="u">vugyindia.com</span></div>
-          <div class="sc"><img src="images/vugy-india.jpg" loading="lazy" alt="Vugy India website preview"></div></div>
-      </article>
-
-      <article class="proj rev rv">
-        <div class="m"><div class="idx">02</div><div class="name">Ammax Decor</div>
-          <div class="tags">Interiors / Decor<br>WordPress · Brand + Catalogue</div><div class="project-note">A visual-first catalogue experience for products that need room to speak.</div>
-          <a class="go" href="https://ammaxdecor.com" target="_blank" rel="noopener">Visit site ↗</a></div>
-        <div class="fr" aria-label="Ammax Decor website preview"><div class="bar"><i></i><i></i><i></i><span class="u">ammaxdecor.com</span></div>
-          <div class="sc"><img src="images/ammax-decor.jpg" loading="lazy" alt="Ammax Decor website preview"></div></div>
-      </article>
-
-      <article class="proj rv">
-        <div class="m"><div class="idx">03</div><div class="name">Sriram Cables</div>
-          <div class="tags">Manufacturing / Industrial<br>WordPress · Business</div><div class="project-note">A business-first digital presence for an industrial brand — currently being built.</div>
-          <span class="wip">Work in progress</span></div>
-        <div class="fr" aria-label="Sriram Cables website preview, work in progress"><div class="bar"><i></i><i></i><i></i><span class="u">sriramcables.com</span></div>
-          <div class="sc"><img src="images/sriram-cables.jpg" loading="lazy" alt="Sriram Cables website preview"></div></div>
-      </article>
-
-      <article class="proj rev rv">
-        <div class="m"><div class="idx">04</div><div class="name">SNG Cosmetics</div>
-          <div class="tags">Beauty / Cosmetics<br>D2C + Catalogue</div><div class="project-note">A beauty experience built around clarity, confidence and what gets someone to keep exploring.</div>
-          <a class="go" href="https://sngcosmetics.in" target="_blank" rel="noopener">Visit site ↗</a></div>
-        <div class="fr" aria-label="SNG Cosmetics website preview"><div class="bar"><i></i><i></i><i></i><span class="u">sngcosmetics.in</span></div>
-          <div class="sc"><img src="images/sng-cosmetics.jpg" loading="lazy" alt="SNG Cosmetics website preview"></div></div>
-      </article>
-
-      <article class="proj rv">
-        <div class="m"><div class="idx">05</div><div class="name">Rabaani Jewels</div>
-          <div class="tags">Jewellery<br>Brand + Ecommerce</div><div class="project-note">A jewellery experience in progress, where restraint does more work than noise.</div>
-          <span class="wip">Work in progress</span></div>
-        <div class="fr" aria-label="Rabaani Jewels website preview, work in progress"><div class="bar"><i></i><i></i><i></i><span class="u">rabaanijewels.com</span></div>
-          <div class="sc"><div class="big">Quietly<br>precious</div><div class="stripe i"></div><span class="mk" style="left:6%;bottom:16%;width:38%;height:8%"></span></div></div>
-      </article>
-    </div>
-  </section>
-
-
-  <!-- 04B TRANSFORMATION — white -->
-  <section class="transform-section">
-    <div class="wrap">
-      <div class="transform-head">
-        <div>
-          <div class="mono rv">Watch it become <span style="color:var(--accent);margin-left:10px">scroll / hover · neon = selected</span></div>
-          <h2 class="rv d2" style="margin-top:18px">From a grey box to a <em class="ombre-heading">working storefront.</em></h2>
-        </div>
-        <p class="rv d3">You shouldn't have to trust someone because they say they can build a website. Scroll through the build. See how structure, design, content and interaction become the thing customers actually use.</p>
-      </div>
-      <div class="builder-stage" id="builderStage">
-        <div class="builder-sticky">
-          <div class="build-steps" id="buildSteps">
-            <div class="build-step active"><div class="bn">01</div><div><div class="bt">Structure</div><div class="builder-cap">What goes where.</div></div></div>
-            <div class="build-step"><div class="bn">02</div><div><div class="bt">Design</div><div class="builder-cap">How it feels.</div></div></div>
-            <div class="build-step"><div class="bn">03</div><div><div class="bt">Content</div><div class="builder-cap">What it says.</div></div></div>
-            <div class="build-step"><div class="bn">04</div><div><div class="bt">Live</div><div class="builder-cap">What it does.</div></div></div>
-          </div>
-          <div class="build-stage" id="buildStage" data-step="0">
-            <div class="build-chrome"><i></i><i></i><i></i></div>
-            <div class="build-canvas">
-              <div class="layer wire"><div class="skel"></div><div class="skel big"></div><div class="skel"></div><div class="skel"></div></div>
-              <div class="layer design"><div class="type">A BETTER<br>WAY IN.</div><div class="accent-block"></div></div>
-              <div class="layer content"><div class="type">Make the first impression count.</div><div class="copyline"></div><div class="copyline" style="width:56%"></div></div>
-              <div class="layer live"><div class="livebar"></div><div class="headline">BUILT FOR<br>WHAT HAPPENS NEXT.</div><div class="cta-mini">START A PROJECT ↗</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 05 BUILD storefront — black -->
-  <section class="build sec s-black" id="build" style="padding-bottom:0">
-    <div class="wrap">
-      <div class="head-wrap">
-        <div class="mono rv">What I build <span style="color:var(--accent);margin-left:10px">scroll / hover to explore · neon = selected</span></div>
-        <h2 class="head h-md rv d2" style="margin-top:16px">Different businesses.<br>Different customer journeys.</h2>
-        <span class="kw kw--sm rv d2"><span class="t">Same obsession.</span></span>
-      </div>
-      <div class="stage" id="stage">
-        <div class="sticky">
-          <div class="catlist" id="catlist">
-            <div class="cat" data-i="0"><div class="t">D2C<span class="current-dot" aria-hidden="true"></span></div><p class="d">Shopify built around discovery, trust, and the decision to buy.</p></div>
-            <div class="cat" data-i="1"><div class="t">Business<span class="current-dot" aria-hidden="true"></span></div><p class="d">A site that looks as serious online as the company is in person.</p></div>
-            <div class="cat" data-i="2"><div class="t">Catalogue<span class="current-dot" aria-hidden="true"></span></div><p class="d">Structured for browsing and enquiry, not just display.</p></div>
-            <div class="cat" data-i="3"><div class="t">Personal<span class="current-dot" aria-hidden="true"></span></div><p class="d">A portfolio that sounds like you, not a template.</p></div>
-            <div class="cat" data-i="4"><div class="t">Brand<span class="current-dot" aria-hidden="true"></span></div><p class="d">Digital that makes the brand impossible to confuse with anyone else.</p></div>
-          </div>
-          <div class="store" id="store" aria-label="Storefront that changes with each category">
-            <div class="bar"><i></i><i></i><i></i><span class="u" id="storeUrl">store.example / d2c</span></div>
-            <div class="canvas">
-              <div class="scene on" data-i="0">
-                <div class="row"><span class="blk" style="width:78px;height:12px"></span><span class="blk ind" style="margin-left:auto;width:54px;height:16px;border-radius:999px"></span></div>
-                <div class="row" style="margin-top:18px;gap:12px"><span class="blk" style="flex:1;height:118px"></span><span class="blk" style="flex:1;height:118px"></span><span class="blk" style="flex:1;height:118px"></span></div>
-                <div class="row" style="margin-top:12px;gap:12px"><span class="blk" style="flex:1;height:118px"></span><span class="blk" style="flex:1;height:118px"></span><span class="blk" style="flex:1;height:118px"></span></div>
-              </div>
-              <div class="scene" data-i="1">
-                <span class="blk" style="width:120px;height:14px;display:block"></span>
-                <span class="blk" style="width:58%;height:42px;display:block;margin-top:14px"></span>
-                <div class="row" style="margin-top:16px;gap:12px"><span class="blk ind" style="width:92px;height:26px;border-radius:6px"></span><span class="blk" style="width:92px;height:26px;border-radius:6px"></span></div>
-                <div class="row" style="margin-top:26px;gap:10px"><span class="blk" style="flex:1;height:66px"></span><span class="blk" style="flex:1;height:66px"></span><span class="blk" style="flex:1;height:66px"></span><span class="blk" style="flex:1;height:66px"></span></div>
-              </div>
-              <div class="scene" data-i="2">
-                <div class="row" style="gap:12px"><span class="blk" style="width:130px;min-height:210px"></span>
-                  <div style="flex:1;display:flex;flex-direction:column;gap:10px"><span class="blk" style="height:40px"></span><span class="blk" style="height:40px"></span><span class="blk ind" style="height:40px;width:62%"></span><span class="blk" style="height:40px"></span></div></div>
-              </div>
-              <div class="scene" data-i="3">
-                <div class="row" style="gap:18px;align-items:center;height:100%"><span class="blk" style="width:38%;height:70%;border-radius:8px"></span>
-                  <div style="flex:1;display:flex;flex-direction:column;gap:12px"><span class="blk ind" style="width:70%;height:30px"></span><span class="blk" style="width:90%;height:12px"></span><span class="blk" style="width:80%;height:12px"></span><span class="blk" style="width:52%;height:12px"></span></div></div>
-              </div>
-              <div class="scene" data-i="4">
-                <div style="height:100%;display:flex;align-items:center;justify-content:center"><span class="blk ind" style="width:64%;height:56px;border-radius:8px"></span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 05B PROCESS — neon -->
-  <section class="sec s-ivory" id="process">
-    <div class="wrap">
-      <div class="mono rv">Process</div>
-      <h2 class="head h-md rv d2" style="margin-top:16px">A good project should feel</h2>
-      <span class="kw rv d2"><span class="t">simple.</span></span>
-      <div class="steps">
-        <div class="step rv"><div class="no">01</div><div class="h">Discovery</div><p class="d">A complimentary call. We map the business, the audience, the scope.</p></div>
-        <div class="step rv"><div class="no">02</div><div class="h">Scope + quote</div><p class="d">Clear deliverables. A proposal you can actually read.</p></div>
-        <div class="step rv"><div class="no">03</div><div class="h">Timeline</div><p class="d">Responsibilities, milestones, dates — agreed up front.</p></div>
-        <div class="step rv pay"><div class="no">04</div><div class="h">25% advance</div><p class="d">Work begins once the 25% advance is in.</p></div>
-        <div class="step rv"><div class="no">05</div><div class="h">Concept</div><p class="d">We lock the visual direction before building on it.</p></div>
-        <div class="step rv"><div class="no">06</div><div class="h">Development</div><p class="d">The approved concept becomes a working website.</p></div>
-        <div class="step rv"><div class="no">07</div><div class="h">Two revisions</div><p class="d">Two structured revision rounds, included.</p></div>
-        <div class="step rv pay"><div class="no">08</div><div class="h">Handover</div><p class="d">Final checks, balance, and the keys are yours.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 06B SHOPIFY LANE — white -->
-  <section class="shopify-lane">
-    <div class="wrap">
-      <div class="shopify-lane-head">
-        <div>
-          <div class="mono rv">Shopify, properly</div>
-          <h2 class="rv d2" style="margin-top:18px">The things a Shopify <em>brand</em> actually needs.</h2>
-        </div>
-        <p class="rv d3">Builds are only one part of the job. The rest is making the store easier to use, easier to update and easier for a customer to say yes to.</p>
-      </div>
-      <div class="keyword-grid">
-        <div class="keyword rv"><div class="k">01 / Store setup</div><h3>Store build &amp; redesign</h3></div>
-        <div class="keyword rv d2"><div class="k">02 / Experience</div><h3>Theme customisation</h3></div>
-        <div class="keyword rv d3"><div class="k">03 / Commerce</div><h3>Product &amp; collection setup</h3></div>
-        <div class="keyword rv d4"><div class="k">04 / Conversion</div><h3>Audit &amp; optimisation</h3></div>
-        <div class="keyword rv"><div class="k">05 / Growth</div><h3>Landing pages</h3></div>
-        <div class="keyword rv d2"><div class="k">06 / Migration</div><h3>Store migration</h3></div>
-        <div class="keyword rv d3"><div class="k">07 / Support</div><h3>Ongoing website management</h3></div>
-        <div class="keyword rv d4"><div class="k">08 / Troubleshooting</div><h3>Fixes &amp; refinements</h3></div>
-      </div>
-      <div class="partner-explainer rv">
-        <p>For Shopify merchants, these are the practical jobs that move a store forward — from the first build to the updates that keep it current.</p>
-        <div class="partner-note">Shopify service language aligned to the current Partner Directory taxonomy</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 06 MAINTENANCE — black (merged with former Support section) -->
-  <section class="maint" id="support">
-    <div class="wrap">
-      <div class="maint-head">
-        <div>
-          <div class="mono">After launch</div>
-          <h2 style="margin-top:20px">Launch isn't the <em>finish.</em><br>We offer <em>maintenance</em> too.</h2>
-        </div>
-        <p>Your business keeps moving — new collections, new offers, festive campaigns, new products. Your website should move with it. That's exactly the kind of small job that shouldn't become a big problem.</p>
-      </div>
-      <div class="maint-marquee" aria-label="Ongoing website support services">
-        <div class="maint-card"><div class="big">NEW DROP</div><div class="small">COLLECTION UPDATE ↗</div></div>
-        <div class="maint-card"><div class="big">SALE</div><div class="small">PROMOTION ↗</div></div>
-        <div class="maint-card"><div class="big">FESTIVE</div><div class="small">CAMPAIGN ↗</div></div>
-        <div class="maint-card"><div class="big">NEW PRODUCT</div><div class="small">CATALOGUE ↗</div></div>
-        <div class="maint-card"><div class="big">HOMEPAGE</div><div class="small">REFRESH ↗</div></div>
-        <div class="maint-card"><div class="big">OFFER</div><div class="small">MERCHANDISING ↗</div></div>
-        <div class="maint-card"><div class="big">NEW DROP</div><div class="small">COLLECTION UPDATE ↗</div></div>
-        <div class="maint-card"><div class="big">SALE</div><div class="small">PROMOTION ↗</div></div>
-      </div>
-      <ul class="carelist" style="margin-top:56px">
-        <li><span>New collections</span><i aria-hidden="true">&#8599;</i></li>
-        <li><span>Product updates</span><i aria-hidden="true">&#8599;</i></li>
-        <li><span>Discounts &amp; offers</span><i aria-hidden="true">&#8599;</i></li>
-        <li><span>Festive campaigns</span><i aria-hidden="true">&#8599;</i></li>
-        <li><span>Homepage / banner updates</span><i aria-hidden="true">&#8599;</i></li>
-        <li><span>Ongoing digital support</span><i aria-hidden="true">&#8599;</i></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 10 CLIENT — white -->
-  <section class="sec s-white" id="client">
-    <div class="wrap cli">
-      <div>
-        <div class="mono rv">Working together</div>
-        <h2 class="head h-md rv d2" style="margin-top:16px">Bring the brand. I'll build the</h2>
-        <span class="kw kw--sm rv d2"><span class="t">experience.</span></span>
-        <div class="body rv" style="margin-top:24px">
-          <p>You bring the raw material — logo and identity, images, video, product information, and any copy you have. I turn it into the website.</p>
-          <p><b>The sooner it arrives, the faster we move. Timelines hold when the assets do.</b></p>
-        </div>
-      </div>
-      <ul class="prov rv d2">
-        <li>Logo &amp; brand identity <span>You</span></li>
-        <li>Images <span>You</span></li>
-        <li>Video <span>You</span></li>
-        <li>Product information <span>You</span></li>
-        <li>Copy / content <span>You</span></li>
-        <li>Design, build &amp; launch <span>Me</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 11 ENGAGE — black -->
-  <section class="eng sec s-black">
-    <div class="wrap">
-      <div class="mono rv">Ways to work</div>
-      <h2 class="head h-md rv d2" style="margin-top:16px">A project. A retainer.<br>Or someone on the inside.</h2>
-      <span class="kw rv d2"><span class="t">longer.</span></span>
-      <div class="cards">
-        <div class="card rv"><div class="k">Projects</div><p>A complete website, start to finish, for a business or brand.</p></div>
-        <div class="card rv d2"><div class="k">Ongoing support</div><p>For brands whose website needs to keep changing.</p></div>
-        <div class="card rv d3"><div class="k">Longer-term / full-time</div><p>For teams who want someone who understands the build and the commercial side behind it.</p></div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- 11B FIT — neon -->
-  <section class="fit">
-    <div class="wrap fit-grid">
-      <div>
-        <div class="mono rv">A good fit</div>
-        <h2 class="rv d2" style="margin-top:20px">We’ll probably get along if you care about <em>the details.</em></h2>
-      </div>
-      <div class="fit-col">
-        <div class="fit-item rv"><div class="fno">01</div><div><h3>You care how the business looks online.</h3><p>Not because appearances are everything — because credibility changes what happens next.</p></div></div>
-        <div class="fit-item rv"><div class="fno">02</div><div><h3>You want the website to actually do something.</h3><p>Sell, explain, showcase, generate an enquiry, or make the next step obvious.</p></div></div>
-        <div class="fit-item rv"><div class="fno">03</div><div><h3>You can bring the raw material.</h3><p>Brand identity, images, video, product information and the pieces that make the business yours.</p></div></div>
-        <div class="fit-item rv"><div class="fno">04</div><div><h3>You'd rather have a partner than a box-ticker.</h3><p>Someone who can think with you, build with you, and stay around when the website needs changing.</p></div></div>
-        <div class="fit-item maybe rv"><div class="fno">×</div><div><h3>Maybe not if you're only shopping for the cheapest website.</h3><p>Good work takes thought. That's the deal.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  </div>
-  <!-- end legacy sections (preserved, hidden from homepage) -->
-
-  <!-- 12 CTA — neon -->
-  <section class="cta sec s-black" id="contact">
-    <div class="wrap">
-      <div class="mono rv">Start</div>
-      <h2 class="rv d2" style="margin-top:18px">Show me what<br>you’re <span class="kw"><span class="t">building.</span></span><br><span class="cta-subline">I'll bring the founder lens.</span></h2>
-      <div class="row rv d3">
-        <a class="pill fill" href="mailto:REPLACE@EMAIL.com"><span class="dot"></span> Start a project</a>
-        <a class="pill ghost" href="mailto:REPLACE@EMAIL.com?subject=Discovery%20call">Book a complimentary discovery call</a>
-      </div>
-      <div class="breath rv d4">Complimentary discovery call · no hard sell · just a good conversation.</div>
-      <button class="secret rv d4" id="secretBtn">P.S. you made it this far ↗</button>
-      <div class="secret-reveal" id="secretReveal">Alright. Let’s build it.</div>
-      <div class="tier-strip rv d4">
-        <div class="official-wordmark">Shopify Select Partner</div>
-        <div class="status">Add official Shopify badge after Select confirmation</div>
-      </div>
-      <div class="contact rv d4">
-        <a href="mailto:REPLACE@EMAIL.com">Email</a>
-        <a href="https://wa.me/REPLACE-NUMBER" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://linkedin.com/in/REPLACE" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer>
   <div class="wrap foot">
     <div class="mono">Webforge / Digital</div>
-    <div class="foot-links"><a href="work.html">Work</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Contact</a></div>
+    <div class="foot-links"><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Contact</a></div>
     <div class="intent">Built with intention. Kept slightly playful.</div>
     <div class="mono">© <span id="yr"></span> Webforge</div>
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="main.js"></script>
 <script>
+/* Stream hero corridor — ported from the reference React component's own
+   geometry/keyframe math (see the block comment on ImageStreamHero for the
+   full reasoning). Depth is authored as apparent size, sampled into real
+   @keyframes so the curve is exact, not approximated with a CSS easing
+   function. Everything is in cqw so it stays proportional at any width. */
 (function(){
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14,rootMargin:'0px 0px -6% 0px'});
-  document.querySelectorAll('.rv,.kw').forEach(function(el){io.observe(el);});
+  var stageHost = document.getElementById('streamHero');
+  if(!stageHost) return;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduceMotion) return;
 
-  /* Marquee backdrop — [data-marquee-phrase="X"] fills itself with two
-     identical halves of "X · " repeated, each half wider than the screen, so
-     translating by exactly -50% loops seamlessly with no visible seam. */
-  document.querySelectorAll('[data-marquee-phrase]').forEach(function(track){
-    var line=track.dataset.marqueePhrase+' · ';
-    var repeated=line.repeat(8);
-    track.innerHTML='<span>'+repeated+'</span><span>'+repeated+'</span>';
-  });
-
-  var nav=document.getElementById('nav'),prog=document.getElementById('progress');
-  function onScroll(y){
-    if(y===undefined) y=window.scrollY||0;
-    nav.classList.toggle('scrolled',y>40);
-    var h=document.documentElement.scrollHeight-window.innerHeight;
-    prog.style.width=(h>0?(y/h*100):0)+'%';
-  }
-  window.addEventListener('scroll',function(){requestAnimationFrame(function(){onScroll();});},{passive:true});onScroll();
-
-  var menu=document.getElementById('menu');
-  document.getElementById('burger').addEventListener('click',function(){menu.classList.add('open');});
-  document.getElementById('menuClose').addEventListener('click',function(){menu.classList.remove('open');});
-  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');});});
-
-  var stage=document.getElementById('stage'),
-      cats=[].slice.call(document.querySelectorAll('#catlist .cat')),
-      scenes=[].slice.call(document.querySelectorAll('.scene')),
-      url=document.getElementById('storeUrl'),
-      names=['store.example / d2c','company.example / business','catalogue.example','you.example / personal','brand.example'],
-      ci=-1;
-  function setCat(i){if(i===ci)return;ci=i;cats.forEach(function(c,n){c.classList.toggle('active',n===i);});scenes.forEach(function(s){s.classList.toggle('on',+s.dataset.i===i);});url.textContent=names[i];}
-  setCat(0);
-  cats.forEach(function(c){c.addEventListener('click',function(){setCat(+c.dataset.i);c.scrollIntoView({block:'center',behavior:'smooth'});});});
-  function storeScroll(){var r=stage.getBoundingClientRect(),vh=window.innerHeight,total=r.height-vh;if(total<=0){setCat(0);return;}var p=Math.min(Math.max((-r.top)/total,0),1);setCat(Math.min(4,Math.floor(p*5-1e-6)));}
-  window.addEventListener('scroll',function(){requestAnimationFrame(storeScroll);},{passive:true});storeScroll();
-
-  document.getElementById('yr').textContent=new Date().getFullYear();
-
-  /* Playful interactions */
-  var cursor=document.getElementById('cursorOrb');
-  var fine=window.matchMedia('(pointer:fine)').matches;
-  var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* Custom cursor — true lerp follow, not 1:1 tracking. This lag is the effect. */
-  if(cursor && fine){
-    var mx=innerWidth/2, my=innerHeight/2, cx=mx, cy=my, cScale=1, cScaleTarget=1;
-    window.addEventListener('mousemove',function(e){
-      cursor.classList.add('on'); mx=e.clientX; my=e.clientY;
-    },{passive:true});
-    document.querySelectorAll('a,button,.q,.taste-btn,.type-row,.proj,.index-card').forEach(function(el){
-      el.addEventListener('mouseenter',function(){cScaleTarget=1.8;});
-      el.addEventListener('mouseleave',function(){cScaleTarget=1;});
-    });
-    (function tick(){
-      cx+=(mx-cx)*.16; cy+=(my-cy)*.16; cScale+=(cScaleTarget-cScale)*.2;
-      cursor.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%) scale('+cScale.toFixed(2)+')';
-      requestAnimationFrame(tick);
-    })();
-  }
-
-  /* Magnetic pull on primary buttons */
-  if(fine && window.gsap){
-    document.querySelectorAll('.pill').forEach(function(btn){
-      btn.addEventListener('mousemove',function(e){
-        var r=btn.getBoundingClientRect();
-        var bx=e.clientX-(r.left+r.width/2), by=e.clientY-(r.top+r.height/2);
-        gsap.to(btn,{x:bx*.25,y:by*.4,duration:.4,ease:'power2.out'});
-      });
-      btn.addEventListener('mouseleave',function(){gsap.to(btn,{x:0,y:0,duration:.5,ease:'elastic.out(1,.4)'});});
-    });
-  }
-
-  /* Index step-lock — the first 5 wheel/touch/key "scrolls" step through the 5
-     projects with the page completely frozen (no real scroll happens at all,
-     only the active project card crossfades); scrolling past the 5th project
-     releases into plain, fully native scroll for the rest of the page.
-     Scrolling back up to the very top re-locks and steps back through them.
-     Desktop + non-reduced-motion only: mobile and reduced-motion fall back to
-     a plain vertically-stacked scrollable list, same as before. */
-  (function(){
-    var cards=[].slice.call(document.querySelectorAll('.index-card'));
-    var column=document.getElementById('indexColumn');
-    if(!cards.length || !column) return;
-
-    var sidebarItems=[].slice.call(document.querySelectorAll('.index-client'));
-    var counter=document.getElementById('indexCounter');
-    var tagsEl=document.getElementById('indexMetaTags');
-    var hintEl=document.getElementById('indexHint');
-    var tagsByIndex=[
-      'Fashion / Made-to-measure<br>Shopify · D2C + Brand',
-      'Interiors / Decor<br>WordPress · Brand + Catalogue',
-      'Manufacturing / Industrial<br>WordPress · Business',
-      'Beauty / Cosmetics<br>D2C + Catalogue',
-      'Jewellery<br>Brand + Ecommerce'
-    ];
-    var STEPS=cards.length;
-
-    function setActive(i){
-      sidebarItems.forEach(function(el){el.classList.toggle('active',+el.dataset.i===i);});
-      if(counter) counter.textContent=('0'+(i+1)).slice(-2);
-      if(tagsEl && tagsByIndex[i]) tagsEl.innerHTML=tagsByIndex[i];
-    }
-
-    var stepped = !reduceMotion && window.innerWidth>=900;
-
-    if(!stepped){
-      if(hintEl) hintEl.style.display='none';
-      var revealIO=new IntersectionObserver(function(es){
-        es.forEach(function(e){if(e.isIntersecting) e.target.style.opacity=1;});
-      },{threshold:.2,rootMargin:'0px 0px -8% 0px'});
-      var activeIO=new IntersectionObserver(function(es){
-        es.forEach(function(e){if(e.isIntersecting) setActive(+e.target.dataset.i);});
-      },{threshold:0,rootMargin:'-45% 0px -45% 0px'});
-      cards.forEach(function(c){c.style.transition='opacity .6s ease';revealIO.observe(c);activeIO.observe(c);});
-      return;
-    }
-
-    column.classList.add('stepped');
-    var stepIndex=0, locked=true, cooldown=false;
-    window.__indexGetActiveStep=function(){ return stepIndex; };
-
-    function goTo(i){
-      stepIndex=Math.max(0,Math.min(STEPS-1,i));
-      cards.forEach(function(c,n){c.classList.toggle('step-active',n===stepIndex);});
-      setActive(stepIndex);
-      if(hintEl) hintEl.textContent = stepIndex===STEPS-1 ? 'Scroll to continue' : 'Scroll for next';
-      if(window.__indexSetActiveImage) window.__indexSetActiveImage(stepIndex);
-    }
-    goTo(0);
-
-    function lock(v){
-      locked=v;
-      document.documentElement.classList.toggle('fake-scroll',v);
-    }
-    lock(true);
-
-    function cool(){ cooldown=true; setTimeout(function(){cooldown=false;},550); }
-
-    function step(dir){
-      if(cooldown) return;
-      if(dir>0){
-        if(stepIndex<STEPS-1){ goTo(stepIndex+1); cool(); }
-        else { lock(false); }
-      }else if(stepIndex>0){
-        goTo(stepIndex-1); cool();
-      }
-    }
-
-    window.addEventListener('wheel',function(e){
-      if(locked){
-        e.preventDefault();
-        step(e.deltaY>0?1:-1);
-      }else if(window.scrollY<=0 && e.deltaY<0){
-        e.preventDefault();
-        lock(true);
-        goTo(STEPS-1);
-      }
-    },{passive:false});
-
-    var touchY=null;
-    window.addEventListener('touchstart',function(e){touchY=e.touches[0].clientY;},{passive:true});
-    window.addEventListener('touchmove',function(e){
-      if(touchY===null) return;
-      var dy=touchY-e.touches[0].clientY;
-      if(locked){
-        e.preventDefault();
-        if(Math.abs(dy)>44){ step(dy>0?1:-1); touchY=e.touches[0].clientY; }
-      }else if(window.scrollY<=0 && dy<0 && Math.abs(dy)>44){
-        e.preventDefault();
-        lock(true); goTo(STEPS-1); touchY=e.touches[0].clientY;
-      }
-    },{passive:false});
-
-    window.addEventListener('keydown',function(e){
-      if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
-      if(locked){
-        if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){ e.preventDefault(); step(1); }
-        else if(e.key==='ArrowUp'||e.key==='PageUp'){ e.preventDefault(); step(-1); }
-      }else if(window.scrollY<=0 && (e.key==='ArrowUp'||e.key==='PageUp')){
-        e.preventDefault(); lock(true); goTo(STEPS-1);
-      }
-    });
-
-    document.querySelectorAll('a[href^="#"]').forEach(function(a){
-      a.addEventListener('click',function(){ if(locked) lock(false); });
-    });
-  })();
-
-  /* WebGL image layer — optional visual polish only. The real <img> inside each
-     card is the actual content (SEO, accessibility, and a guaranteed-correct
-     fallback); when a WebGL context + texture are available, Three.js draws
-     the current step's image on top of it. If WebGL fails or a texture never
-     loads, the real image underneath is already showing, so nothing breaks. */
-  function initIndexGL(){
-    var canvas=document.getElementById('glCanvas');
-    if(!canvas || !window.THREE || reduceMotion || window.innerWidth<900) return;
-
-    var renderer;
-    try{ renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true}); }
-    catch(e){ return; }
-
-    renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));
-
-    var scene=new THREE.Scene();
-    var camera=new THREE.OrthographicCamera(0,innerWidth,0,innerHeight,-10,10);
-    camera.position.z=5;
-
-    var loader=new THREE.TextureLoader();
-    loader.crossOrigin='anonymous';
-
-    var mat=new THREE.MeshBasicMaterial({transparent:true,opacity:0,side:THREE.DoubleSide});
-    var mesh=new THREE.Mesh(new THREE.PlaneGeometry(1,1),mat);
-    scene.add(mesh);
-
-    var activeWrap=null, currentTex=null;
-
-    function setActiveImage(i){
-      var card=document.querySelectorAll('.index-card')[i];
-      var wrap=card?card.querySelector('.index-card-img'):null;
-      var img=wrap?wrap.querySelector('img'):null;
-      if(!wrap || !img){ activeWrap=null; mat.opacity=0; return; }
-      activeWrap=wrap;
-      mat.opacity=0;
-      var src=img.currentSrc||img.src;
-      loader.load(src,function(tex){
-        if(activeWrap!==wrap){ tex.dispose(); return; }
-        if(currentTex) currentTex.dispose();
-        tex.flipY=false;
-        currentTex=tex;
-        mat.map=tex; mat.needsUpdate=true;
-        mat.opacity=1;
-      },undefined,function(){ /* failed to load — real <img> keeps showing underneath */ });
-    }
-    window.__indexSetActiveImage=setActiveImage;
-    setActiveImage(window.__indexGetActiveStep ? window.__indexGetActiveStep() : 0);
-
-    function resize(){
-      camera.right=innerWidth; camera.bottom=innerHeight; camera.updateProjectionMatrix();
-      renderer.setSize(innerWidth,innerHeight,false);
-    }
-    resize();
-    window.addEventListener('resize',resize);
-
-    function animate(){
-      requestAnimationFrame(animate);
-      if(activeWrap){
-        var r=activeWrap.getBoundingClientRect();
-        mesh.visible = r.width>0 && r.height>0;
-        if(mesh.visible){
-          mesh.scale.set(r.width,r.height,1);
-          mesh.position.set(r.left+r.width/2,r.top+r.height/2,0);
-        }
-      }else{
-        mesh.visible=false;
-      }
-      renderer.render(scene,camera);
-    }
-    animate();
-  }
-  function initIndexGLSafe(){ try{ initIndexGL(); }catch(e){ console.error('initIndexGL failed:',e); } }
-  function startIndexGL(){ requestAnimationFrame(function(){requestAnimationFrame(initIndexGLSafe);}); }
-  if(document.readyState==='complete'){ startIndexGL(); }
-  else{ window.addEventListener('load',startIndexGL); }
-
-  /* Taste chooser */
-  var tasteBtns=[].slice.call(document.querySelectorAll('.taste-btn'));
-  var tasteTitle=document.getElementById('tasteTitle'), tasteMini=document.getElementById('tasteMini');
-  var tasteWords={
-    QUIET:'Quietly<br>confident.', BOLD:'MAKE<br>THE<br>ENTRANCE.', EDITORIAL:'THE<br>BRAND<br>HAS A<br>POINT OF VIEW.', CONVERTING:'MAKE IT<br>EASY TO<br>SAY YES.'
+  var IMAGES = [
+    'images/vugy-india.jpg',
+    'images/ammax-decor.jpg',
+    'images/sriram-cables.jpg',
+    'images/sng-cosmetics.jpg'
+  ];
+  var P = {
+    perspective:30, cardWidth:18, cardHeight:25, cardRadius:.4,
+    birthHeight:2.6, exitHeight:46, railBirth:-11, railExit:44,
+    fan:3.3, turnBirth:6, turnExit:28, stops:24
   };
-  tasteBtns.forEach(function(btn){
-    btn.addEventListener('click',function(){
-      tasteBtns.forEach(function(b){b.classList.remove('active')});
-      btn.classList.add('active');
-      var style=btn.dataset.style;
-      tasteTitle.innerHTML=tasteWords[style];
-      tasteMini.textContent='DIRECTION / '+style;
-    });
-  });
+  var CARDS=9, SPEED=18, AXIS=55;
 
-  /* Builder scroll choreography */
-  var builderStage=document.getElementById('builderStage'), buildStage=document.getElementById('buildStage');
-  var buildSteps=[].slice.call(document.querySelectorAll('.build-step'));
-  function updateBuilder(){
-    if(!builderStage || !buildStage) return;
-    var r=builderStage.getBoundingClientRect(), total=builderStage.offsetHeight-window.innerHeight;
-    var p=Math.min(Math.max(-r.top/Math.max(total,1),0),1);
-    var idx=Math.min(3,Math.floor(p*4));
-    buildStage.dataset.step=idx;
-    buildSteps.forEach(function(s,i){s.classList.toggle('active',i===idx);});
-  }
-  window.addEventListener('scroll',function(){requestAnimationFrame(updateBuilder);},{passive:true});
-  updateBuilder();
-
-
-  /* Instant hover preview for build steps */
-  buildSteps.forEach(function(step,i){
-    step.addEventListener('mouseenter',function(){
-      buildStage.dataset.step=i;
-      buildSteps.forEach(function(s,n){s.classList.toggle('active',n===i);});
-    });
-  });
-  cats.forEach(function(cat){
-    cat.addEventListener('mouseenter',function(){
-      setCat(+cat.dataset.i);
-    });
-  });
-
-
-  /* Strong active-panel fallback for scroll position */
-  function neonCategoryByCenter(){
-    if(!cats.length) return;
-    var center=window.innerHeight*0.5, best=-1, bd=Infinity;
-    cats.forEach(function(cat,i){
-      var r=cat.getBoundingClientRect();
-      if(r.bottom>0 && r.top<window.innerHeight){
-        var d=Math.abs((r.top+r.height/2)-center);
-        if(d<bd){bd=d;best=i;}
-      }
-    });
-    if(best>=0 && bd<window.innerHeight*.30){
-      setCat(best);
+  function buildKeyframes(dir,name){
+    var steps=[];
+    for(var s=0;s<=P.stops;s++){
+      var u=s/P.stops;
+      var scale=(P.birthHeight/P.cardHeight)*Math.pow(P.exitHeight/P.birthHeight,u);
+      var z=P.perspective*(1-1/scale);
+      var rail=P.railExit-(P.railExit-P.railBirth)*Math.pow(1-u,P.fan);
+      var turn=P.turnBirth+(P.turnExit-P.turnBirth)*u;
+      steps.push((u*100).toFixed(2)+'%{transform:translate3d('+(dir*rail).toFixed(2)+'cqw,0,'+z.toFixed(2)+'cqw) rotateY('+(-dir*turn).toFixed(2)+'deg)}');
     }
-  }
-  window.addEventListener('scroll',function(){requestAnimationFrame(neonCategoryByCenter);},{passive:true});
-  neonCategoryByCenter();
-
-  /* Secret footer */
-  var secretBtn=document.getElementById('secretBtn'), secretReveal=document.getElementById('secretReveal');
-  if(secretBtn && secretReveal){
-    secretBtn.addEventListener('click',function(){
-      secretReveal.classList.toggle('open');
-      secretBtn.textContent=secretReveal.classList.contains('open')?'P.P.S. now you really made it ↗':'P.S. you made it this far ↗';
-    });
+    return '@keyframes '+name+'{'+steps.join('')+'}';
   }
 
-  /* Slow parallax on project browsers */
-  if(window.matchMedia('(prefers-reduced-motion: no-preference)').matches){
-    document.querySelectorAll('.proj .fr').forEach(function(card){
-      card.addEventListener('mousemove',function(e){
-        var r=card.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
-        card.style.transform='perspective(900px) rotateY('+(x*3)+'deg) rotateX('+(y*-2)+'deg) translateY(-6px)';
-      });
-      card.addEventListener('mouseleave',function(){card.style.transform='';});
-    });
-  }
+  var uid='ish'+Math.random().toString(36).slice(2,8);
+  var rightName=uid+'r', leftName=uid+'l';
 
+  var styleTag=document.createElement('style');
+  styleTag.textContent=buildKeyframes(1,rightName)+buildKeyframes(-1,leftName);
+  document.head.appendChild(styleTag);
 
-  /* Neon activation for What I Build rows: hover + scroll */
-  var buildRows=[].slice.call(document.querySelectorAll('.types .type-row'));
-  if(buildRows.length){
-    var rowIO=new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          var r=entry.target.getBoundingClientRect();
-          /* Only activate rows once they enter the visual centre band. */
-          var center=window.innerHeight*.52;
-          var distance=Math.abs((r.top+r.height/2)-center);
-          if(distance<window.innerHeight*.28){
-            buildRows.forEach(function(row){row.classList.remove('active');});
-            entry.target.classList.add('active');
-          }
-        }
-      });
-    },{threshold:[0.15,0.4,0.65]});
-    buildRows.forEach(function(row){rowIO.observe(row);});
-    window.addEventListener('scroll',function(){
-      var center=window.innerHeight*.52, best=null, bestDist=Infinity;
-      buildRows.forEach(function(row){
-        var r=row.getBoundingClientRect();
-        var d=Math.abs((r.top+r.height/2)-center);
-        if(r.bottom>0 && r.top<window.innerHeight && d<bestDist){
-          best=row;bestDist=d;
-        }
-      });
-      if(best && bestDist<window.innerHeight*.32){
-        buildRows.forEach(function(row){row.classList.toggle('active',row===best);});
-      }
-    },{passive:true});
-  }
+  var stage=document.createElement('div');
+  stage.className='stream-hero-stage';
+  stage.setAttribute('aria-hidden','true');
+  stage.style.perspective=P.perspective+'cqw';
+  stage.style.perspectiveOrigin='50% '+AXIS+'%';
 
+  var inner=document.createElement('div');
+  inner.className='stream-hero-inner3d';
+  stage.appendChild(inner);
+
+  [rightName,leftName].forEach(function(name){
+    for(var i=0;i<CARDS;i++){
+      var src=IMAGES[i % IMAGES.length];
+      var el=document.createElement('div');
+      el.className='stream-card';
+      el.style.left='50%'; el.style.top=AXIS+'%';
+      el.style.width=P.cardWidth+'cqw'; el.style.height=P.cardHeight+'cqw';
+      el.style.marginLeft=(-P.cardWidth/2)+'cqw'; el.style.marginTop=(-P.cardHeight/2)+'cqw';
+      el.style.borderRadius=P.cardRadius+'cqw';
+      el.style.animation=name+' '+SPEED+'s linear infinite';
+      el.style.animationDelay=(-(i*SPEED)/CARDS)+'s';
+      var img=document.createElement('img');
+      img.src=src; img.loading='lazy'; img.decoding='async'; img.draggable=false; img.alt='';
+      el.appendChild(img);
+      inner.appendChild(el);
+    }
+  });
+
+  stageHost.insertBefore(stage, stageHost.firstChild);
 })();
 </script>
 </body>
