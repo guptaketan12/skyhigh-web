@@ -67,13 +67,14 @@
     });
   }
 
-  /* Ambient sound toggle — off by default, a visitor has to click it.
-     The pad is a few detuned sine oscillators through a slowly sweeping
-     filter, synthesized with the Web Audio API rather than a licensed
-     track, so there's nothing to source. It doesn't persist across
-     pages: a fresh document needs its own user gesture before audio can
-     play, so carrying an "on" flag over would just leave the button
-     lit with no sound until someone clicked again anyway. */
+  /* Ambient sound toggle — silent on load, starts itself on the first
+     scroll, and the button flips it off/on from there. The pad is a
+     few detuned sine oscillators through a slowly sweeping filter,
+     synthesized with the Web Audio API rather than a licensed track,
+     so there's nothing to source. It doesn't persist across pages: a
+     fresh document needs its own gesture before audio can play, so
+     carrying an "on" flag over would just leave the button lit with
+     no sound until the next scroll or click. */
   if(window.AudioContext||window.webkitAudioContext){
     var ambientBtn=document.createElement('button');
     ambientBtn.className='ambient-toggle';
@@ -88,7 +89,7 @@
       if(actx.state==='suspended') actx.resume();
       var master=actx.createGain();
       master.gain.setValueAtTime(0,actx.currentTime);
-      master.gain.linearRampToValueAtTime(.05,actx.currentTime+1.6);
+      master.gain.linearRampToValueAtTime(.075,actx.currentTime+1.6);
       master.connect(actx.destination);
       var filter=actx.createBiquadFilter();
       filter.type='lowpass'; filter.frequency.value=900;
@@ -122,6 +123,7 @@
       ambientBtn.setAttribute('aria-pressed','false');
     }
     ambientBtn.addEventListener('click',function(){ playing?stopAmbient():startAmbient(); });
+    window.addEventListener('scroll',function(){ if(!playing) startAmbient(); },{passive:true,once:true});
   }
 
   /* Text scramble — headings marked .scramble decode from random characters
