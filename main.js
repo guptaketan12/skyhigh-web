@@ -42,6 +42,7 @@
   var cursor=document.getElementById('cursorOrb');
   var fine=window.matchMedia('(pointer:fine)').matches;
   if(cursor && fine && !reduceMotion){
+    document.documentElement.classList.add('has-custom-cursor');
     var mx=innerWidth/2, my=innerHeight/2, cx=mx, cy=my, cScale=1, cScaleTarget=1;
     window.addEventListener('mousemove',function(e){cursor.classList.add('on'); mx=e.clientX; my=e.clientY;},{passive:true});
     document.querySelectorAll('a,button,.pill').forEach(function(el){

@@ -65,6 +65,9 @@ header.nav.scrolled{padding:12px var(--pad);background:rgba(11,11,11,.82);backdr
 
 .cursor-orb{position:fixed;left:0;top:0;width:16px;height:16px;border-radius:50%;background:var(--accent);mix-blend-mode:screen;pointer-events:none;z-index:200;transition:opacity .25s ease;opacity:0}
 .cursor-orb.on{opacity:.85}
+/* Once the lerp cursor is confirmed running (fine pointer, motion allowed),
+   hide the native pointer everywhere so only the lime dot shows. */
+html.has-custom-cursor,html.has-custom-cursor *{cursor:none!important}
 
 /* film-grain texture — apply by adding an empty <div class="grain"></div> as
    the first child of any section that should carry it */
